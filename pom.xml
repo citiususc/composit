@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>es.usc.citius.composit</groupId>
+    <artifactId>composit-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1.0-SNAPSHOT</version>
+    <modules>
+        <module>composit-core</module>
+        <module>composit-all</module>
+        <module>composit-iserve</module>
+    </modules>
+
+    <properties>
+        <!-- Dependencies version -->
+        <java.version>1.6</java.version>
+        <hipster.version>0.1.0</hipster.version>
+        <guava.version>15.0</guava.version>
+        <mockito.test.version>1.9.5</mockito.test.version>
+        <junit.test.version>4.11</junit.test.version>
+
+        <!-- Project build encoding UTF-8 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Specific jvm parameters -->
+        <test.jvm.argLine>
+            -server
+            -XX:+AggressiveOpts
+        </test.jvm.argLine>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <organization>
+        <name>Centro de Investigación en Tecnoloxías da Información (CITIUS), University of Santiago de Compostela</name>
+        <url>http://citius.usc.es</url>
+    </organization>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>http://github.com/pablormier/composit</url>
+    </issueManagement>
+
+    <inceptionYear>2011</inceptionYear>
+    <licenses>
+        <license>
+            <name>GNU Library or Lesser General Public License (LGPL)</name>
+            <url>http://www.gnu.org/licenses/lgpl.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <prerequisites>
+        <maven>3.0.3</maven>
+    </prerequisites>
+
+    <scm>
+        <connection>scm:git:git@github.com:pablormier/cmoposit.git</connection>
+        <developerConnection>scm:git:git@github.com:pablormier/composit.git</developerConnection>
+        <url>scm:git:git@github.com:pablormier/composit.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>pablormier</id>
+            <name>Pablo Rodríguez Mier</name>
+            <email>pablo.rodriguez.mier@usc.es</email>
+            <roles>
+                <role>owner</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.test.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.test.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+</project>
