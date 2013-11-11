@@ -26,12 +26,6 @@
 
         <!-- Project build encoding UTF-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Specific jvm parameters -->
-        <test.jvm.argLine>
-            -server
-            -XX:+AggressiveOpts
-        </test.jvm.argLine>
     </properties>
 
     <build>
