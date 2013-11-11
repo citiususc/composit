@@ -19,6 +19,11 @@ public class SignatureIO<E> implements Signature<E>, Serializable{
         this.outputs = ImmutableSet.copyOf(outputs);
     }
 
+    public SignatureIO() {
+        this.inputs = ImmutableSet.of();
+        this.outputs = ImmutableSet.of();
+    }
+
     @Override
     public Set<E> getInputs() {
         return Collections.unmodifiableSet(inputs);
