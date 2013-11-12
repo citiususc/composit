@@ -109,12 +109,12 @@ public class WSCXMLKnowledgeBase implements HierarchicalKnowledgeBase, Serializa
     }
 
     @Override
-    public Set<? extends Concept> getSubclasses(Concept concept) {
+    public Set<Concept> getSubclasses(Concept concept) {
         return ImmutableSet.copyOf(this.subclasses.get(concept));
     }
 
     @Override
-    public Set<? extends Concept> getSuperclasses(Concept concept) {
+    public Set<Concept> getSuperclasses(Concept concept) {
         return ImmutableSet.copyOf(this.superclasses.get(concept));
     }
 
@@ -136,16 +136,16 @@ public class WSCXMLKnowledgeBase implements HierarchicalKnowledgeBase, Serializa
     }
 
 
-    public Set<? extends Instance> getInstances(Concept concept) {
+    public Set<Instance> getInstances(Concept concept) {
         return ImmutableSet.copyOf(concept.getInstances());
     }
 
-    public Set<? extends Concept> getConcepts() {
+    public Set<Concept> getConcepts() {
         return ImmutableSet.copyOf(conceptID.values());
         //return ImmutableSet.copyOf(Sets.union(this.subclasses.keySet(), this.superclasses.keySet()));
     }
 
-    public Set<? extends Instance> getInstances() {
+    public Set<Instance> getInstances() {
         return ImmutableSet.copyOf(instanceID.values());
     }
 }

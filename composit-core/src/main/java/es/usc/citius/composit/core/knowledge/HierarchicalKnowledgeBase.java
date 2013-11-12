@@ -29,14 +29,14 @@ public interface HierarchicalKnowledgeBase {
      * @param concept Concept provided
      * @return collection of subclasses of the concept
      */
-    Set<? extends Concept> getSubclasses(Concept concept);
+    Set<Concept> getSubclasses(Concept concept);
     
     /**
      * Returns a collection containing the superclasses of the provided concept
      * @param concept Concept provided
      * @return collection of subclasses of the concept
      */
-    Set<? extends Concept> getSuperclasses(Concept concept);
+    Set<Concept> getSuperclasses(Concept concept);
     
     /**
      * Check if concept x is equivalent to concept y
@@ -75,17 +75,17 @@ public interface HierarchicalKnowledgeBase {
      * @return {@link Set} with the instances of the concept.
      * If there are no instances, a empty set is returned.
      */
-    Set<? extends Instance> getInstances(Concept concept);
+    Set<Instance> getInstances(Concept concept);
 
     /**
      * Return all concepts managed by this KB.
      * @return {@link Set} with all available concepts.
      */
-    Set<? extends Concept> getConcepts();
+    Set<Concept> getConcepts();
 
     /**
      * Return all instances managed by this KB.
      * @return {@link Set} with all available instances.
      */
-    Set<? extends Instance> getInstances();
+    Set<Instance> getInstances();
 }
