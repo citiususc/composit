@@ -66,7 +66,7 @@ public class WSCXMLServideProvider implements ServiceDataProvider<String> {
             // Create the signature
             SignatureIO<String> signature = new SignatureIO<String>(inputs, outputs);
             // Default operation.
-            Operation<String> op = new ResourceOperation<String>(serviceID + operationSuffix, signature);
+            ResourceOperation<String> op = new ResourceOperation<String>(serviceID + operationSuffix, signature);
             s.addOperation(op);
             return s;
         }
