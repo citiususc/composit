@@ -12,6 +12,5 @@ package es.usc.citius.composit.core.model;
 public interface Operation<E> {
     Service<E> getServiceOwner();
     Signature<E> getSignature();
-
     //TODO; implement precondition / effects methods
 }

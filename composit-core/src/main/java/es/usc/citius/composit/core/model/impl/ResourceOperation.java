@@ -9,12 +9,17 @@ import es.usc.citius.composit.core.model.Signature;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class ResourceOperation<E> extends Resource implements Operation<E> {
-    private final Service<E> owner;
+    private Service<E> owner;
     private final Signature<E> signature;
 
     public ResourceOperation(String id, Service<E> owner, Signature<E> signature) {
         super(id);
         this.owner = owner;
+        this.signature = signature;
+    }
+
+    public ResourceOperation(String id, Signature<E> signature) {
+        super(id);
         this.signature = signature;
     }
 
@@ -26,5 +31,9 @@ public class ResourceOperation<E> extends Resource implements Operation<E> {
     @Override
     public Signature<E> getSignature() {
         return this.signature;
+    }
+
+    public void setOwner(Service<E> owner) {
+        this.owner = owner;
     }
 }
