@@ -10,19 +10,33 @@ import java.util.Set;
  * inference reasoning with non standard models (for example, WSC'08 taxonomy format).
  */
 public interface HierarchicalKnowledgeBase {
+
+    /**
+     * Get the concept with the provided id.
+     * @param id Concept ID.
+     * @return Concept
+     */
+    Concept getConcept(String id);
+
+    /**
+     * Get the instance with the provided id.
+     * @param id Instance ID.
+     * @return Instance
+     */
+    Instance getInstance(String id);
 	/**
      * Get a collection with the subclasses of the provided concept
      * @param concept Concept provided
      * @return collection of subclasses of the concept
      */
-    public Set<Concept> getSubclasses(Concept concept);
+    Set<? extends Concept> getSubclasses(Concept concept);
     
     /**
      * Returns a collection containing the superclasses of the provided concept
      * @param concept Concept provided
      * @return collection of subclasses of the concept
      */
-    public Set<Concept> getSuperclasses(Concept concept);
+    Set<? extends Concept> getSuperclasses(Concept concept);
     
     /**
      * Check if concept x is equivalent to concept y
@@ -30,7 +44,7 @@ public interface HierarchicalKnowledgeBase {
      * @param y Concept y
      * @return True if x is equivalent to y
      */
-    public boolean equivalent(Concept x, Concept y);
+    boolean equivalent(Concept x, Concept y);
     
     /**
      * Check if concept x is subclass of concept y
@@ -38,7 +52,7 @@ public interface HierarchicalKnowledgeBase {
      * @param y Concept y
      * @return True if x subclass of y, false in other case.
      */
-    public boolean isSubclass(Concept x, Concept y);
+    boolean isSubclass(Concept x, Concept y);
     
     /**
      * Check if concept x is a subclass of y, false in other case
@@ -46,7 +60,7 @@ public interface HierarchicalKnowledgeBase {
      * @param y Concept y
      * @return True if x is a superclass of y
      */
-    public boolean isSuperclass(Concept x, Concept y);
+    boolean isSuperclass(Concept x, Concept y);
     
     /**
      * Returns the concept Resource from which this Resource is instance. If
@@ -54,24 +68,24 @@ public interface HierarchicalKnowledgeBase {
      * @param instance Concept or Instance Resource
      * @return Concept parent of the instance.
      */
-    public Concept resolveInstance(Instance instance);
+    Concept resolveInstance(Instance instance);
     
     /**
      * Return all instances of the provided concept.
      * @return {@link Set} with the instances of the concept.
      * If there are no instances, a empty set is returned.
      */
-    public Set<Instance> getInstances(Concept concept);
+    Set<? extends Instance> getInstances(Concept concept);
 
     /**
      * Return all concepts managed by this KB.
      * @return {@link Set} with all available concepts.
      */
-    public Set<Concept> getConcepts();
+    Set<? extends Concept> getConcepts();
 
     /**
      * Return all instances managed by this KB.
      * @return {@link Set} with all available instances.
      */
-    public Set<Concept> getInstances();
+    Set<? extends Instance> getInstances();
 }
