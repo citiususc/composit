@@ -123,11 +123,11 @@ public class WSCXMLKnowledgeBase implements HierarchicalKnowledgeBase, Serializa
     }
 
     public boolean isSubclass(Concept x, Concept y) {
-        return this.superclasses.get(y).contains(x);
+        return this.subclasses.get(y).contains(x);
     }
 
     public boolean isSuperclass(Concept x, Concept y) {
-        return this.subclasses.get(y).contains(x);
+        return this.superclasses.get(y).contains(x);
     }
 
     @Override
