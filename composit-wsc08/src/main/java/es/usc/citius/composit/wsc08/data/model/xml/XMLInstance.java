@@ -2,16 +2,19 @@
 
 package es.usc.citius.composit.wsc08.data.model.xml;
 
+import es.usc.citius.composit.core.knowledge.Instance;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import java.net.URI;
 
 /**
  * JAXB Class.
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class XMLInstance {
+public class XMLInstance implements Instance {
     @XmlAttribute(name="name")
     private String name;
 
@@ -45,5 +48,19 @@ public class XMLInstance {
         return hash;
     }
 
-    
+
+    @Override
+    public String getID() {
+        return name;
+    }
+
+    @Override
+    public URI getURI() {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
