@@ -9,7 +9,7 @@ package es.usc.citius.composit.core.model;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  * @param <E> data type.
  */
-public interface Operation<E> {
+public interface Operation<E> extends Resource {
     Service<E> getServiceOwner();
     Signature<E> getSignature();
     //TODO; implement precondition / effects methods

@@ -1,19 +1,21 @@
 package es.usc.citius.composit.core.model.impl;
 
+import es.usc.citius.composit.core.model.Resource;
+
 import java.io.Serializable;
 import java.net.URI;
 
-public class Resource implements Serializable{
+public class ResourceComponent implements Resource, Serializable{
     // ID cannot be null. The ID is used to identify unique instances of resource.
     private final String id;
     private final URI uri;
 
-    public Resource(String id) {
+    public ResourceComponent(String id) {
         this.id = id;
         this.uri = null;
     }
 
-    public Resource(String id, URI uri) {
+    public ResourceComponent(String id, URI uri) {
         this.id = id;
         this.uri = uri;
     }
@@ -23,7 +25,7 @@ public class Resource implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Resource resource = (Resource) o;
+        ResourceComponent resource = (ResourceComponent) o;
 
         if (!id.equals(resource.id)) return false;
         if (uri != null ? !uri.equals(resource.uri) : resource.uri != null) return false;
@@ -38,11 +40,11 @@ public class Resource implements Serializable{
         return result;
     }
 
-    public String getId() {
+    public String getID() {
         return id;
     }
 
-    public URI getUri() {
+    public URI getURI() {
         return uri;
     }
 

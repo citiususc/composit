@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class ResourceService<E> extends Resource implements Service<E> {
+public class ResourceService<E> extends ResourceComponent implements Service<E> {
     private Set<Operation<E>> operations;
 
     public ResourceService(String id, Set<ResourceOperation<E>> operations) {

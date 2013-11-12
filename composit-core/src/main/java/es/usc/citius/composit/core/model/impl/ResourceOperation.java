@@ -8,7 +8,7 @@ import es.usc.citius.composit.core.model.Signature;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class ResourceOperation<E> extends Resource implements Operation<E> {
+public class ResourceOperation<E> extends ResourceComponent implements Operation<E> {
     private Service<E> owner;
     private final Signature<E> signature;
 
