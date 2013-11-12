@@ -41,6 +41,10 @@ public interface SetMatchFunction<E,T extends Comparable<T>> extends MatchFuncti
             return ImmutableSortedMap.copyOf(sourceElements, matchTypeComparator).keySet();
         }
 
+        @Override
+        public String toString() {
+            return matchTable.toString();
+        }
     }
     /**
      * Find at most one match from source to target. The first
