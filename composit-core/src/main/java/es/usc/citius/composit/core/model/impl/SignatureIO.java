@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import es.usc.citius.composit.core.model.Signature;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public class SignatureIO<E> implements Signature<E>, Serializable{
     private final Set<E> inputs;
     private final Set<E> outputs;
 
-    public SignatureIO(Set<E> inputs, Set<E> outputs) {
+    public SignatureIO(Collection<E> inputs, Collection<E> outputs) {
         this.inputs = ImmutableSet.copyOf(inputs);
         this.outputs = ImmutableSet.copyOf(outputs);
     }
