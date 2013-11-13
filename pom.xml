@@ -29,6 +29,47 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <organization>
+        <name>Centro de Investigación en Tecnoloxías da Información (CITIUS), University of Santiago de Compostela</name>
+        <url>http://citius.usc.es</url>
+    </organization>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>http://github.com/pablormier/composit</url>
+    </issueManagement>
+
+    <inceptionYear>2011</inceptionYear>
+    <licenses>
+        <license>
+            <name>GNU Library or Lesser General Public License (LGPL)</name>
+            <url>http://www.gnu.org/licenses/lgpl.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <prerequisites>
+        <maven>3.0.3</maven>
+    </prerequisites>
+
+    <scm>
+        <connection>scm:git:git@github.com:pablormier/cmoposit.git</connection>
+        <developerConnection>scm:git:git@github.com:pablormier/composit.git</developerConnection>
+        <url>scm:git:git@github.com:pablormier/composit.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>pablormier</id>
+            <name>Pablo Rodríguez Mier</name>
+            <email>pablo.rodriguez.mier@usc.es</email>
+            <roles>
+                <role>owner</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <build>
         <plugins>
             <plugin>
@@ -101,49 +142,30 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Generate Java 1.6 signature -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>animal-sniffer-maven-plugin</artifactId>
+                <version>1.9</version>
+                <configuration>
+                    <signature>
+                        <groupId>org.codehaus.mojo.signature</groupId>
+                        <artifactId>java16</artifactId>
+                        <version>1.0</version>
+                    </signature>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
-    <organization>
-        <name>Centro de Investigación en Tecnoloxías da Información (CITIUS), University of Santiago de Compostela</name>
-        <url>http://citius.usc.es</url>
-    </organization>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>http://github.com/pablormier/composit</url>
-    </issueManagement>
-
-    <inceptionYear>2011</inceptionYear>
-    <licenses>
-        <license>
-            <name>GNU Library or Lesser General Public License (LGPL)</name>
-            <url>http://www.gnu.org/licenses/lgpl.html</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <prerequisites>
-        <maven>3.0.3</maven>
-    </prerequisites>
-
-    <scm>
-        <connection>scm:git:git@github.com:pablormier/cmoposit.git</connection>
-        <developerConnection>scm:git:git@github.com:pablormier/composit.git</developerConnection>
-        <url>scm:git:git@github.com:pablormier/composit.git</url>
-    </scm>
-
-    <developers>
-        <developer>
-            <id>pablormier</id>
-            <name>Pablo Rodríguez Mier</name>
-            <email>pablo.rodriguez.mier@usc.es</email>
-            <roles>
-                <role>owner</role>
-                <role>developer</role>
-            </roles>
-        </developer>
-    </developers>
 
     <dependencyManagement>
         <dependencies>
