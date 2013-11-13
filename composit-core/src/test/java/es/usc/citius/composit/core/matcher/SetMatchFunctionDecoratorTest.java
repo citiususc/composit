@@ -8,9 +8,7 @@ import org.mockito.Mockito;
 import java.util.Set;
 import java.util.SortedSet;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 public class SetMatchFunctionDecoratorTest {
