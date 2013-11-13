@@ -8,7 +8,7 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <name>ComposIT WSC Adapter</name>
     <artifactId>composit-wsc08</artifactId>
 
     <dependencies>

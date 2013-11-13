@@ -8,8 +8,14 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <name>ComposIT iServe Adapter</name>
     <artifactId>composit-iserve</artifactId>
-
+    <description>
+        ComposIT iServe support. The iServe framework (http://github.com/kmi/iserve) is a service
+        warehouse which unifies service publication, analysis, and discovery through the use
+        of lightweight semantics as well as advanced discovery and analytic capabilities.
+        This module provides semantic matching importing and data handling capabilities
+        through iServe platform.
+    </description>
 
 </project>
