@@ -10,6 +10,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>composit-all</artifactId>
-
-
+    <dependencies>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-iserve</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-wsc08</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
