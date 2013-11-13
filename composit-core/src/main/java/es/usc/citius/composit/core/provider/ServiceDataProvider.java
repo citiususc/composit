@@ -1,4 +1,4 @@
-package es.usc.citius.composit.core.data;
+package es.usc.citius.composit.core.provider;
 
 
 import es.usc.citius.composit.core.model.Operation;

@@ -1,12 +1,12 @@
 package es.usc.citius.composit.wsc08.data;
 
 
-import es.usc.citius.composit.core.data.ServiceDataProvider;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
 import es.usc.citius.composit.core.model.impl.ResourceOperation;
 import es.usc.citius.composit.core.model.impl.ResourceService;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
+import es.usc.citius.composit.core.provider.ServiceDataProvider;
 import es.usc.citius.composit.wsc08.data.model.xml.XMLInstance;
 import es.usc.citius.composit.wsc08.data.model.xml.services.XMLService;
 import es.usc.citius.composit.wsc08.data.model.xml.services.XMLServices;
