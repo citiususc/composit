@@ -1,5 +1,5 @@
 #header {
-    border-bottom: 3px solid #0767a4;
+    border-bottom: 3px solid #D19F34;
 }
 
 #search_filtered .jd-selected {
@@ -9,7 +9,7 @@
 /************* Customizations for ComposIT *************/
 
 body {
-    background-image: none;
+    background: #EEEBE5 none;
     font: 14px/19px Roboto, sans-serif;
 }
 
@@ -18,12 +18,12 @@ th {
 }
 
 a, a code {
-  color:#093757;
+  color:#8A5E1D;
 }
 
 a:visited,
 a:visited code {
-  color:#093757;
+  color:#8A5E1D;
 }
 
 input.gsc-input {
@@ -31,31 +31,60 @@ input.gsc-input {
 }
 
 #header {
-    border-bottom: 3px solid #F36126;
-    background-color: #093757;
+    border-bottom: 3px solid #D19F34;
+    background-color: #282828;
     height: 110px;
 }
 
 #masthead-title {
-    color: #E56B3C;
+    color: #D19F34;
 }
 
+/* Side navigation panel */
+#side-nav {
+    background-color: #EEEBE5;
+}
+
+#side-nav .selected {
+    background-color: #B68A2D;
+}
+
+/* Page content */
 #jd-header {
     background-color: transparent;
 }
 
 .jd-sumtable a:hover {
     text-decoration:none;
-    color: #F36126;
+    color: #D19F34;
 }
 
+.jd-tagtable td,
+.jd-tagtable th {
+    background-color: transparent;
+}
+
+th {
+    background-color: #E2DBCA;
+}
+
+tr.alt-color {
+    background-color: #F7F5F0;
+}
+
+/* API reference: heading marking
+the details section for constants,
+attrs, methods, etc. */
+h4.jd-details-title {
+    background-color: #E2DBCA;
+}
+
+/* Resizable slides */
 .ui-resizable-s {
-    background: none;
-    background-color: #F1F1F1;
+    background: #CCC none;
 }
 .ui-resizable-e {
-    background: none;
-    background-color: #F1F1F1;
+    background: #CCC none;
 }
 
 #search-button {
@@ -86,19 +115,19 @@ input.gsc-input {
     background: rgba(0,0,0,0.3);
 }
 ::-webkit-scrollbar-thumb:vertical:hover {
-    background: rgba(243,97,38,0.6);
+    background: rgba(187,130,46,0.6);
 }
 ::-webkit-scrollbar-thumb:vertical:active {
-    background: rgba(243,97,38,0.8);
+    background: rgba(187,130,46,0.8);
 }
 ::-webkit-scrollbar-thumb:horizontal {
     background: rgba(0,0,0,0.3);
 }
 ::-webkit-scrollbar-thumb:horizontal:hover {
-    background: rgba(243,97,38,0.6);
+    background: rgba(187,130,46,0.6);
 }
 ::-webkit-scrollbar-thumb:horizontal:active {
-    background: rgba(243,97,38,0.8);
+    background: rgba(187,130,46,0.8);
 }
 
 /* Google roboto font */
