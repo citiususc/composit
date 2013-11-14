@@ -19,7 +19,7 @@
         <module>composit-core</module>
         <module>composit-all</module>
         <module>composit-iserve</module>
-        <module>composit-wsc08</module>
+        <module>composit-wsc</module>
     </modules>
 
     <properties>

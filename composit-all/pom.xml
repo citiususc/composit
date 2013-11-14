@@ -26,7 +26,7 @@
         </dependency>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
-            <artifactId>composit-wsc08</artifactId>
+            <artifactId>composit-wsc</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
