@@ -20,7 +20,7 @@ public class WSCXMLServideProviderTest {
 
     @Before
     public void setUp() throws IOException {
-        this.provider = WSCTest.TESTSET_2008_01.createResourceProvider();
+        this.provider = WSCTest.TESTSET_2008_01.createXmlResourceProvider();
     }
 
     @Test

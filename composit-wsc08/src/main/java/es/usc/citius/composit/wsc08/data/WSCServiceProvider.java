@@ -18,14 +18,16 @@ import java.util.Set;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class SemanticWSCServiceProvider implements ServiceDataProvider<Concept> {
+public class WSCServiceProvider implements ServiceDataProvider<Concept> {
     private HierarchicalKnowledgeBase kb;
     private ServiceDataProvider<String> delegatedProvider;
 
-    public SemanticWSCServiceProvider(ServiceDataProvider<String> delegatedProvider, HierarchicalKnowledgeBase kb) {
+    public WSCServiceProvider(ServiceDataProvider<String> delegatedProvider, HierarchicalKnowledgeBase kb) {
         this.delegatedProvider = delegatedProvider;
         this.kb = kb;
     }
+
+
 
     @Override
     public Service<Concept> getService(String serviceID) {
