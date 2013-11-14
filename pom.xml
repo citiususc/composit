@@ -20,6 +20,7 @@
         <module>composit-all</module>
         <module>composit-iserve</module>
         <module>composit-wsc</module>
+        <module>composit-test</module>
     </modules>
 
     <properties>
