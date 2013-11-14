@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>ComposIT WSC Adapter</name>
-    <artifactId>composit-wsc08</artifactId>
+    <artifactId>composit-wsc</artifactId>
 
     <dependencies>
         <!--

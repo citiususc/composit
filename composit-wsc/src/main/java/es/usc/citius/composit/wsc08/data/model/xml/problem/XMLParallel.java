@@ -9,7 +9,6 @@ package es.usc.citius.composit.wsc08.data.model.xml.problem;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Map;
 
 /**
  * JAXB Class.
