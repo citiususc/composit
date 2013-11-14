@@ -1,9 +1,12 @@
 package es.usc.citius.composit.core.matcher.graph;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.SetMatchResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
@@ -11,13 +14,17 @@ import java.util.Set;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class HashMatchGraph<E, T extends Comparable<T>> implements MatchGraph<E,T>{
+    private final static Logger logger = LoggerFactory.getLogger(HashMatchGraph.class);
 
     private SetMatchResult<E,T> matchTable;
     private Set<E> elements;
 
     public HashMatchGraph(SetMatchFunction<E,T> setMatcher, Set<E> elements) {
+        Stopwatch w = Stopwatch.createStarted();
+        logger.debug("Processing full match of {} elements...", elements.size());
         this.matchTable = setMatcher.fullMatch(elements, elements);
         this.elements = elements;
+        logger.debug("Match processing finished in {}.", w.stop().toString());
     }
 
     public HashMatchGraph(SetMatchResult<E,T> matchResult) {
