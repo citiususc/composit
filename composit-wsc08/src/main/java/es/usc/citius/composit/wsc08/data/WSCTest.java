@@ -1,8 +1,14 @@
 package es.usc.citius.composit.wsc08.data;
 
+import es.usc.citius.composit.core.knowledge.Concept;
+import es.usc.citius.composit.core.matcher.SetMatchFunction;
+import es.usc.citius.composit.core.matcher.SetMatchFunctionDecorator;
+import es.usc.citius.composit.core.matcher.logic.LogicMatchType;
+import es.usc.citius.composit.core.matcher.logic.LogicMatcher;
 import es.usc.citius.composit.core.model.Signature;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
 import es.usc.citius.composit.core.util.FileUtils;
+import es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +42,29 @@ public enum WSCTest {
 
     }
 
+    public static class Dataset {
+        private WSCXMLKnowledgeBase kb;
+        private WSCServiceProvider serviceProvider;
+        private SetMatchFunction<Concept, LogicMatchType> defaultMatcher;
 
+        public Dataset(WSCServiceProvider serviceProvider, WSCXMLKnowledgeBase kb, SetMatchFunction<Concept, LogicMatchType> defaultMatcher) {
+            this.serviceProvider = serviceProvider;
+            this.kb = kb;
+            this.defaultMatcher = defaultMatcher;
+        }
+
+        public WSCXMLKnowledgeBase getKb() {
+            return kb;
+        }
+
+        public WSCServiceProvider getServiceProvider() {
+            return serviceProvider;
+        }
+
+        public SetMatchFunction<Concept, LogicMatchType> getDefaultMatcher() {
+            return defaultMatcher;
+        }
+    }
 
     private String testFile, testPath;
     // Default dataset request
@@ -71,10 +99,29 @@ public enum WSCTest {
         return FileUtils.openZipEntry(zipFile, testPath + "taxonomy.xml");
     }
 
-    public WSCXMLServideProvider createResourceProvider() throws ZipException,
+    public WSCXMLServideProvider createXmlResourceProvider() throws ZipException,
             IOException {
         return new WSCXMLServideProvider(openServicesStream());
     }
+
+    public WSCXMLKnowledgeBase createKnowledgeBase() throws IOException {
+        return new WSCXMLKnowledgeBase(openTaxonomyStream());
+    }
+
+    public WSCServiceProvider createSemanticServiceProvider() throws IOException {
+        return new WSCServiceProvider(createXmlResourceProvider(), createKnowledgeBase());
+    }
+
+    public Dataset dataset() throws IOException {
+        WSCXMLKnowledgeBase kb = createKnowledgeBase();
+        WSCXMLServideProvider xmlServiceProvider = createXmlResourceProvider();
+        WSCServiceProvider serviceProvider = new WSCServiceProvider(xmlServiceProvider, kb);
+        LogicMatcher matcher = new LogicMatcher(kb);
+        SetMatchFunction<Concept, LogicMatchType> setMatcher = new SetMatchFunctionDecorator<Concept, LogicMatchType>(matcher);
+        return new Dataset(serviceProvider, kb, setMatcher);
+    }
+
+
 
     public int[] getExpected() {
         return expected;
