@@ -41,10 +41,10 @@ public class SetMatchFunctionDecoratorTest {
         // Only d and e matched
         assertEquals(Sets.newHashSet("d", "e"), result.getTargetElements());
         // Just the first element recorded
-        assertEquals(1, result.getSourceElementsThatMatch("d").size());
-        assertEquals(1, result.getSourceElementsThatMatch("e").size());
-        assertNotNull(result.getSourceElementsThatMatch("f"));
-        assertTrue(result.getSourceElementsThatMatch("f").isEmpty());
+        assertEquals(1, result.getSortedSourceElemsThatMatch("d").size());
+        assertEquals(1, result.getSortedSourceElemsThatMatch("e").size());
+        assertNotNull(result.getSortedSourceElemsThatMatch("f"));
+        assertTrue(result.getSortedSourceElemsThatMatch("f").isEmpty());
     }
 
     @Test
@@ -53,17 +53,17 @@ public class SetMatchFunctionDecoratorTest {
         // Only d and e matched
         assertEquals(Sets.newHashSet("d", "e"), result.getTargetElements());
         // Only a and b match d
-        assertEquals(Sets.newHashSet("a", "b"), result.getSourceElementsThatMatch("d"));
+        assertEquals(Sets.newHashSet("a", "b"), result.getSortedSourceElemsThatMatch("d"));
         // a, b and c match e
-        assertEquals(source, result.getSourceElementsThatMatch("e"));
-        assertNotNull(result.getSourceElementsThatMatch("f"));
-        assertTrue(result.getSourceElementsThatMatch("f").isEmpty());
+        assertEquals(source, result.getSortedSourceElemsThatMatch("e"));
+        assertNotNull(result.getSortedSourceElemsThatMatch("f"));
+        assertTrue(result.getSortedSourceElemsThatMatch("f").isEmpty());
     }
 
     @Test
     public void testSortedTypesOnFullMatch(){
         SetMatchResult<String, Integer> result = setMatcher.fullMatch(source, target);
-        SortedSet<String> elements = result.getSourceElementsThatMatch("e");
+        SortedSet<String> elements = result.getSortedSourceElemsThatMatch("e");
         assertEquals("a",elements.first());
         assertEquals("c",elements.last());
     }
