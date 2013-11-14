@@ -20,10 +20,11 @@ public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements 
     private HashMatchGraph<E,T> matchGraph;
 
 
-    public HashLeveledServiceMatchGraph(LeveledServices<E> layers) {
+    public HashLeveledServiceMatchGraph(LeveledServices<E> layers, SetMatchFunction<E,T> setMatcher) {
         this.layers = layers;
         this.matchTable = computeLeveledMatch();
         this.matchGraph = new HashMatchGraph<E, T>(matchTable);
+        this.setMatcher = setMatcher;
     }
 
     private SetMatchResult<E,T> computeLeveledMatch(){
