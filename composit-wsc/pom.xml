@@ -19,6 +19,7 @@
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- Enable logging with SLF4J and Logback -->

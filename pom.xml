@@ -178,23 +178,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- ComposIT dependencies -->
-            <dependency>
-                <groupId>es.usc.citius.composit</groupId>
-                <artifactId>composit-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>es.usc.citius.composit</groupId>
-                <artifactId>composit-iserve</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>es.usc.citius.composit</groupId>
-                <artifactId>composit-wsc</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
             <!-- 3rd party tools -->
             <dependency>
                 <groupId>com.google.guava</groupId>
