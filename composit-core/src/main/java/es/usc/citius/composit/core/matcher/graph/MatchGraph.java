@@ -2,6 +2,7 @@ package es.usc.citius.composit.core.matcher.graph;
 
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -19,21 +20,21 @@ public interface MatchGraph<E,T extends Comparable<T>> extends SetMatchFunction<
      * @param source
      * @return
      */
-    Set<E> getTargetElementsMatchedBy(E source);
+    Map<E,T> getTargetElementsMatchedBy(E source);
 
     /**
      * from target to source
      * @param target
      * @return
      */
-    Set<E> getSourceElementsThatMatch(E target);
+    Map<E,T> getSourceElementsThatMatch(E target);
 
     /**
      * Get all target elements in the graph that are matched by source with match type t.
      * @param source
      * @return
      */
-    Set<E> getTargetElementsMatchedBy(E source, T type, TypeSelector selector);
+    Map<E,T> getTargetElementsMatchedBy(E source, T type, TypeSelector selector);
 
     /**
      *
@@ -41,5 +42,5 @@ public interface MatchGraph<E,T extends Comparable<T>> extends SetMatchFunction<
      * @param type
      * @return
      */
-    Set<E> getSourceElementsThatMatch(E target, T type, TypeSelector selector);
+    Map<E,T> getSourceElementsThatMatch(E target, T type, TypeSelector selector);
 }

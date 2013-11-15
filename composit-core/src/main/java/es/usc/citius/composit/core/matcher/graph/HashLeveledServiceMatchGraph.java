@@ -7,6 +7,7 @@ import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -116,22 +117,22 @@ public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements 
     }
 
     @Override
-    public Set<E> getTargetElementsMatchedBy(E source) {
+    public Map<E,T> getTargetElementsMatchedBy(E source) {
         return matchGraph.getTargetElementsMatchedBy(source);
     }
 
     @Override
-    public Set<E> getSourceElementsThatMatch(E target) {
+    public Map<E,T> getSourceElementsThatMatch(E target) {
         return matchGraph.getSourceElementsThatMatch(target);
     }
 
     @Override
-    public Set<E> getTargetElementsMatchedBy(E source, T type, TypeSelector selector) {
+    public Map<E,T> getTargetElementsMatchedBy(E source, T type, TypeSelector selector) {
         return matchGraph.getTargetElementsMatchedBy(source, type, selector);
     }
 
     @Override
-    public Set<E> getSourceElementsThatMatch(E target, T type, TypeSelector selector) {
+    public Map<E,T> getSourceElementsThatMatch(E target, T type, TypeSelector selector) {
         return matchGraph.getSourceElementsThatMatch(target, type, selector);
     }
 

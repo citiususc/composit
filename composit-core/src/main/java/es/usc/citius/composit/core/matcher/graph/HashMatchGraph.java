@@ -1,13 +1,17 @@
 package es.usc.citius.composit.core.matcher.graph;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.SetMatchResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -38,47 +42,65 @@ public class HashMatchGraph<E, T extends Comparable<T>> implements MatchGraph<E,
     }
 
     @Override
-    public Set<E> getTargetElementsMatchedBy(E source) {
+    public Map<E,T> getTargetElementsMatchedBy(E source) {
         // Target elements are the column keys
-        return ImmutableSet.copyOf(this.matchTable.getMatchTable().row(source).keySet());
+        return ImmutableMap.copyOf(this.matchTable.getMatchTable().row(source));
     }
 
     @Override
-    public Set<E> getSourceElementsThatMatch(E target) {
+    public Map<E,T> getSourceElementsThatMatch(E target) {
         // Source elements are the row keys
-        return ImmutableSet.copyOf(this.matchTable.getMatchTable().column(target).keySet());
+        return ImmutableMap.copyOf(this.matchTable.getMatchTable().column(target));
     }
 
-    @Override
-    public Set<E> getTargetElementsMatchedBy(E source, T type, TypeSelector selector) {
+    private Map<E,T> filter(final Map<E,T> map, final T type, final TypeSelector selector){
         // First get all from matchTable and then filter using the selector
-        Set<E> target = getTargetElementsMatchedBy(source);
-        // Filter all
-        for(E resource : target){
-            switch(selector){
-                case AT_LEAST:
-                    break;
-                case AT_MOST:
-                    break;
-                case EXACT:
-            }
-        }
-        return target;
+        return
+                Maps.filterEntries(map, new Predicate<Map.Entry<E, T>>() {
+                    @Override
+                    public boolean apply(Map.Entry<E, T> input) {
+                        switch(selector){
+                            case AT_LEAST:
+                                // The match type is at least as good as the provided one.
+                                // Example: Match at least subsumes: accepts exact, plugin and subsumes
+                                return input.getValue().compareTo(type)<=0;
+                            case AT_MOST:
+                                return input.getValue().compareTo(type)>0;
+                            default:
+                                return input.getValue().equals(type);
+                        }
+                    }
+                });
     }
 
     @Override
-    public Set<E> getSourceElementsThatMatch(E target, T type, TypeSelector selector) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Map<E,T> getTargetElementsMatchedBy(final E source, final T type, final TypeSelector selector) {
+        // First get all from matchTable and then filter using the selector
+        return filter(getTargetElementsMatchedBy(source), type, selector);
+    }
+
+    @Override
+    public Map<E,T> getSourceElementsThatMatch(final E target, final T type, final TypeSelector selector) {
+        return filter(getSourceElementsThatMatch(target), type, selector);
     }
 
     @Override
     public SetMatchResult<E, T> partialMatch(Set<E> source, Set<E> target) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        throw new UnsupportedOperationException("Partial match unsupported.");
     }
 
     @Override
     public SetMatchResult<E, T> fullMatch(Set<E> source, Set<E> target) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        SetMatchResult<E,T> matchResult = new SetMatchResult<E, T>();
+        for(E x : source){
+            for(E y : target){
+                T match = matchTable.getMatchTable().get(x,y);
+                if (match != null){
+                    matchResult.addMatch(x, y, match);
+                }
+            }
+        }
+        return matchResult;
     }
 
     @Override
