@@ -15,22 +15,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.zip.ZipException;
+import java.util.zip.ZipInputStream;
 
 
 public enum WSCTest {
 
 
-    TESTSET_2008_01(Ref.file, "TESTSET/Set01MetaData/", Ref.request2008_01, new int[]{16, 12, 7, 10, 3, 4, 1, 1, 1, 5}),
-    TESTSET_2008_02(Ref.file, "TESTSET/Set02MetaData/", Ref.request2008_02, new int[]{9, 15, 11, 16, 5, 4, 1, 1}),
-    TESTSET_2008_03(Ref.file, "TESTSET/Set03MetaData/", Ref.request2008_03, new int[]{4, 2, 1, 3, 6, 5, 2, 4, 4, 4, 5, 9, 10, 2, 2, 15, 5, 1, 2, 2, 8, 6, 3}),
-    TESTSET_2008_04(Ref.file, "TESTSET/Set04MetaData/", Ref.request2008_04, new int[]{15, 9, 10, 7, 3}),
-    TESTSET_2008_05(Ref.file, "TESTSET/Set05MetaData/", Ref.request2008_05, new int[]{11, 14, 12, 17, 9, 12, 13, 9, 4, 1}),
-    TESTSET_2008_06(Ref.file, "TESTSET/Set06MetaData/", Ref.request2008_06, new int[]{43, 15, 47, 20, 31, 24, 9, 2, 6, 2, 1, 2, 1, 1}),
-    TESTSET_2008_07(Ref.file, "TESTSET/Set07MetaData/", Ref.request2008_07, new int[]{6, 18, 15, 12, 7, 6, 4, 9, 13, 15, 8, 11, 10, 17, 9, 3, 1}),
-    TESTSET_2008_08(Ref.file, "TESTSET/Set08MetaData/", Ref.request2008_08, new int[]{11, 5, 4, 6, 5, 9, 3, 2, 10, 7, 7, 3, 5, 4, 2, 4, 12, 3, 4, 15, 5, 1, 3, 1});
+    TESTSET_2008_01(Ref.resourceName, "TESTSET/Set01MetaData/", Ref.request2008_01, new int[]{16, 12, 7, 10, 3, 4, 1, 1, 1, 5}),
+    TESTSET_2008_02(Ref.resourceName, "TESTSET/Set02MetaData/", Ref.request2008_02, new int[]{9, 15, 11, 16, 5, 4, 1, 1}),
+    TESTSET_2008_03(Ref.resourceName, "TESTSET/Set03MetaData/", Ref.request2008_03, new int[]{4, 2, 1, 3, 6, 5, 2, 4, 4, 4, 5, 9, 10, 2, 2, 15, 5, 1, 2, 2, 8, 6, 3}),
+    TESTSET_2008_04(Ref.resourceName, "TESTSET/Set04MetaData/", Ref.request2008_04, new int[]{15, 9, 10, 7, 3}),
+    TESTSET_2008_05(Ref.resourceName, "TESTSET/Set05MetaData/", Ref.request2008_05, new int[]{11, 14, 12, 17, 9, 12, 13, 9, 4, 1}),
+    TESTSET_2008_06(Ref.resourceName, "TESTSET/Set06MetaData/", Ref.request2008_06, new int[]{43, 15, 47, 20, 31, 24, 9, 2, 6, 2, 1, 2, 1, 1}),
+    TESTSET_2008_07(Ref.resourceName, "TESTSET/Set07MetaData/", Ref.request2008_07, new int[]{6, 18, 15, 12, 7, 6, 4, 9, 13, 15, 8, 11, 10, 17, 9, 3, 1}),
+    TESTSET_2008_08(Ref.resourceName, "TESTSET/Set08MetaData/", Ref.request2008_08, new int[]{11, 5, 4, 6, 5, 9, 3, 2, 10, 7, 7, 3, 5, 4, 2, 4, 12, 3, 4, 15, 5, 1, 3, 1});
 
     private static class Ref {
-        private static final String file = "wsc08-testsets.zip";
+        private static final String resourceName = "wsc08-testsets.zip";
         private static Signature request2008_01 = new SignatureIO(Arrays.asList("con1233457844", "con1849951292", "con864995873"), Arrays.asList("con1220759822", "con2119691623"));
         private static Signature request2008_02 = new SignatureIO(Arrays.asList("con1498435960", "con189054683", "con608925131", "con1518098260"), Arrays.asList("con357002459"));
         private static Signature request2008_03 = new SignatureIO(Arrays.asList("con1765781068", "con1958306700", "con1881706184"), Arrays.asList("con896546722"));
@@ -66,37 +67,34 @@ public enum WSCTest {
         }
     }
 
-    private String testFile, testPath;
+    private String resourceName, zipPath;
     // Default dataset request
     private Signature request;
     private int[] expected;
 
-    WSCTest(String testFile, String testPath, Signature request, int[] expected) {
-        this.testFile = absolutePath(testFile);
-        this.testPath = testPath;
+    WSCTest(String resourceName, String zipPath, Signature request, int[] expected) {
+        this.resourceName = resourceName;
+        this.zipPath = zipPath;
         this.request = request;
         this.expected = expected;
     }
 
-    private InputStream openStream(String path) {
-        return getClass().getClassLoader().getResourceAsStream(path);
+    private InputStream openStream(String resource) {
+        return getClass().getClassLoader().getResourceAsStream(resource);
     }
 
-    private String absolutePath(String path) {
-        String file = getClass().getClassLoader().getResource(path).getFile();
-        return file;
-    }
-
-    public InputStream openServicesStream() throws ZipException,
+    public ZipInputStream openServicesStream() throws ZipException,
             IOException {
-        File zipFile = new File(testFile);
-        return FileUtils.openZipEntry(zipFile, testPath + "services.xml");
+        ZipInputStream zipStream = new ZipInputStream(openStream(resourceName));
+        String entryName = zipPath + "services.xml";
+        return FileUtils.moveToZipEntry(zipStream, entryName);
     }
 
-    public InputStream openTaxonomyStream() throws ZipException,
+    public ZipInputStream openTaxonomyStream() throws ZipException,
             IOException {
-        File zipFile = new File(testFile);
-        return FileUtils.openZipEntry(zipFile, testPath + "taxonomy.xml");
+        ZipInputStream zipStream = new ZipInputStream(openStream(resourceName));
+        String entryName = zipPath + "taxonomy.xml";
+        return FileUtils.moveToZipEntry(zipStream, entryName);
     }
 
     public WSCXMLServideProvider createXmlResourceProvider() throws ZipException,
@@ -113,8 +111,11 @@ public enum WSCTest {
     }
 
     public Dataset dataset() throws IOException {
-        WSCXMLKnowledgeBase kb = createKnowledgeBase();
-        WSCXMLServideProvider xmlServiceProvider = createXmlResourceProvider();
+        ZipInputStream taxonomy = openTaxonomyStream();
+        ZipInputStream services = openServicesStream();
+        // Streams are automatically closed by JAXB
+        WSCXMLKnowledgeBase kb = new WSCXMLKnowledgeBase(taxonomy);
+        WSCXMLServideProvider xmlServiceProvider = new WSCXMLServideProvider(services);
         WSCServiceProvider serviceProvider = new WSCServiceProvider(xmlServiceProvider, kb);
         LogicMatcher matcher = new LogicMatcher(kb);
         SetMatchFunction<Concept, LogicMatchType> setMatcher = new SetMatchFunctionDecorator<Concept, LogicMatchType>(matcher);

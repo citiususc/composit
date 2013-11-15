@@ -2,10 +2,7 @@ package es.usc.citius.composit.core.util;
 
 
 import java.io.*;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-import java.util.zip.ZipException;
-import java.util.zip.ZipFile;
+import java.util.zip.*;
 
 
 /**
@@ -27,6 +24,15 @@ public final class FileUtils {
     public static InputStream openZipEntry(File zipFile, String entryName) throws ZipException, IOException{
         ZipFile file = new ZipFile(zipFile);
         return file.getInputStream(file.getEntry(entryName));
+    }
+
+    public static ZipInputStream moveToZipEntry(ZipInputStream stream, String entry) throws IOException {
+        for (ZipEntry zentry; (zentry = stream.getNextEntry()) != null;) {
+            if (zentry.getName().equals(entry)) {
+                return stream;
+            }
+        }
+        throw new EOFException(entry + " not found");
     }
 
     public static <T> void saveObject(T object, File file, boolean use_compression) throws FileNotFoundException, IOException{
