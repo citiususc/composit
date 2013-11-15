@@ -32,7 +32,7 @@ input.gsc-input {
 
 #header {
     border-bottom: 3px solid #D19F34;
-    background-color: #282828;
+    background-color: #3D3D3D;
     height: 110px;
 }
 
@@ -97,6 +97,22 @@ h4.jd-details-title {
 
 #search-button:hover {
     background-position: 0 -28px;
+}
+
+/* FOOTER */
+
+#footer {
+    color: #2C2C2C;
+}
+
+#footer a {
+    color: #8A5E1D;
+    font-size: 11px;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+    color: #D19F34;
 }
 
 /* Scrollbar replacement. Original snippet from https://gist.github.com/devinrhode2/2573411 */
