@@ -32,14 +32,14 @@ public enum WSCTest {
 
     private static class Ref {
         private static final String resourceName = "wsc08-testsets.zip";
-        private static Signature request2008_01 = new SignatureIO(Arrays.asList("con1233457844", "con1849951292", "con864995873"), Arrays.asList("con1220759822", "con2119691623"));
-        private static Signature request2008_02 = new SignatureIO(Arrays.asList("con1498435960", "con189054683", "con608925131", "con1518098260"), Arrays.asList("con357002459"));
-        private static Signature request2008_03 = new SignatureIO(Arrays.asList("con1765781068", "con1958306700", "con1881706184"), Arrays.asList("con896546722"));
-        private static Signature request2008_04 = new SignatureIO(Arrays.asList("con1174477567", "con1559120783", "con34478529", "con1492759465", "con1735261165", "con1801416348"), Arrays.asList("con1183284356", "con1112009574", "con102886439", "con1157274091"));
-        private static Signature request2008_05 = new SignatureIO(Arrays.asList("con428391640", "con2100909192"), Arrays.asList("con1092196197", "con1374634550", "con2055848680"));
-        private static Signature request2008_06 = new SignatureIO(Arrays.asList("con1927582736", "con2066855250", "con1482928259", "con1174685776", "con1929429507", "con1036639498", "con683948594", "con1055275345", "con74623429"), Arrays.asList("con2139158577", "con1855489728", "con1888258136", "con1299621724"));
-        private static Signature request2008_07 = new SignatureIO(Arrays.asList("con484707919", "con797253905", "con891470167", "con1591526279", "con1250100988", "con2073456634", "con222954059", "con409949952"), Arrays.asList("con477743641"));
-        private static Signature request2008_08 = new SignatureIO(Arrays.asList("con1269728670", "con1666449411", "con917858046", "con625786234", "con1966097554"), Arrays.asList("con817293857", "con900031981", "con991999738", "con1395691071"));
+        private static SignatureIO<String> request2008_01 = new SignatureIO<String>(Arrays.asList("con1233457844", "con1849951292", "con864995873"), Arrays.asList("con1220759822", "con2119691623"));
+        private static SignatureIO<String> request2008_02 = new SignatureIO<String>(Arrays.asList("con1498435960", "con189054683", "con608925131", "con1518098260"), Arrays.asList("con357002459"));
+        private static SignatureIO<String> request2008_03 = new SignatureIO<String>(Arrays.asList("con1765781068", "con1958306700", "con1881706184"), Arrays.asList("con896546722"));
+        private static SignatureIO<String> request2008_04 = new SignatureIO<String>(Arrays.asList("con1174477567", "con1559120783", "con34478529", "con1492759465", "con1735261165", "con1801416348"), Arrays.asList("con1183284356", "con1112009574", "con102886439", "con1157274091"));
+        private static SignatureIO<String> request2008_05 = new SignatureIO<String>(Arrays.asList("con428391640", "con2100909192"), Arrays.asList("con1092196197", "con1374634550", "con2055848680"));
+        private static SignatureIO<String> request2008_06 = new SignatureIO<String>(Arrays.asList("con1927582736", "con2066855250", "con1482928259", "con1174685776", "con1929429507", "con1036639498", "con683948594", "con1055275345", "con74623429"), Arrays.asList("con2139158577", "con1855489728", "con1888258136", "con1299621724"));
+        private static SignatureIO<String> request2008_07 = new SignatureIO<String>(Arrays.asList("con484707919", "con797253905", "con891470167", "con1591526279", "con1250100988", "con2073456634", "con222954059", "con409949952"), Arrays.asList("con477743641"));
+        private static SignatureIO<String> request2008_08 = new SignatureIO<String>(Arrays.asList("con1269728670", "con1666449411", "con917858046", "con625786234", "con1966097554"), Arrays.asList("con817293857", "con900031981", "con991999738", "con1395691071"));
 
     }
 
@@ -47,9 +47,11 @@ public enum WSCTest {
         private WSCXMLKnowledgeBase kb;
         private WSCServiceProvider serviceProvider;
         private SetMatchFunction<Concept, LogicMatchType> defaultMatcher;
+        private SignatureIO<String> request;
 
-        public Dataset(WSCServiceProvider serviceProvider, WSCXMLKnowledgeBase kb, SetMatchFunction<Concept, LogicMatchType> defaultMatcher) {
+        public Dataset(SignatureIO<String> request, WSCServiceProvider serviceProvider, WSCXMLKnowledgeBase kb, SetMatchFunction<Concept, LogicMatchType> defaultMatcher) {
             this.serviceProvider = serviceProvider;
+            this.request = request;
             this.kb = kb;
             this.defaultMatcher = defaultMatcher;
         }
@@ -65,14 +67,18 @@ public enum WSCTest {
         public SetMatchFunction<Concept, LogicMatchType> getDefaultMatcher() {
             return defaultMatcher;
         }
+
+        public SignatureIO<String> getRequest() {
+            return request;
+        }
     }
 
     private String resourceName, zipPath;
     // Default dataset request
-    private Signature request;
+    private SignatureIO<String> request;
     private int[] expected;
 
-    WSCTest(String resourceName, String zipPath, Signature request, int[] expected) {
+    WSCTest(String resourceName, String zipPath, SignatureIO<String> request, int[] expected) {
         this.resourceName = resourceName;
         this.zipPath = zipPath;
         this.request = request;
@@ -119,7 +125,7 @@ public enum WSCTest {
         WSCServiceProvider serviceProvider = new WSCServiceProvider(xmlServiceProvider, kb);
         LogicMatcher matcher = new LogicMatcher(kb);
         SetMatchFunction<Concept, LogicMatchType> setMatcher = new SetMatchFunctionDecorator<Concept, LogicMatchType>(matcher);
-        return new Dataset(serviceProvider, kb, setMatcher);
+        return new Dataset(request, serviceProvider, kb, setMatcher);
     }
 
 

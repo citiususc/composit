@@ -12,6 +12,26 @@
 
     <dependencies>
         <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-wsc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-iserve</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-wsc</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
         </dependency>
