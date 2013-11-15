@@ -32,7 +32,7 @@
         <junit.test.version>4.11</junit.test.version>
         <log.slf4j.version>1.7.5</log.slf4j.version>
         <log.logback.version>1.0.13</log.logback.version>
-
+        <composit.root.dir>${project.basedir}</composit.root.dir>
         <!-- Project build encoding UTF-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -123,7 +123,7 @@
                         -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
                         -federationxml JDK http://doclava.googlecode.com/svn/static/api/openjdk-6.xml
                         -hdf project.name "${project.name}"
-                        -templatedir ${project.basedir}/../src/main/doclava/custom/assets/composit-template/
+                        -templatedir ${composit.root.dir}/src/main/doclava/custom/assets/composit-template/
                         -d ${project.build.directory}/apidocs
                     </additionalparam>
                     <useStandardDocletOptions>false</useStandardDocletOptions>
@@ -135,19 +135,6 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                    </execution>
-                    <!-- Generate aggregated javadoc in the site phase -->
-                    <execution>
-                        <id>aggregate</id>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                        <phase>site</phase>
-                        <configuration>
-                            <additionalparam>
-                                -templatedir ${project.basedir}/src/main/doclava/custom/assets/composit-template/
-                            </additionalparam>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

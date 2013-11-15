@@ -13,6 +13,10 @@
     <name>ComposIT Bundle</name>
     <description>This module contains all ComposIT submodules.</description>
 
+    <properties>
+        <composit.root.dir>${project.basedir}/..</composit.root.dir>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>

@@ -16,6 +16,10 @@
         optimizations.
     </description>
 
+    <properties>
+        <composit.root.dir>${project.basedir}/..</composit.root.dir>
+    </properties>
+
     <artifactId>composit-core</artifactId>
     <dependencies>
         <dependency>

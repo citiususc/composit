@@ -11,6 +11,10 @@
     <name>ComposIT WSC Adapter</name>
     <artifactId>composit-wsc</artifactId>
 
+    <properties>
+        <composit.root.dir>${project.basedir}/..</composit.root.dir>
+    </properties>
+
     <dependencies>
         <!--
             Dependency with composit-core to implement

@@ -18,4 +18,8 @@
         through iServe platform.
     </description>
 
+    <properties>
+        <composit.root.dir>${project.basedir}/..</composit.root.dir>
+    </properties>
+
 </project>
