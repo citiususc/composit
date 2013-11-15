@@ -9,6 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>ComposIT Integration Tests</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
     <artifactId>composit-test</artifactId>
 
 
