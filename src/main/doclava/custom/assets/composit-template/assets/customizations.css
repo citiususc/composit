@@ -46,7 +46,12 @@ input.gsc-input {
 }
 
 #side-nav .selected {
+    background-color: #B68A2D;
+}
+
+#index-links .selected {
     background-color: transparent;
+    color: #3D3D3D;
 }
 
 /* Page content */
