@@ -65,7 +65,7 @@ public class HashMatchGraph<E, T extends Comparable<T>> implements MatchGraph<E,
                                 // Example: Match at least subsumes: accepts exact, plugin and subsumes
                                 return input.getValue().compareTo(type)<=0;
                             case AT_MOST:
-                                return input.getValue().compareTo(type)>0;
+                                return input.getValue().compareTo(type)>=0;
                             default:
                                 return input.getValue().equals(type);
                         }

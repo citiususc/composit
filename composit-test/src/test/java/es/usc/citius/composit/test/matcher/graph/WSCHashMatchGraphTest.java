@@ -2,37 +2,155 @@ package es.usc.citius.composit.test.matcher.graph;
 
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.matcher.graph.HashMatchGraph;
+import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.matcher.logic.LogicMatchType;
 import es.usc.citius.composit.wsc08.data.WSCTest;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class WSCHashMatchGraphTest {
 
-    private WSCTest.Dataset dataset;
+    private static WSCTest.Dataset dataset;
+    private static HashMatchGraph<Concept, LogicMatchType> matchGraph;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         dataset = WSCTest.TESTSET_2008_01.dataset();
+        matchGraph = new HashMatchGraph<Concept, LogicMatchType>(dataset.getDefaultMatcher(), dataset.getKb().getConcepts());
+
     }
 
     @Test
-    public void testMatchWSC(){
-        HashMatchGraph<Concept, LogicMatchType> matchGraph =
-                new HashMatchGraph<Concept, LogicMatchType>(dataset.getDefaultMatcher(), dataset.getKb().getConcepts());
+    public void testMatchGraphElements(){
+        int elements = matchGraph.getElements().size();
+        assertEquals(1540, elements);
+    }
 
-        Set<Concept> targets = new HashSet<Concept>();
-        // WSC 01 request inputs
-        Set<String> inputs = dataset.getRequest().getInputs();
-        for(String input : inputs){
-            Concept c = dataset.getKb().getConcept(input);
-            System.out.println(matchGraph.getTargetElementsMatchedBy(c));
-        }
+    @Test
+    public void testMatchGraphTargetAllTypesWithWSC01(){
+        Concept c = dataset.getKb().getConcept("con1233457844");
+        Map<Concept, LogicMatchType> expected = new HashMap<Concept, LogicMatchType>();
+        expected.put(dataset.getKb().getConcept("con1653328292"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con677999980"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1578980503"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1988815758"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1233457844"), LogicMatchType.EXACT);
+        expected.put(dataset.getKb().getConcept("con332477359"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con54748427"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1226699739"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1648412736"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1094593378"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con471341825"), LogicMatchType.SUBSUMES);
+        Map<Concept, LogicMatchType> result = matchGraph.getTargetElementsMatchedBy(c);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testMatchGraphTargetExactWithWSC01(){
+        Concept c = dataset.getKb().getConcept("con1233457844");
+        Map<Concept, LogicMatchType> expected = new HashMap<Concept, LogicMatchType>();
+        expected.put(dataset.getKb().getConcept("con1233457844"), LogicMatchType.EXACT);
+        Map<Concept, LogicMatchType> result = matchGraph.getTargetElementsMatchedBy(c, LogicMatchType.EXACT, MatchGraph.TypeSelector.EXACT);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testMatchGraphTargetAtLeastPluginWithWSC01(){
+        Concept c = dataset.getKb().getConcept("con1233457844");
+        Map<Concept, LogicMatchType> expected = new HashMap<Concept, LogicMatchType>();
+        expected.put(dataset.getKb().getConcept("con1653328292"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1988815758"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1233457844"), LogicMatchType.EXACT);
+        expected.put(dataset.getKb().getConcept("con1226699739"), LogicMatchType.PLUGIN);
+        Map<Concept, LogicMatchType> result = matchGraph.getTargetElementsMatchedBy(c, LogicMatchType.PLUGIN, MatchGraph.TypeSelector.AT_LEAST);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testMatchGraphTargetAtMostPluginWithWSC01(){
+        Concept c = dataset.getKb().getConcept("con1233457844");
+        Map<Concept, LogicMatchType> expected = new HashMap<Concept, LogicMatchType>();
+        expected.put(dataset.getKb().getConcept("con1653328292"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con677999980"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1578980503"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1988815758"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con332477359"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con54748427"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1226699739"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1648412736"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1094593378"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con471341825"), LogicMatchType.SUBSUMES);
+        Map<Concept, LogicMatchType> result = matchGraph.getTargetElementsMatchedBy(c, LogicMatchType.PLUGIN, MatchGraph.TypeSelector.AT_MOST);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testMatchGraphSourceWithWSC01(){
+        Concept c = dataset.getKb().getConcept("con1233457844");
+        Map<Concept, LogicMatchType> expected = new HashMap<Concept, LogicMatchType>();
+        expected.put(dataset.getKb().getConcept("con1988815758"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con677999980"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1648412736"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1653328292"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1233457844"), LogicMatchType.EXACT);
+        expected.put(dataset.getKb().getConcept("con1578980503"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con471341825"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1226699739"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con54748427"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con332477359"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1094593378"), LogicMatchType.PLUGIN);
+        Map<Concept, LogicMatchType> result = matchGraph.getSourceElementsThatMatch(c);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testMatchGraphSourceExactWithWSC01(){
+        Concept c = dataset.getKb().getConcept("con1233457844");
+        Map<Concept, LogicMatchType> expected = new HashMap<Concept, LogicMatchType>();
+        expected.put(dataset.getKb().getConcept("con1233457844"), LogicMatchType.EXACT);
+        Map<Concept, LogicMatchType> result = matchGraph.getSourceElementsThatMatch(c, LogicMatchType.EXACT, MatchGraph.TypeSelector.EXACT);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testMatchGraphSourceAtLeastWSC01(){
+        Concept c = dataset.getKb().getConcept("con1233457844");
+        Map<Concept, LogicMatchType> expected = new HashMap<Concept, LogicMatchType>();
+        expected.put(dataset.getKb().getConcept("con677999980"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1648412736"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1233457844"), LogicMatchType.EXACT);
+        expected.put(dataset.getKb().getConcept("con1578980503"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con471341825"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con54748427"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con332477359"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1094593378"), LogicMatchType.PLUGIN);
+        Map<Concept, LogicMatchType> result = matchGraph.getSourceElementsThatMatch(c, LogicMatchType.PLUGIN, MatchGraph.TypeSelector.AT_LEAST);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testMatchGraphSourceAtMostWSC01(){
+        Concept c = dataset.getKb().getConcept("con1233457844");
+        Map<Concept, LogicMatchType> expected = new HashMap<Concept, LogicMatchType>();
+        expected.put(dataset.getKb().getConcept("con1988815758"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con677999980"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1648412736"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1653328292"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con1578980503"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con471341825"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1226699739"), LogicMatchType.SUBSUMES);
+        expected.put(dataset.getKb().getConcept("con54748427"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con332477359"), LogicMatchType.PLUGIN);
+        expected.put(dataset.getKb().getConcept("con1094593378"), LogicMatchType.PLUGIN);
+        Map<Concept, LogicMatchType> result = matchGraph.getSourceElementsThatMatch(c, LogicMatchType.PLUGIN, MatchGraph.TypeSelector.AT_MOST);
+        assertEquals(expected, result);
     }
 }

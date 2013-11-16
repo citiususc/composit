@@ -50,7 +50,7 @@
 
     <build>
         <plugins>
-            <!-- Plugin to reuse wsc module test resources -->
+            <!-- Package tests to be reused in different modules -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -62,11 +62,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*.class</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
