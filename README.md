@@ -5,7 +5,26 @@ en Tecnoloxías da Información (CITIUS)](http://citius.usc.es), University of S
 This library is the main ComposIT Java API used by the engine, which includes different state-of-the-art search algorithms
 and optimization techniques to improve the composition of Semantic Web Services.
 
-## Citation
+## License
+
+This software is licensed under the Apache 2 license, quoted below.
+
+    Copyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS),
+    University of Santiago de Compostela (USC).
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    
+### Citation
 We encourage you to cite our journal paper if you use ComposIT or some parts of the library in your research:
 
 > Rodriguez-Mier, P., Mucientes, M., Vidal, J. C., & Lama, M. (2012). [An Optimal and Complete Algorithm for 
