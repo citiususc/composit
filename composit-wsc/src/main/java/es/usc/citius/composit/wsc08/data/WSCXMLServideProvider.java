@@ -1,6 +1,10 @@
 package es.usc.citius.composit.wsc08.data;
 
 
+import com.google.common.base.Function;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Multimap;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
 import es.usc.citius.composit.core.model.impl.ResourceOperation;
@@ -26,6 +30,10 @@ public class WSCXMLServideProvider implements ServiceDataProvider<String> {
     private XMLServices services;
     // KV Map with name / class
     private Map<String, XMLService> nameIndex = new HashMap<String, XMLService>();
+    // KV Map with input / operation
+    private Multimap<String, XMLService> inputIndex = HashMultimap.create();
+    // KV Map with output / operation
+    private Multimap<String, XMLService> outputIndex = HashMultimap.create();
     // WSC'08 does not define the concept of service operations. Each service
     // has inputs and outputs. This service provider generates one operation
     // per service, using the same name as the WSC'08 service name but adding
@@ -45,6 +53,12 @@ public class WSCXMLServideProvider implements ServiceDataProvider<String> {
     private final void index() {
         for (XMLService s : services.getServices()) {
             nameIndex.put(s.getName(), s);
+            for(XMLInstance input : s.getInputs().getInstances()){
+                inputIndex.put(input.getID(), s);
+            }
+            for(XMLInstance output : s.getOutputs().getInstances()){
+                outputIndex.put(output.getID(), s);
+            }
         }
     }
 
@@ -89,6 +103,38 @@ public class WSCXMLServideProvider implements ServiceDataProvider<String> {
             return service.getOperations().iterator().next();
         }
         return null;
+    }
+
+    @Override
+    public Iterable<Operation<String>> getOperationsWithInput(String input) {
+        final Collection<XMLService> services = inputIndex.get(input);
+        return new Iterable<Operation<String>>() {
+            @Override
+            public Iterator<Operation<String>> iterator() {
+                return Iterators.transform(services.iterator(), new Function<XMLService, Operation<String>>() {
+                    @Override
+                    public Operation<String> apply(XMLService service) {
+                        return getOperation(service.getName()+operationSuffix);
+                    }
+                });
+            }
+        };
+    }
+
+    @Override
+    public Iterable<Operation<String>> getOperationsWithOutput(String output) {
+        final Collection<XMLService> services = outputIndex.get(output);
+        return new Iterable<Operation<String>>() {
+            @Override
+            public Iterator<Operation<String>> iterator() {
+                return Iterators.transform(services.iterator(), new Function<XMLService, Operation<String>>() {
+                    @Override
+                    public Operation<String> apply(XMLService service) {
+                        return getOperation(service.getName()+operationSuffix);
+                    }
+                });
+            }
+        };
     }
 
     @Override
@@ -149,7 +195,7 @@ public class WSCXMLServideProvider implements ServiceDataProvider<String> {
     public Set<String> listOperations() {
         Set<String> ops = new HashSet<String>();
         for(String service : listServices()){
-            ops.add(service+"Operation");
+            ops.add(service+operationSuffix);
         }
         return ops;
     }

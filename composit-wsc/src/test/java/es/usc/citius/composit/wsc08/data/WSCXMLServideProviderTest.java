@@ -65,6 +65,16 @@ public class WSCXMLServideProviderTest {
     }
 
     @Test
+    public void testGetOperationsWithInput() throws Exception {
+        assertEquals("serv699915007Operation", provider.getOperationsWithInput("inst1716616603").iterator().next().getID());
+    }
+
+    @Test
+    public void testGetOperationsWithOutput() throws Exception {
+        assertEquals("serv699915007Operation", provider.getOperationsWithOutput("inst725927364").iterator().next().getID());
+    }
+
+    @Test
     public void testGetServices() throws Exception {
         assertEquals(158, Sets.newHashSet(provider.getServices()).size());
     }

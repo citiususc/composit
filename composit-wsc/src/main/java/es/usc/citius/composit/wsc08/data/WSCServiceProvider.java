@@ -68,6 +68,39 @@ public class WSCServiceProvider implements ServiceDataProvider<Concept> {
     }
 
     @Override
+    public Iterable<Operation<Concept>> getOperationsWithInput(final Concept input) {
+        return new Iterable<Operation<Concept>>() {
+            @Override
+            public Iterator<Operation<Concept>> iterator() {
+                return Iterators.transform(delegatedProvider.getOperationsWithInput(input.getID()).iterator(),
+                        new Function<Operation<String>, Operation<Concept>>() {
+                            @Override
+                            public Operation<Concept> apply(Operation<String> op) {
+                                return translate(op);
+                            }
+                        });
+            }
+        };
+
+    }
+
+    @Override
+    public Iterable<Operation<Concept>> getOperationsWithOutput(final Concept output) {
+        return new Iterable<Operation<Concept>>() {
+            @Override
+            public Iterator<Operation<Concept>> iterator() {
+                return Iterators.transform(delegatedProvider.getOperationsWithOutput(output.getID()).iterator(),
+                        new Function<Operation<String>, Operation<Concept>>() {
+                            @Override
+                            public Operation<Concept> apply(Operation<String> op) {
+                                return translate(op);
+                            }
+                        });
+            }
+        };
+    }
+
+    @Override
     public Iterable<Operation<Concept>> getOperations() {
         // Returns an iterable of transformed operations.
         // Operations are transformed dynamically and not beforehand.
