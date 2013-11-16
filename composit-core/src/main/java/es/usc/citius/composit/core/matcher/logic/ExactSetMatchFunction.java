@@ -1,8 +1,8 @@
 package es.usc.citius.composit.core.matcher.logic;
 
 import com.google.common.collect.Sets;
+import es.usc.citius.composit.core.matcher.MatchTable;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
-import es.usc.citius.composit.core.matcher.SetMatchResult;
 
 import java.util.Set;
 
@@ -13,16 +13,16 @@ import java.util.Set;
 public class ExactSetMatchFunction<E> implements SetMatchFunction<E, LogicMatchType> {
 
     @Override
-    public SetMatchResult<E, LogicMatchType> partialMatch(Set<E> source, Set<E> target) {
+    public MatchTable<E, LogicMatchType> partialMatch(Set<E> source, Set<E> target) {
         // In this case the concept of partial match is identical to full match.
         return fullMatch(source, target);
     }
 
     @Override
-    public SetMatchResult<E, LogicMatchType> fullMatch(Set<E> source, Set<E> target) {
+    public MatchTable<E, LogicMatchType> fullMatch(Set<E> source, Set<E> target) {
         // Perform a set intersection
         Sets.SetView<E> intersection = Sets.intersection(source, target);
-        SetMatchResult<E,LogicMatchType> result = new SetMatchResult<E, LogicMatchType>();
+        MatchTable<E,LogicMatchType> result = new MatchTable<E, LogicMatchType>();
         for(E e : intersection){
             result.addMatch(e, e, LogicMatchType.EXACT);
         }

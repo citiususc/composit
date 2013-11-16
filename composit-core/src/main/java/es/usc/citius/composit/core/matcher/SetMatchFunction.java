@@ -21,7 +21,7 @@ public interface SetMatchFunction<E,T extends Comparable<T>> extends MatchFuncti
      * @param target target elements (elements to be matched).
      * @return a {@link Map} with keys = matcher elements and values = {@link Match} instances.
      */
-    SetMatchResult<E,T> partialMatch(Set<E> source, Set<E> target);
+    MatchTable<E,T> partialMatch(Set<E> source, Set<E> target);
 
 
     /**
@@ -30,5 +30,5 @@ public interface SetMatchFunction<E,T extends Comparable<T>> extends MatchFuncti
      * @param target {@link Set} elements to be matched.
      * @return
      */
-    SetMatchResult<E,T> fullMatch(Set<E> source, Set<E> target);
+    MatchTable<E,T> fullMatch(Set<E> source, Set<E> target);
 }

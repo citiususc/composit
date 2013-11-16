@@ -2,7 +2,7 @@ package es.usc.citius.composit.core.matcher.graph;
 
 import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
-import es.usc.citius.composit.core.matcher.SetMatchResult;
+import es.usc.citius.composit.core.matcher.MatchTable;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
 
@@ -17,7 +17,7 @@ public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements 
 
     private LeveledServices<E> layers;
     private SetMatchFunction<E,T> setMatcher;
-    private SetMatchResult<E,T> matchTable = new SetMatchResult<E, T>();
+    private MatchTable<E,T> matchTable = new MatchTable<E, T>();
     private HashMatchGraph<E,T> matchGraph;
 
 
@@ -28,15 +28,15 @@ public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements 
         this.setMatcher = setMatcher;
     }
 
-    private SetMatchResult<E,T> computeLeveledMatch(){
-        SetMatchResult<E,T> matchTable = new SetMatchResult<E, T>();
+    private MatchTable<E,T> computeLeveledMatch(){
+        MatchTable<E,T> matchTable = new MatchTable<E, T>();
         for(int level = 0; level < layers.numberOfLevels(); level++){
             Set<Operation<E>> ops = layers.getOperationsAtLevel(level);
             for(Operation<E> op : ops){
                 for(Operation<E> dest : layers.getOperationsAfterLevel(level)){
                     // Compute full match between these operations
                     // matcher -> matched
-                    SetMatchResult<E,T> matchResult =
+                    MatchTable<E,T> matchResult =
                             setMatcher.fullMatch(op.getSignature().getOutputs(),
                                     dest.getSignature().getInputs());
 
@@ -137,12 +137,12 @@ public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements 
     }
 
     @Override
-    public SetMatchResult<E,T> partialMatch(Set<E> source, Set<E> target) {
+    public MatchTable<E,T> partialMatch(Set<E> source, Set<E> target) {
         return matchGraph.partialMatch(source, target);
     }
 
     @Override
-    public SetMatchResult<E,T> fullMatch(Set<E> source, Set<E> target) {
+    public MatchTable<E,T> fullMatch(Set<E> source, Set<E> target) {
         return matchGraph.fullMatch(source, target);
     }
 

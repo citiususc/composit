@@ -10,9 +10,9 @@ public class SetMatchFunctionDecorator<E,T extends Comparable<T>> implements Set
         this.decoratedMatcher = decoratedMatcher;
     }
 
-    private SetMatchResult<E, T> match(Set<E> source, Set<E> target, boolean full){
+    private MatchTable<E, T> match(Set<E> source, Set<E> target, boolean full){
         // Compute partial match using the decorated match function
-        SetMatchResult<E,T> result = new SetMatchResult<E, T>();
+        MatchTable<E,T> result = new MatchTable<E, T>();
         for(E y : target){
             for(E x : source){
                 T matchType = decoratedMatcher.match(x,y);
@@ -28,12 +28,12 @@ public class SetMatchFunctionDecorator<E,T extends Comparable<T>> implements Set
     }
 
     @Override
-    public SetMatchResult<E, T> partialMatch(Set<E> source, Set<E> target) {
+    public MatchTable<E, T> partialMatch(Set<E> source, Set<E> target) {
         return match(source, target, false);
     }
 
     @Override
-    public SetMatchResult<E, T> fullMatch(Set<E> source, Set<E> target) {
+    public MatchTable<E, T> fullMatch(Set<E> source, Set<E> target) {
         return match(source, target, true);
     }
 

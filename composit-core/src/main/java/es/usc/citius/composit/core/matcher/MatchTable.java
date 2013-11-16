@@ -9,14 +9,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
-public class SetMatchResult<E, T extends Comparable<T>> {
+public class MatchTable<E, T extends Comparable<T>> {
     // Row: source, Column: target, Value matchType
     private Table<E, E, T> matchTable = HashBasedTable.create();
     private Set<E> elements = new HashSet<E>();
 
-    public SetMatchResult(){}
+    public MatchTable(){}
 
-    public SetMatchResult(Table<E,E,T> matchTable){
+    /**
+     * Interprets a {@link Table} as a match table of elements.
+     * @param matchTable
+     */
+    public MatchTable(Table<E, E, T> matchTable){
         this.matchTable = matchTable;
     }
 

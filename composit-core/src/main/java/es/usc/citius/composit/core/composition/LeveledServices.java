@@ -16,12 +16,14 @@ import java.util.Set;
 public interface LeveledServices<E> {
 
     /**
+     * TODO; Method from ServiceDataProvider. Remove
      * Get all services in the graph.
      * @return Set of services.
      */
     Set<Service<E>> getServices();
 
     /**
+     * TODO; Method from ServiceDataProvider. Remove
      * Get all operations in the graph.
      * @return Set of operations.
      */
@@ -76,6 +78,7 @@ public interface LeveledServices<E> {
     Set<Operation<E>> getOperationsAtLevel(int level);
 
     /**
+     * TODO; Method from ServiceDataProvider. Remove
      * Get all operations in the graph that have the provided input within their inputs.
      * @param input input.
      * @return Set of operations with the input. Each retrieved operation holds {@code operation.getInputs().contains(input)}.
@@ -83,6 +86,7 @@ public interface LeveledServices<E> {
     Set<Operation<E>> getOperationsWithInput(E input);
 
     /**
+     * TODO; Method from ServiceDataProvider. Remove
      * Get all operations in the graph that have the provided output within their outputs.
      * @param output output.
      * @return Set of operations with the output. Each retrieved operation holds {@code operation.getOutputs().contains(output)}.

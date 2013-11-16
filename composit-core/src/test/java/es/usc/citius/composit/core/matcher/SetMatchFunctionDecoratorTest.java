@@ -37,7 +37,7 @@ public class SetMatchFunctionDecoratorTest {
     }
     @Test
     public void testPartialMatch() throws Exception {
-        SetMatchResult<String, Integer> result = setMatcher.partialMatch(source, target);
+        MatchTable<String, Integer> result = setMatcher.partialMatch(source, target);
         // Only d and e matched
         assertEquals(Sets.newHashSet("d", "e"), result.getTargetElements());
         // Just the first element recorded
@@ -49,7 +49,7 @@ public class SetMatchFunctionDecoratorTest {
 
     @Test
     public void testFullMatch() throws Exception {
-        SetMatchResult<String, Integer> result = setMatcher.fullMatch(source, target);
+        MatchTable<String, Integer> result = setMatcher.fullMatch(source, target);
         // Only d and e matched
         assertEquals(Sets.newHashSet("d", "e"), result.getTargetElements());
         // Only a and b match d
@@ -62,7 +62,7 @@ public class SetMatchFunctionDecoratorTest {
 
     @Test
     public void testSortedTypesOnFullMatch(){
-        SetMatchResult<String, Integer> result = setMatcher.fullMatch(source, target);
+        MatchTable<String, Integer> result = setMatcher.fullMatch(source, target);
         SortedSet<String> elements = result.getSortedSourceElemsThatMatch("e");
         assertEquals("a",elements.first());
         assertEquals("c",elements.last());

@@ -7,7 +7,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
-import es.usc.citius.composit.core.matcher.SetMatchResult;
+import es.usc.citius.composit.core.matcher.MatchTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ import java.util.Set;
 public class HashMatchGraph<E, T extends Comparable<T>> implements MatchGraph<E,T>{
     private final static Logger logger = LoggerFactory.getLogger(HashMatchGraph.class);
 
-    private SetMatchResult<E,T> matchTable;
+    private MatchTable<E,T> matchTable;
     private Set<E> elements;
 
     public HashMatchGraph(SetMatchFunction<E,T> setMatcher, Set<E> elements) {
@@ -31,7 +31,7 @@ public class HashMatchGraph<E, T extends Comparable<T>> implements MatchGraph<E,
         logger.debug("Match processing finished in {}.", w.stop().toString());
     }
 
-    public HashMatchGraph(SetMatchResult<E,T> matchResult) {
+    public HashMatchGraph(MatchTable<E,T> matchResult) {
         this.matchTable = matchResult;
         this.elements = Sets.union(matchResult.getMatchTable().columnKeySet(), matchResult.getMatchTable().rowKeySet());
     }
@@ -85,13 +85,13 @@ public class HashMatchGraph<E, T extends Comparable<T>> implements MatchGraph<E,
     }
 
     @Override
-    public SetMatchResult<E, T> partialMatch(Set<E> source, Set<E> target) {
+    public MatchTable<E, T> partialMatch(Set<E> source, Set<E> target) {
         throw new UnsupportedOperationException("Partial match unsupported.");
     }
 
     @Override
-    public SetMatchResult<E, T> fullMatch(Set<E> source, Set<E> target) {
-        SetMatchResult<E,T> matchResult = new SetMatchResult<E, T>();
+    public MatchTable<E, T> fullMatch(Set<E> source, Set<E> target) {
+        MatchTable<E,T> matchResult = new MatchTable<E, T>();
         for(E x : source){
             for(E y : target){
                 T match = matchTable.getMatchTable().get(x,y);
