@@ -54,4 +54,8 @@ public class SignatureIO<E> implements Signature<E>, Serializable{
         result = 31 * result + outputs.hashCode();
         return result;
     }
+
+    public static <E> SignatureIO<E> empty(){
+        return new SignatureIO<E>();
+    }
 }
