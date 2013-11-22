@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase;
+import es.usc.citius.composit.core.knowledge.Instance;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
 import es.usc.citius.composit.core.model.impl.ResourceOperation;
@@ -18,11 +19,11 @@ import java.util.Set;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class WSCServiceProvider implements ServiceDataProvider<Concept> {
+public class WSCLazyServiceProvider implements ServiceDataProvider<Concept> {
     private HierarchicalKnowledgeBase kb;
     private ServiceDataProvider<String> delegatedProvider;
 
-    public WSCServiceProvider(ServiceDataProvider<String> delegatedProvider, HierarchicalKnowledgeBase kb) {
+    public WSCLazyServiceProvider(ServiceDataProvider<String> delegatedProvider, HierarchicalKnowledgeBase kb) {
         this.delegatedProvider = delegatedProvider;
         this.kb = kb;
     }
@@ -69,10 +70,15 @@ public class WSCServiceProvider implements ServiceDataProvider<Concept> {
 
     @Override
     public Iterable<Operation<Concept>> getOperationsWithInput(final Concept input) {
+        final Set<Instance> instances = kb.getInstances(input);
         return new Iterable<Operation<Concept>>() {
             @Override
             public Iterator<Operation<Concept>> iterator() {
-                return Iterators.transform(delegatedProvider.getOperationsWithInput(input.getID()).iterator(),
+                Iterator<Operation<String>> iteratorResult = Iterators.emptyIterator();
+                for(Instance instance : instances){
+                    iteratorResult = Iterators.concat(iteratorResult, delegatedProvider.getOperationsWithInput(instance.getID()).iterator());
+                }
+                return Iterators.transform(iteratorResult,
                         new Function<Operation<String>, Operation<Concept>>() {
                             @Override
                             public Operation<Concept> apply(Operation<String> op) {
@@ -86,10 +92,15 @@ public class WSCServiceProvider implements ServiceDataProvider<Concept> {
 
     @Override
     public Iterable<Operation<Concept>> getOperationsWithOutput(final Concept output) {
+        final Set<Instance> instances = kb.getInstances(output);
         return new Iterable<Operation<Concept>>() {
             @Override
             public Iterator<Operation<Concept>> iterator() {
-                return Iterators.transform(delegatedProvider.getOperationsWithOutput(output.getID()).iterator(),
+                Iterator<Operation<String>> iteratorResult = Iterators.emptyIterator();
+                for(Instance instance : instances){
+                    iteratorResult = Iterators.concat(iteratorResult, delegatedProvider.getOperationsWithOutput(instance.getID()).iterator());
+                }
+                return Iterators.transform(iteratorResult,
                         new Function<Operation<String>, Operation<Concept>>() {
                             @Override
                             public Operation<Concept> apply(Operation<String> op) {

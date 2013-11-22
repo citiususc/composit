@@ -106,8 +106,8 @@ public class WSCXMLServideProvider implements ServiceDataProvider<String> {
     }
 
     @Override
-    public Iterable<Operation<String>> getOperationsWithInput(String input) {
-        final Collection<XMLService> services = inputIndex.get(input);
+    public Iterable<Operation<String>> getOperationsWithInput(String inputInstance) {
+        final Collection<XMLService> services = inputIndex.get(inputInstance);
         return new Iterable<Operation<String>>() {
             @Override
             public Iterator<Operation<String>> iterator() {
@@ -122,8 +122,8 @@ public class WSCXMLServideProvider implements ServiceDataProvider<String> {
     }
 
     @Override
-    public Iterable<Operation<String>> getOperationsWithOutput(String output) {
-        final Collection<XMLService> services = outputIndex.get(output);
+    public Iterable<Operation<String>> getOperationsWithOutput(String outputInstance) {
+        final Collection<XMLService> services = outputIndex.get(outputInstance);
         return new Iterable<Operation<String>>() {
             @Override
             public Iterator<Operation<String>> iterator() {

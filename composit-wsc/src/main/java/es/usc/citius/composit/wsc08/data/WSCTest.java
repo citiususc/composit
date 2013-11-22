@@ -5,15 +5,15 @@ import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.SetMatchFunctionDecorator;
 import es.usc.citius.composit.core.matcher.logic.LogicMatchType;
 import es.usc.citius.composit.core.matcher.logic.LogicMatcher;
-import es.usc.citius.composit.core.model.Signature;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
 import es.usc.citius.composit.core.util.FileUtils;
 import es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.zip.ZipException;
 import java.util.zip.ZipInputStream;
 
@@ -45,22 +45,31 @@ public enum WSCTest {
 
     public static class Dataset {
         private WSCXMLKnowledgeBase kb;
-        private WSCServiceProvider serviceProvider;
+        private WSCLazyServiceProvider serviceProvider;
         private SetMatchFunction<Concept, LogicMatchType> defaultMatcher;
-        private SignatureIO<String> request;
+        private SignatureIO<Concept> request;
 
-        public Dataset(SignatureIO<String> request, WSCServiceProvider serviceProvider, WSCXMLKnowledgeBase kb, SetMatchFunction<Concept, LogicMatchType> defaultMatcher) {
+        public Dataset(SignatureIO<String> request, WSCLazyServiceProvider serviceProvider, WSCXMLKnowledgeBase kb, SetMatchFunction<Concept, LogicMatchType> defaultMatcher) {
             this.serviceProvider = serviceProvider;
-            this.request = request;
             this.kb = kb;
             this.defaultMatcher = defaultMatcher;
+            // Translate the request
+            Set<Concept> inputs = new HashSet<Concept>();
+            for(String input : request.getInputs()){
+                inputs.add(kb.getConcept(input));
+            }
+            Set<Concept> outputs = new HashSet<Concept>();
+            for(String output : request.getOutputs()){
+                outputs.add(kb.getConcept(output));
+            }
+            this.request = new SignatureIO<Concept>(inputs, outputs);
         }
 
         public WSCXMLKnowledgeBase getKb() {
             return kb;
         }
 
-        public WSCServiceProvider getServiceProvider() {
+        public WSCLazyServiceProvider getServiceProvider() {
             return serviceProvider;
         }
 
@@ -68,7 +77,7 @@ public enum WSCTest {
             return defaultMatcher;
         }
 
-        public SignatureIO<String> getRequest() {
+        public SignatureIO<Concept> getRequest() {
             return request;
         }
     }
@@ -112,8 +121,8 @@ public enum WSCTest {
         return new WSCXMLKnowledgeBase(openTaxonomyStream());
     }
 
-    public WSCServiceProvider createSemanticServiceProvider() throws IOException {
-        return new WSCServiceProvider(createXmlResourceProvider(), createKnowledgeBase());
+    public WSCLazyServiceProvider createSemanticServiceProvider() throws IOException {
+        return new WSCLazyServiceProvider(createXmlResourceProvider(), createKnowledgeBase());
     }
 
     public Dataset dataset() throws IOException {
@@ -122,7 +131,7 @@ public enum WSCTest {
         // Streams are automatically closed by JAXB
         WSCXMLKnowledgeBase kb = new WSCXMLKnowledgeBase(taxonomy);
         WSCXMLServideProvider xmlServiceProvider = new WSCXMLServideProvider(services);
-        WSCServiceProvider serviceProvider = new WSCServiceProvider(xmlServiceProvider, kb);
+        WSCLazyServiceProvider serviceProvider = new WSCLazyServiceProvider(xmlServiceProvider, kb);
         LogicMatcher matcher = new LogicMatcher(kb);
         SetMatchFunction<Concept, LogicMatchType> setMatcher = new SetMatchFunctionDecorator<Concept, LogicMatchType>(matcher);
         return new Dataset(request, serviceProvider, kb, setMatcher);
