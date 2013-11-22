@@ -23,18 +23,18 @@ public interface ServiceDataProvider<E> {
     Operation<E> getOperation(String operationID);
 
     /**
-     * Returns an interable with all operations that have the
+     * Returns an iterable with all operations that have the
      * selected input.
      * @param input Input to be found.
-     * @return Iterable with operations that hold {@code operation.getSignature().getInputs().contains(input)}
+     * @return Iterable with operations
      */
     Iterable<Operation<E>> getOperationsWithInput(E input);
 
     /**
-     * Returns an interable with all operations that have the
+     * Returns an iterable with all operations that have the
      * selected output.
      * @param output Output to be found.
-     * @return Iterable with operations that hold {@code operation.getSignature().getOutputs().contains(input)}
+     * @return Iterable with operations
      */
     Iterable<Operation<E>> getOperationsWithOutput(E output);
 
