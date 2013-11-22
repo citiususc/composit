@@ -4,14 +4,14 @@ package es.usc.citius.composit.wsc08.data.matcher;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase;
 import es.usc.citius.composit.core.matcher.MatchTable;
-import es.usc.citius.composit.core.matcher.graph.MatchGraph;
+import es.usc.citius.composit.core.matcher.graph.AbstractMatchGraph;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class ExactPluginKnowledgeBaseMatchGraph implements MatchGraph<Concept, Boolean> {
+public class ExactPluginKnowledgeBaseMatchGraph extends AbstractMatchGraph<Concept, Boolean> {
     private HierarchicalKnowledgeBase kb;
 
     public ExactPluginKnowledgeBaseMatchGraph(HierarchicalKnowledgeBase kb) {
@@ -46,16 +46,6 @@ public class ExactPluginKnowledgeBaseMatchGraph implements MatchGraph<Concept, B
         // exact match, target->target
         result.put(target, true);
         return result;
-    }
-
-    @Override
-    public Map<Concept, Boolean> getTargetElementsMatchedBy(Concept source, Boolean type, TypeSelector selector) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Map<Concept, Boolean> getSourceElementsThatMatch(Concept target, Boolean type, TypeSelector selector) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
