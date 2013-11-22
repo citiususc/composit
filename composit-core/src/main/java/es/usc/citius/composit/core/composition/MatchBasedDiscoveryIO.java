@@ -32,7 +32,7 @@ public class MatchBasedDiscoveryIO<E, T extends Comparable<T>> implements Discov
         for(E target : targets.keySet()){
             Iterable<Operation<E>> result = provider.getOperationsWithInput(target);
             if (result != null){
-                relevantOps.addAll(Sets.newHashSet(provider.getOperationsWithInput(target)));
+                relevantOps.addAll(Sets.newHashSet(result));
             }
         }
         return relevantOps;
