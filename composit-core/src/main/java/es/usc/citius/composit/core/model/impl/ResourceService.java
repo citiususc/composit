@@ -11,7 +11,7 @@ import java.util.Set;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class ResourceService<E> extends ResourceComponent implements Service<E> {
-    private Set<Operation<E>> operations;
+    private Set<Operation<E>> operations = new HashSet<Operation<E>>();
 
     public ResourceService(String id, Set<ResourceOperation<E>> operations) {
         super(id);
@@ -22,7 +22,6 @@ public class ResourceService<E> extends ResourceComponent implements Service<E> 
 
     public ResourceService(String id) {
         super(id);
-        this.operations = new HashSet<Operation<E>>();
     }
 
     @Override
