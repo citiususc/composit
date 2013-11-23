@@ -11,10 +11,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class ExactPluginKnowledgeBaseMatchGraph extends AbstractMatchGraph<Concept, Boolean> {
+public class WSCKBMatchGraph extends AbstractMatchGraph<Concept, Boolean> {
     private HierarchicalKnowledgeBase kb;
 
-    public ExactPluginKnowledgeBaseMatchGraph(HierarchicalKnowledgeBase kb) {
+    public WSCKBMatchGraph(HierarchicalKnowledgeBase kb) {
         this.kb = kb;
     }
 

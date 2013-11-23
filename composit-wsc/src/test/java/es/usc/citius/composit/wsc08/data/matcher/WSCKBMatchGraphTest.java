@@ -17,14 +17,14 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class ExactPluginKnowledgeBaseMatchGraphTest {
+public class WSCKBMatchGraphTest {
     private static HierarchicalKnowledgeBase kb;
-    private static ExactPluginKnowledgeBaseMatchGraph matchGraph;
+    private static WSCKBMatchGraph matchGraph;
 
     @BeforeClass
     public static void setUp() throws IOException {
         kb = WSCTest.TESTSET_2008_01.createKnowledgeBase();
-        matchGraph = new ExactPluginKnowledgeBaseMatchGraph(kb);
+        matchGraph = new WSCKBMatchGraph(kb);
     }
 
 

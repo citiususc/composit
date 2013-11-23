@@ -8,8 +8,7 @@ import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.provider.MemoryIndexServiceProvider;
 import es.usc.citius.composit.core.provider.ServiceDataProvider;
 import es.usc.citius.composit.wsc08.data.WSCTest;
-import es.usc.citius.composit.wsc08.data.matcher.ExactPluginKnowledgeBaseMatchGraph;
-import org.junit.Before;
+import es.usc.citius.composit.wsc08.data.matcher.WSCKBMatchGraph;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,7 @@ public class ForwardServiceDiscovererWSC01 {
         WSCTest.Dataset dataset = test.dataset();
         ServiceDataProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
         // Create a I/O Discovery and the match graph
-        ExactPluginKnowledgeBaseMatchGraph matchGraph = new ExactPluginKnowledgeBaseMatchGraph(dataset.getKb());
+        WSCKBMatchGraph matchGraph = new WSCKBMatchGraph(dataset.getKb());
         DiscoveryIO<Concept> discovery = new MatchBasedDiscoveryIO<Concept, Boolean>(matchGraph, provider);
         Stopwatch w = Stopwatch.createStarted();
         new ForwardServiceDiscoverer<Concept>(discovery, matchGraph).search(dataset.getRequest());
