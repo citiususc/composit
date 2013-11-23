@@ -13,16 +13,14 @@ import java.util.Set;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class IndexedServiceProvider<E> implements ServiceDataProvider<E> {
+public class MemoryIndexServiceProvider<E> implements ServiceDataProvider<E> {
     private Map<String, Service<E>> serviceIndex = new HashMap<String, Service<E>>();
     private Map<String, Operation<E>> operationIndex = new HashMap<String, Operation<E>>();
     private Multimap<E, Operation<E>> inputIndex = HashMultimap.create();
     private Multimap<E, Operation<E>> outputIndex = HashMultimap.create();
-    private ServiceDataProvider<E> delegatedProvider;
 
-    public IndexedServiceProvider(ServiceDataProvider<E> delegatedProvider) {
-        this.delegatedProvider = delegatedProvider;
-        // Build index
+    public MemoryIndexServiceProvider(ServiceDataProvider<E> delegatedProvider) {
+        // Build in-memory I/O index
         for(Service<E> service : delegatedProvider.getServices()){
             serviceIndex.put(service.getID(), service);
             for(Operation<E> op : service.getOperations()){
