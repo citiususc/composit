@@ -51,15 +51,7 @@ public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements 
         return matchTable;
     }
 
-    @Override
-    public Set<Service<E>> getServices() {
-        return layers.getServices();
-    }
 
-    @Override
-    public Set<Operation<E>> getOperations() {
-        return layers.getOperations();
-    }
 
     @Override
     public Operation<E> getSource() {
@@ -94,16 +86,6 @@ public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements 
     @Override
     public Set<Operation<E>> getOperationsAtLevel(int level) {
         return layers.getOperationsAtLevel(level);
-    }
-
-    @Override
-    public Set<Operation<E>> getOperationsWithInput(E input) {
-        return layers.getOperationsWithInput(input);
-    }
-
-    @Override
-    public Set<Operation<E>> getOperationsWithOutput(E output) {
-        return layers.getOperationsWithOutput(output);
     }
 
     @Override

@@ -6,13 +6,14 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.SetMultimap;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
+import es.usc.citius.composit.core.provider.ServiceDataProvider;
 
 import java.util.*;
 
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class HashLeveledServices<E> implements LeveledServices<E> {
+public class HashLeveledServices<E> implements LeveledServices<E>, ServiceDataProvider<E> {
     // Service operationLayers
     private List<Set<Operation<E>>> operationLayers;
 
@@ -118,8 +119,36 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
     }
 
     @Override
+    public Set<String> listOperations() {
+        Set<String> ids = new HashSet<String>();
+        for(Operation<E> op : operations){
+            ids.add(op.getID());
+        }
+        return ids;
+    }
+
+    @Override
+    public Set<String> listServices() {
+        Set<String> ids = new HashSet<String>();
+        for(Service<E> service : services){
+            ids.add(service.getID());
+        }
+        return ids;
+    }
+
+    @Override
     public Set<Operation<E>> getOperations() {
         return ImmutableSet.copyOf(operations);
+    }
+
+    @Override
+    public Service<E> getService(String serviceID) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Operation<E> getOperation(String operationID) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
