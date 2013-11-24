@@ -6,14 +6,14 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.SetMultimap;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
-import es.usc.citius.composit.core.provider.ServiceDataProvider;
+import es.usc.citius.composit.core.provider.ServiceProvider;
 
 import java.util.*;
 
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class HashLeveledServices<E> implements LeveledServices<E>, ServiceDataProvider<E> {
+public class HashLeveledServices<E> implements LeveledServices<E>, ServiceProvider<E> {
     // Service operationLayers
     private List<Set<Operation<E>>> operationLayers;
 

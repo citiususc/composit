@@ -6,7 +6,7 @@ import es.usc.citius.composit.core.composition.MatchBasedDiscoveryIO;
 import es.usc.citius.composit.core.composition.search.ForwardServiceDiscoverer;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.provider.MemoryIndexServiceProvider;
-import es.usc.citius.composit.core.provider.ServiceDataProvider;
+import es.usc.citius.composit.core.provider.ServiceProvider;
 import es.usc.citius.composit.wsc08.data.WSCTest;
 import es.usc.citius.composit.wsc08.data.matcher.WSCKBMatchGraph;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class ForwardServiceDiscovererWSC01 {
 
     private void run(WSCTest test) throws IOException {
         WSCTest.Dataset dataset = test.dataset();
-        ServiceDataProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
+        ServiceProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
         // Create a I/O Discovery and the match graph
         WSCKBMatchGraph matchGraph = new WSCKBMatchGraph(dataset.getKb());
         DiscoveryIO<Concept> discovery = new MatchBasedDiscoveryIO<Concept, Boolean>(matchGraph, provider);

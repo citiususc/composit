@@ -13,13 +13,13 @@ import java.util.Set;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class MemoryIndexServiceProvider<E> implements ServiceDataProvider<E> {
+public class MemoryIndexServiceProvider<E> implements ServiceProvider<E> {
     private Map<String, Service<E>> serviceIndex = new HashMap<String, Service<E>>();
     private Map<String, Operation<E>> operationIndex = new HashMap<String, Operation<E>>();
     private Multimap<E, Operation<E>> inputIndex = HashMultimap.create();
     private Multimap<E, Operation<E>> outputIndex = HashMultimap.create();
 
-    public MemoryIndexServiceProvider(ServiceDataProvider<E> delegatedProvider) {
+    public MemoryIndexServiceProvider(ServiceProvider<E> delegatedProvider) {
         // Build in-memory I/O index
         for(Service<E> service : delegatedProvider.getServices()){
             serviceIndex.put(service.getID(), service);

@@ -1,12 +1,10 @@
 package es.usc.citius.composit.core.composition;
 
-import com.google.common.collect.Iterators;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.model.Operation;
-import es.usc.citius.composit.core.model.Signature;
 import es.usc.citius.composit.core.model.impl.ResourceOperation;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
-import es.usc.citius.composit.core.provider.ServiceDataProvider;
+import es.usc.citius.composit.core.provider.ServiceProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,7 +49,7 @@ public class MatchBasedDiscoveryIOTest {
         ResourceOperation<String> op2 = new ResourceOperation<String>("Operation2", SignatureIO.<String>empty());
 
         // Configure a mocked service provider
-        ServiceDataProvider<String> mockedDataProvider = mock(ServiceDataProvider.class);
+        ServiceProvider<String> mockedDataProvider = mock(ServiceProvider.class);
 
         // Note that there is a inconsistency here. The mocked provider provides operations with empty signatures
         // which are suppose to use inputs a, c and return outputs b and d, but is not relevant for the test.

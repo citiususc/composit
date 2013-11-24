@@ -1,7 +1,7 @@
 package es.usc.citius.composit.core.composition;
 
 import es.usc.citius.composit.core.model.Operation;
-import es.usc.citius.composit.core.provider.ServiceDataProvider;
+import es.usc.citius.composit.core.provider.ServiceProvider;
 
 import java.util.List;
 import java.util.Set;
@@ -13,7 +13,7 @@ import java.util.Set;
  *
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public interface LeveledServices<E> extends ServiceDataProvider<E> {
+public interface LeveledServices<E> extends ServiceProvider<E> {
 
 
     /**

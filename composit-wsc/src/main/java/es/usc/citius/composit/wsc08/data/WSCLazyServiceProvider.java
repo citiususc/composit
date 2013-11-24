@@ -10,7 +10,7 @@ import es.usc.citius.composit.core.model.Service;
 import es.usc.citius.composit.core.model.impl.ResourceOperation;
 import es.usc.citius.composit.core.model.impl.ResourceService;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
-import es.usc.citius.composit.core.provider.ServiceDataProvider;
+import es.usc.citius.composit.core.provider.ServiceProvider;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,11 +19,11 @@ import java.util.Set;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class WSCLazyServiceProvider implements ServiceDataProvider<Concept> {
+public class WSCLazyServiceProvider implements ServiceProvider<Concept> {
     private HierarchicalKnowledgeBase kb;
-    private ServiceDataProvider<String> delegatedProvider;
+    private ServiceProvider<String> delegatedProvider;
 
-    public WSCLazyServiceProvider(ServiceDataProvider<String> delegatedProvider, HierarchicalKnowledgeBase kb) {
+    public WSCLazyServiceProvider(ServiceProvider<String> delegatedProvider, HierarchicalKnowledgeBase kb) {
         this.delegatedProvider = delegatedProvider;
         this.kb = kb;
     }

@@ -3,7 +3,7 @@ package es.usc.citius.composit.core.composition;
 import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.model.Operation;
-import es.usc.citius.composit.core.provider.ServiceDataProvider;
+import es.usc.citius.composit.core.provider.ServiceProvider;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -17,9 +17,9 @@ import java.util.Set;
  */
 public class MatchBasedDiscoveryIO<E, T extends Comparable<T>> implements DiscoveryIO<E> {
     private MatchGraph<E,T> matchGraph;
-    private ServiceDataProvider<E> provider;
+    private ServiceProvider<E> provider;
 
-    public MatchBasedDiscoveryIO(MatchGraph<E, T> matchGraph, ServiceDataProvider<E> provider) {
+    public MatchBasedDiscoveryIO(MatchGraph<E, T> matchGraph, ServiceProvider<E> provider) {
         this.matchGraph = matchGraph;
         this.provider = provider;
     }

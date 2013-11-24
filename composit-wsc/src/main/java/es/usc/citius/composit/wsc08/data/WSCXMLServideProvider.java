@@ -10,7 +10,7 @@ import es.usc.citius.composit.core.model.Service;
 import es.usc.citius.composit.core.model.impl.ResourceOperation;
 import es.usc.citius.composit.core.model.impl.ResourceService;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
-import es.usc.citius.composit.core.provider.ServiceDataProvider;
+import es.usc.citius.composit.core.provider.ServiceProvider;
 import es.usc.citius.composit.wsc08.data.model.xml.XMLInstance;
 import es.usc.citius.composit.wsc08.data.model.xml.services.XMLService;
 import es.usc.citius.composit.wsc08.data.model.xml.services.XMLServices;
@@ -25,7 +25,7 @@ import java.util.*;
  * into the ComposIT model. The WSC'08 format has many drawbacks: it does not use proper URIs and
  * it uses non-standard XML formats to define services and ontologies.
  */
-public class WSCXMLServideProvider implements ServiceDataProvider<String> {
+public class WSCXMLServideProvider implements ServiceProvider<String> {
     // JAXB Root class
     private XMLServices services;
     // KV Map with name / class

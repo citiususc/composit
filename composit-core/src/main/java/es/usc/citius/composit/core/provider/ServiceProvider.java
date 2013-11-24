@@ -6,7 +6,7 @@ import es.usc.citius.composit.core.model.Service;
 
 import java.util.Set;
 
-public interface ServiceDataProvider<E> {
+public interface ServiceProvider<E> {
     /**
      * Locates and imports a service from the current service
      * provider.
@@ -53,14 +53,14 @@ public interface ServiceDataProvider<E> {
     /**
      * List the available operation id's.
      * @return Set of operation ids. To retrieve
-     * the operation model use {@link ServiceDataProvider#getOperation(String)}.
+     * the operation model use {@link ServiceProvider#getOperation(String)}.
      */
     Set<String> listOperations();
 
     /**
      * List the available service id's.
      * @return Set of service ids. To retrieve the service model
-     * use {@link ServiceDataProvider#getService(String)}.
+     * use {@link ServiceProvider#getService(String)}.
      */
     Set<String> listServices();
 }
