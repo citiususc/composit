@@ -1,6 +1,7 @@
 package es.usc.citius.composit.core.matcher.graph;
 
 import es.usc.citius.composit.core.composition.LeveledServices;
+import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.MatchTable;
 import es.usc.citius.composit.core.model.Operation;
@@ -13,15 +14,14 @@ import java.util.Set;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements MatchGraph<E,T>, LeveledServices<E> {
+public class HashServiceMatchNetwork<E,T extends Comparable<T>> implements ServiceMatchNetwork<E,T> {
 
     private LeveledServices<E> layers;
     private SetMatchFunction<E,T> setMatcher;
     private MatchTable<E,T> matchTable = new MatchTable<E, T>();
     private HashMatchGraph<E,T> matchGraph;
 
-
-    public HashLeveledServiceMatchGraph(LeveledServices<E> layers, SetMatchFunction<E,T> setMatcher) {
+    public HashServiceMatchNetwork(LeveledServices<E> layers, SetMatchFunction<E, T> setMatcher) {
         this.layers = layers;
         this.matchTable = computeLeveledMatch();
         this.matchGraph = new HashMatchGraph<E, T>(matchTable);
@@ -91,6 +91,44 @@ public class HashLeveledServiceMatchGraph<E,T extends Comparable<T>> implements 
     @Override
     public List<Set<Operation<E>>> getLeveledList() {
         return layers.getLeveledList();
+    }
+
+    @Override
+    public Service<E> getService(String serviceID) {
+        return layers.getService(serviceID);
+    }
+
+    @Override
+    public Operation<E> getOperation(String operationID) {
+        return layers.getOperation(operationID);
+    }
+
+    public Iterable<Operation<E>> getOperationsWithInput(E input) {
+        return layers.getOperationsWithInput(input);
+    }
+
+    public Iterable<Operation<E>> getOperationsWithOutput(E output) {
+        return layers.getOperationsWithOutput(output);
+    }
+
+    @Override
+    public Iterable<Operation<E>> getOperations() {
+        return layers.getOperations();
+    }
+
+    @Override
+    public Iterable<Service<E>> getServices() {
+        return layers.getServices();
+    }
+
+    @Override
+    public Set<String> listOperations() {
+        return layers.listOperations();
+    }
+
+    @Override
+    public Set<String> listServices() {
+        return layers.listServices();
     }
 
     @Override
