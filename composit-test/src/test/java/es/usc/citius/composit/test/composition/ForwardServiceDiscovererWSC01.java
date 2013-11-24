@@ -22,14 +22,14 @@ public class ForwardServiceDiscovererWSC01 {
     private static final Logger log = LoggerFactory.getLogger(ForwardServiceDiscovererWSC01.class);
 
     private void run(WSCTest test) throws IOException {
+        Stopwatch w = Stopwatch.createStarted();
         WSCTest.Dataset dataset = test.dataset();
         ServiceProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
         // Create a I/O Discovery and the match graph
         WSCKBMatchGraph matchGraph = new WSCKBMatchGraph(dataset.getKb());
         DiscoveryIO<Concept> discovery = new MatchBasedDiscoveryIO<Concept, Boolean>(matchGraph, provider);
-        Stopwatch w = Stopwatch.createStarted();
         new ForwardServiceDiscoverer<Concept, Boolean>(discovery, matchGraph).search(dataset.getRequest());
-        log.debug("Total time {}", w.stop().toString());
+        log.debug("Test time {}", w.stop().toString());
     }
 
     @Test
