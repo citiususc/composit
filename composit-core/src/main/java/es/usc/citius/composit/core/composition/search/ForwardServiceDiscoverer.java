@@ -1,17 +1,18 @@
 package es.usc.citius.composit.core.composition.search;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.composition.DiscoveryIO;
 import es.usc.citius.composit.core.composition.HashLeveledServices;
 import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
-import es.usc.citius.composit.core.matcher.graph.HashServiceMatchNetwork;
+import es.usc.citius.composit.core.composition.network.HashServiceMatchNetwork;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Operations;
 import es.usc.citius.composit.core.model.Signature;
+import es.usc.citius.composit.core.model.impl.Sink;
+import es.usc.citius.composit.core.model.impl.Source;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -102,7 +103,10 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
         log.debug("Operation discovery finalized in {}", timer.toString());
 
         // Add the source and sink operations
-
+        Source<E> sourceOp = new Source<E>(signature.getInputs());
+        Sink<E> sinkOp = new Sink<E>(signature.getOutputs());
+        leveledOps.add(0, Collections.<Operation<E>>singleton(sourceOp));
+        leveledOps.add(leveledOps.size(), Collections.<Operation<E>>singleton(sinkOp));
         // Create a service match network with the discovered services
         LeveledServices<E> leveledServices = new HashLeveledServices<E>(leveledOps);
         HashServiceMatchNetwork<E,T> matchNetwork = new HashServiceMatchNetwork<E, T>(leveledServices, this.matcher);

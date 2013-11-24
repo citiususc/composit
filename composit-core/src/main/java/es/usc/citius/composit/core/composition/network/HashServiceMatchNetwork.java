@@ -1,9 +1,11 @@
-package es.usc.citius.composit.core.matcher.graph;
+package es.usc.citius.composit.core.composition.network;
 
+import com.google.common.collect.Table;
 import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.MatchTable;
+import es.usc.citius.composit.core.matcher.graph.HashMatchGraph;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
 
@@ -23,12 +25,12 @@ public class HashServiceMatchNetwork<E,T extends Comparable<T>> implements Servi
 
     public HashServiceMatchNetwork(LeveledServices<E> layers, SetMatchFunction<E, T> setMatcher) {
         this.layers = layers;
+        this.setMatcher = setMatcher;
         this.matchTable = computeLeveledMatch();
         this.matchGraph = new HashMatchGraph<E, T>(matchTable);
-        this.setMatcher = setMatcher;
     }
 
-    private MatchTable<E,T> computeLeveledMatch(){
+    private final MatchTable<E,T> computeLeveledMatch(){
         MatchTable<E,T> matchTable = new MatchTable<E, T>();
         for(int level = 0; level < layers.numberOfLevels(); level++){
             Set<Operation<E>> ops = layers.getOperationsAtLevel(level);
@@ -39,11 +41,8 @@ public class HashServiceMatchNetwork<E,T extends Comparable<T>> implements Servi
                     MatchTable<E,T> matchResult =
                             setMatcher.fullMatch(op.getSignature().getOutputs(),
                                     dest.getSignature().getInputs());
-
-                    for(E source : matchResult.getSourceElements()){
-                        for(E target : matchResult.getTargetElements()){
-                            matchTable.addMatch(source, target, matchResult.getMatchTable().get(source, target));
-                        }
+                    for(Table.Cell<E,E,T> matchCell : matchResult.getMatchTable().cellSet()){
+                        matchTable.addMatch(matchCell.getRowKey(), matchCell.getColumnKey(), matchCell.getValue());
                     }
                 }
             }
