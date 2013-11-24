@@ -5,9 +5,12 @@ en Tecnoloxías da Información (CITIUS)](http://citius.usc.es), University of S
 This library is the main ComposIT Java API used by the engine, which includes different state-of-the-art search algorithms
 and optimization techniques to improve the composition of Semantic Web Services.
 
-## License
+## License & Citation
 
-This software is licensed under the Apache 2 license, quoted below.
+This software is licensed under the Apache 2 license, quoted below. You can freely download and use ComposIT in whole or in part, for personal, 
+company internal, research or commercial purposes. This license requires you to include a copy of the license in any redistribution 
+you may make that includes Apache software. For more information about the terms of this license, please check the
+[Apache License FAQ](http://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN).
 
     Copyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS),
     University of Santiago de Compostela (USC).
