@@ -21,10 +21,12 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
     private Set<E> elements = new HashSet<E>();
     // Level map to get the level of each operation
     private Map<Operation<E>, Integer> levelMap = new HashMap<Operation<E>, Integer>();
-    // Operations provided to the constructor
-    private Set<Operation<E>> operations = new HashSet<Operation<E>>();
+    // Operations in the leveled structure
+    private Map<String, Operation<E>> operations = new HashMap<String, Operation<E>>();
+    //private Set<Operation<E>> operations = new HashSet<Operation<E>>();
     // Services extracted from the operations
-    private Set<Service<E>> services = new HashSet<Service<E>>();
+    private Map<String, Service<E>> services = new HashMap<String, Service<E>>();
+    //private Set<Service<E>> services = new HashSet<Service<E>>();
     // Output hash mmap (output -> operations with the output)
     private SetMultimap<E, Operation<E>> inputOperationMap = HashMultimap.create();
     // Input hash mmap (input -> operations with the input)
@@ -42,18 +44,20 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
         for(Set<Operation<E>> ops : operationLayers){
             for(Operation<E> op : ops){
                 levelMap.put(op, level++);
-                operations.add(op);
+                operations.put(op.getID(), op);
             }
-            operations.addAll(ops);
+            //operations.addAll(ops);
         }
         // Index inputs, outputs and operations
-        index(operations);
+        index(operations.values());
     }
 
-    private void index(Set<Operation<E>> operations){
+    private void index(Collection<Operation<E>> operations){
         for(Operation<E> op : operations){
             // Index service owners
-            this.services.add(op.getServiceOwner());
+            Service<E> service = op.getServiceOwner();
+            this.services.put(service.getID(), service);
+            //this.services.add(op.getServiceOwner());
             // Index inputs and outputs
             this.elements.addAll(op.getSignature().getInputs());
             this.elements.addAll(op.getSignature().getOutputs());
@@ -95,6 +99,9 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
 
     @Override
     public Set<Operation<E>> getOperationsBeforeLevel(int level) {
+        if (level < 0 || level > operationLayers.size()-1){
+            throw new IllegalArgumentException("Invalid level number. Max level supported: " + (operationLayers.size()-1));
+        }
         Set<Operation<E>> set = new HashSet<Operation<E>>();
         for(int i =0; i < level; i++){
             set.addAll(operationLayers.get(i));
@@ -104,6 +111,9 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
 
     @Override
     public Set<Operation<E>> getOperationsAfterLevel(int level) {
+        if (level < 0 || level > operationLayers.size()-1){
+            throw new IllegalArgumentException("Invalid level number. Max level supported: " + (operationLayers.size()-1));
+        }
         Set<Operation<E>> set = new HashSet<Operation<E>>();
         for(int i = level+1; i < operationLayers.size(); i++){
             set.addAll(operationLayers.get(i));
@@ -121,40 +131,32 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
 
     @Override
     public Set<Service<E>> getServices() {
-        return ImmutableSet.copyOf(services);
+        return ImmutableSet.copyOf(services.values());
     }
 
     @Override
     public Set<String> listOperations() {
-        Set<String> ids = new HashSet<String>();
-        for(Operation<E> op : operations){
-            ids.add(op.getID());
-        }
-        return ids;
+        return ImmutableSet.copyOf(operations.keySet());
     }
 
     @Override
     public Set<String> listServices() {
-        Set<String> ids = new HashSet<String>();
-        for(Service<E> service : services){
-            ids.add(service.getID());
-        }
-        return ids;
+        return ImmutableSet.copyOf(services.keySet());
     }
 
     @Override
     public Set<Operation<E>> getOperations() {
-        return ImmutableSet.copyOf(operations);
+        return ImmutableSet.copyOf(operations.values());
     }
 
     @Override
     public Service<E> getService(String serviceID) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return services.get(serviceID);
     }
 
     @Override
     public Operation<E> getOperation(String operationID) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return operations.get(operationID);
     }
 
     @Override
