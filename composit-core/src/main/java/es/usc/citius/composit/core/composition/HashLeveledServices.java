@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class HashLeveledServices<E> implements LeveledServices<E>, ServiceProvider<E> {
+public class HashLeveledServices<E> implements LeveledServices<E> {
     // Service operationLayers
     private List<Set<Operation<E>>> operationLayers;
 
@@ -31,6 +31,12 @@ public class HashLeveledServices<E> implements LeveledServices<E>, ServiceProvid
     private SetMultimap<E, Operation<E>> outputOperationMap = HashMultimap.create();
 
     public HashLeveledServices(List<Set<Operation<E>>> operationLayers) {
+        if (operationLayers.get(0).size()!=1){
+            throw new IllegalArgumentException("Source operation expected in the first layer.");
+        }
+        if (operationLayers.get(operationLayers.size()-1).size() != 1){
+            throw new IllegalArgumentException("Sink operation expected in the last layer.");
+        }
         this.operationLayers = operationLayers;
         int level=0;
         for(Set<Operation<E>> ops : operationLayers){
