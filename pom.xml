@@ -50,8 +50,8 @@
     <inceptionYear>2011</inceptionYear>
     <licenses>
         <license>
-            <name>GNU Library or Lesser General Public License (LGPL)</name>
-            <url>http://www.gnu.org/licenses/lgpl.html</url>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -79,6 +79,57 @@
     </developers>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.9.1</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <docencoding>UTF-8</docencoding>
+                        <charset>UTF-8</charset>
+                        <!-- Doclava specific configuration -->
+                        <docletArtifact>
+                            <groupId>com.google.doclava</groupId>
+                            <artifactId>doclava</artifactId>
+                            <version>1.0.5</version>
+                        </docletArtifact>
+                        <doclet>com.google.doclava.Doclava</doclet>
+                        <bootclasspath>${sun.boot.class.path}</bootclasspath>
+                        <additionalparam>
+                            -quiet
+                            -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
+                            -federationxml JDK http://doclava.googlecode.com/svn/static/api/openjdk-6.xml
+                            -hdf project.name "${project.name}"
+                            -templatedir ${composit.root.dir}/src/main/doclava/custom/assets/composit-template/
+                            -d ${project.build.directory}/apidocs
+                        </additionalparam>
+                        <useStandardDocletOptions>false</useStandardDocletOptions>
+                        <additionalJOption>-J-Xmx1024m</additionalJOption>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>1.9</version>
+                    <configuration>
+                        <signature>
+                            <groupId>org.codehaus.mojo.signature</groupId>
+                            <artifactId>java16</artifactId>
+                            <version>1.0</version>
+                        </signature>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -105,30 +156,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <docencoding>UTF-8</docencoding>
-                    <charset>UTF-8</charset>
-                    <!-- Doclava specific configuration -->
-                    <docletArtifact>
-                        <groupId>com.google.doclava</groupId>
-                        <artifactId>doclava</artifactId>
-                        <version>1.0.5</version>
-                    </docletArtifact>
-                    <doclet>com.google.doclava.Doclava</doclet>
-                    <bootclasspath>${sun.boot.class.path}</bootclasspath>
-                    <additionalparam>
-                        -quiet
-                        -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
-                        -federationxml JDK http://doclava.googlecode.com/svn/static/api/openjdk-6.xml
-                        -hdf project.name "${project.name}"
-                        -templatedir ${composit.root.dir}/src/main/doclava/custom/assets/composit-template/
-                        -d ${project.build.directory}/apidocs
-                    </additionalparam>
-                    <useStandardDocletOptions>false</useStandardDocletOptions>
-                    <additionalJOption>-J-Xmx1024m</additionalJOption>
-                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -175,14 +202,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.9</version>
-                <configuration>
-                    <signature>
-                        <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16</artifactId>
-                        <version>1.0</version>
-                    </signature>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
