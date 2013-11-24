@@ -12,6 +12,7 @@
     <artifactId>composit-all</artifactId>
     <name>ComposIT Bundle</name>
     <description>This module contains all ComposIT submodules.</description>
+    <packaging>jar</packaging>
 
     <properties>
         <composit.root.dir>${project.basedir}/..</composit.root.dir>
