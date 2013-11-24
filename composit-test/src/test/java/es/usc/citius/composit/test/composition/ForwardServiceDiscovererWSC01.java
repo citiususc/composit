@@ -28,7 +28,7 @@ public class ForwardServiceDiscovererWSC01 {
         WSCKBMatchGraph matchGraph = new WSCKBMatchGraph(dataset.getKb());
         DiscoveryIO<Concept> discovery = new MatchBasedDiscoveryIO<Concept, Boolean>(matchGraph, provider);
         Stopwatch w = Stopwatch.createStarted();
-        new ForwardServiceDiscoverer<Concept>(discovery, matchGraph).search(dataset.getRequest());
+        new ForwardServiceDiscoverer<Concept, Boolean>(discovery, matchGraph).search(dataset.getRequest());
         log.debug("Total time {}", w.stop().toString());
     }
 

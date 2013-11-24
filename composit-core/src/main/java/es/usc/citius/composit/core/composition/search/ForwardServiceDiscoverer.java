@@ -4,8 +4,11 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.composition.DiscoveryIO;
+import es.usc.citius.composit.core.composition.HashLeveledServices;
 import es.usc.citius.composit.core.composition.LeveledServices;
+import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
+import es.usc.citius.composit.core.matcher.graph.HashServiceMatchNetwork;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Operations;
 import es.usc.citius.composit.core.model.Signature;
@@ -17,34 +20,38 @@ import java.util.*;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class ForwardServiceDiscoverer<E> {
+public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
     private static final Logger log = LoggerFactory.getLogger(ForwardServiceDiscoverer.class);
     private DiscoveryIO<E> discovery;
-    private SetMatchFunction<E, ?> matcher;
+    private SetMatchFunction<E, T> matcher;
 
-    public ForwardServiceDiscoverer(DiscoveryIO<E> discovery, SetMatchFunction<E, ?> matcher) {
+    public ForwardServiceDiscoverer(DiscoveryIO<E> discovery, SetMatchFunction<E, T> matcher) {
         this.discovery = discovery;
         this.matcher = matcher;
     }
 
 
-    public LeveledServices<E> search(Signature<E> signature){
+    public ServiceMatchNetwork<E,T> search(Signature<E> signature){
         Set<E> availableInputs = new HashSet<E>(signature.getInputs());
         Set<E> newOutputs = new HashSet<E>(signature.getInputs());
         Set<E> unmatchedOutputs = new HashSet<E>(signature.getOutputs());
         Set<Operation<E>> usedServices = new HashSet<Operation<E>>();
         Map<Operation<E>, Set<E>> unmatchedInputMap = new HashMap<Operation<E>, Set<E>>();
+        List<Set<Operation<E>>> leveledOps = new LinkedList<Set<Operation<E>>>();
 
         boolean checkExpectedOutputs = !signature.getOutputs().isEmpty();
         boolean stop;
 
+        Stopwatch timer = Stopwatch.createStarted();
+        Stopwatch levelTimer = Stopwatch.createUnstarted();
+
         do {
-            Stopwatch w = Stopwatch.createStarted();
             HashSet<Operation<E>> candidates = new HashSet<Operation<E>>();
+            levelTimer.start();
             for(E newConcept : newOutputs){
                 candidates.addAll(discovery.discoverOperationsForInput(newConcept));
             }
-            log.debug("Services retrieved from index in " + w.toString() + " (" + candidates.size() + " candidates)");
+            log.debug("Services retrieved from index in " + levelTimer.toString() + " (" + candidates.size() + " candidates)");
             // Remove services that cannot be invoked with the available inputs
             for(Iterator<Operation<E>> it=candidates.iterator(); it.hasNext();){
                 Operation<E> candidate = it.next();
@@ -68,7 +75,7 @@ public class ForwardServiceDiscoverer<E> {
                     if (!isNew) it.remove();
                 }
             }
-            log.debug("Candidates selected in " + w.stop().toString() + " (" + candidates.size() + " candidates)");
+            log.debug("Candidates selected in " + levelTimer.toString() + " (" + candidates.size() + " candidates)");
 
             // Collect the new outputs of the new candidates
             Set<E> nextOutputs = Operations.outputs(candidates);
@@ -82,10 +89,24 @@ public class ForwardServiceDiscoverer<E> {
             // Update for the next iteration
             availableInputs.addAll(newOutputs);
             newOutputs = nextOutputs;
+
+            // Add the discovered ops
+            leveledOps.add(candidates);
+
             //log.debug("Available Inputs {}, New Outputs {}", availableInputs.size(), newOutputs.size());
             // Stop condition. Stop if there are no more candidates and/or expected outputs are satisfied.
             stop = (checkExpectedOutputs) ? candidates.isEmpty() || unmatchedOutputs.isEmpty() : candidates.isEmpty();
+            levelTimer.reset();
         } while(!stop);
-        return null;
+
+        log.debug("Operation discovery finalized in {}", timer.toString());
+
+        // Add the source and sink operations
+
+        // Create a service match network with the discovered services
+        LeveledServices<E> leveledServices = new HashLeveledServices<E>(leveledOps);
+        HashServiceMatchNetwork<E,T> matchNetwork = new HashServiceMatchNetwork<E, T>(leveledServices, this.matcher);
+        log.debug("Total time, including match network building: {}", timer.stop().toString());
+        return matchNetwork;
     }
 }
