@@ -44,8 +44,7 @@ public class ForwardServiceDiscoverer<E> {
             for(E newConcept : newOutputs){
                 candidates.addAll(discovery.discoverOperationsForInput(newConcept));
             }
-            log.debug("Services retrieved from index in " + w.stop().toString() + " (" + candidates.size() + " candidates)");
-            w.reset().start();
+            log.debug("Services retrieved from index in " + w.toString() + " (" + candidates.size() + " candidates)");
             // Remove services that cannot be invoked with the available inputs
             for(Iterator<Operation<E>> it=candidates.iterator(); it.hasNext();){
                 Operation<E> candidate = it.next();
