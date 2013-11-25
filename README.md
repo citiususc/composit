@@ -1,6 +1,10 @@
 ![Composit](src/main/doclava/custom/assets/composit-template/assets/images/composit-transparent.png?raw=true)
 
+Automatic Web Service Composition for Java.
+
 [![Build Status](https://drone.io/github.com/pablormier/composit/status.png)](https://drone.io/github.com/pablormier/composit/latest)
+
+## Description
 
 ComposIT is an automatic semantic web service composition engine developed within the [Centro de Investigación
 en Tecnoloxías da Información (CITIUS)](http://citius.usc.es), University of Santiago de Compostela. 
