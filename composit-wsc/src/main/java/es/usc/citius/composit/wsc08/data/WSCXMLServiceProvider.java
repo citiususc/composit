@@ -42,7 +42,7 @@ import java.util.*;
  * into the ComposIT model. The WSC'08 format has many drawbacks: it does not use proper URIs and
  * it uses non-standard XML formats to define services and ontologies.
  */
-public class WSCXMLServideProvider implements ServiceProvider<String> {
+public class WSCXMLServiceProvider implements ServiceProvider<String> {
     // JAXB Root class
     private XMLServices services;
     // KV Map with name / class
@@ -57,12 +57,12 @@ public class WSCXMLServideProvider implements ServiceProvider<String> {
     // the suffix Operation to the end.
     public static final String operationSuffix = "Operation";
 
-    public WSCXMLServideProvider(InputStream serviceStream) {
+    public WSCXMLServiceProvider(InputStream serviceStream) {
         this.services = JAXB.unmarshal(serviceStream, XMLServices.class);
         index();
     }
 
-    public WSCXMLServideProvider(File xmlServices) {
+    public WSCXMLServiceProvider(File xmlServices) {
         this.services = JAXB.unmarshal(xmlServices, XMLServices.class);
         index();
     }

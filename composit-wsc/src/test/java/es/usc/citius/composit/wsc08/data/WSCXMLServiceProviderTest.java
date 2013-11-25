@@ -31,9 +31,9 @@ import static org.junit.Assert.*;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class WSCXMLServideProviderTest {
+public class WSCXMLServiceProviderTest {
 
-    private WSCXMLServideProvider provider;
+    private WSCXMLServiceProvider provider;
 
     @Before
     public void setUp() throws IOException {

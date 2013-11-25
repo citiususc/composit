@@ -136,9 +136,9 @@ public enum WSCTest {
         return FileUtils.moveToZipEntry(zipStream, entryName);
     }
 
-    public WSCXMLServideProvider createXmlResourceProvider() throws ZipException,
+    public WSCXMLServiceProvider createXmlResourceProvider() throws ZipException,
             IOException {
-        return new WSCXMLServideProvider(openServicesStream());
+        return new WSCXMLServiceProvider(openServicesStream());
     }
 
     public WSCXMLKnowledgeBase createKnowledgeBase() throws IOException {
@@ -154,7 +154,7 @@ public enum WSCTest {
         ZipInputStream services = openServicesStream();
         // Streams are automatically closed by JAXB
         WSCXMLKnowledgeBase kb = new WSCXMLKnowledgeBase(taxonomy);
-        WSCXMLServideProvider xmlServiceProvider = new WSCXMLServideProvider(services);
+        WSCXMLServiceProvider xmlServiceProvider = new WSCXMLServiceProvider(services);
         WSCLazyServiceProvider serviceProvider = new WSCLazyServiceProvider(xmlServiceProvider, kb);
         LogicMatcher matcher = new LogicMatcher(kb);
         SetMatchFunction<Concept, LogicMatchType> setMatcher = new SetMatchFunctionDecorator<Concept, LogicMatchType>(matcher);
