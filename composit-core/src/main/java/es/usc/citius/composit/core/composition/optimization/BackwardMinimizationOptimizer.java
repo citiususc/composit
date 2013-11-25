@@ -17,26 +17,33 @@ public class BackwardMinimizationOptimizer<E, T extends Comparable<T>> implement
 
     @Override
     public ServiceMatchNetwork<E, T> optimize(ServiceMatchNetwork<E, T> network) {
-        Stopwatch stopwatch = Stopwatch.createStarted();
+        Stopwatch globalWatch = Stopwatch.createStarted();
+        Stopwatch localWatch = Stopwatch.createUnstarted();
         Set<E> newInputs = new HashSet<E>();
         List<Set<Operation<E>>> optimized = new ArrayList<Set<Operation<E>>>(network.numberOfLevels());
+        log.trace("Starting service-backward optimization...");
+        localWatch.start();
         for(int i=network.numberOfLevels()-1;i>=0;i--){
             Set<Operation<E>> current = network.getOperationsAtLevel(i);
+            log.trace(" > Analyzing network level {} : {}", i, current);
             Set<Operation<E>> optimizedSet = new HashSet<Operation<E>>();
             Set<E> futureInputs = new HashSet<E>();
             // Find all services that produces at least one of the required inputs. If new inputs is
             // empty, then select all
             for(Operation<E> op : current){
+                log.trace("    Checking operation {}", op.getID());
                 if (newInputs.isEmpty()){
                     futureInputs.addAll(op.getSignature().getInputs());
                     optimizedSet.add(op);
+                    log.trace("    + {} selected as a mandatory operation", op.getID());
                 } else {
-                    boolean used;
+                    boolean used = false;
                     next:
                     for(E output : op.getSignature().getOutputs()){
                         for(E input : newInputs){
                             used = network.match(output, input) != null;
                             if (used){
+                                log.trace("    + Operation {} marked as useful (match detected between output {} and input {})", op.getID(), output, input);
                                 optimizedSet.add(op);
                                 // Update new inputs
                                 futureInputs.addAll(op.getSignature().getInputs());
@@ -44,23 +51,20 @@ public class BackwardMinimizationOptimizer<E, T extends Comparable<T>> implement
                             }
                         }
                     }
+                    if (!used) log.trace("    - Operation {} marked as useless", op.getID());
                 }
+                //log.debug(" Inputs for the next iteration: {}", futureInputs);
             }
             newInputs.addAll(futureInputs);
             optimized.add(optimizedSet);
         }
         Collections.reverse(optimized);
-        log.debug("Operation minimization finalized in {}", stopwatch.toString());
-        // Build leveled services
-        stopwatch.reset().start();
-        LeveledServices<E> layers = new HashLeveledServices<E>(optimized);
-        stopwatch.stop();
-        log.debug("Layers builded in {}", stopwatch.toString());
         // Create a new match network
-        stopwatch.reset().start();
-        ServiceMatchNetwork<E, T> optimizedNetwork = new HashServiceMatchNetwork<E, T>(layers, network);
-        stopwatch.stop();
-        log.debug("Optimized match network created in {}", stopwatch.toString());
+        localWatch.reset().start();
+        ServiceMatchNetwork<E, T> optimizedNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(optimized), network);
+        localWatch.stop();
+        log.trace(" > Optimized match network created in {}", localWatch.toString());
+        log.debug("Backward optimization done in {}. Size before/after {}/{}", globalWatch.stop().toString(), network.listOperations().size(), optimizedNetwork.listOperations().size());
         // Create a new optimized service match network
         return optimizedNetwork;
     }
