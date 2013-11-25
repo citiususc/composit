@@ -56,7 +56,9 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
         for(Operation<E> op : operations){
             // Index service owners
             Service<E> service = op.getServiceOwner();
-            this.services.put(service.getID(), service);
+            if (service != null){
+                this.services.put(service.getID(), service);
+            }
             //this.services.add(op.getServiceOwner());
             // Index inputs and outputs
             this.elements.addAll(op.getSignature().getInputs());
