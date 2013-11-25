@@ -1,10 +1,8 @@
 package es.usc.citius.composit.core.composition;
 
-import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Operations;
-import es.usc.citius.composit.core.model.Signature;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +12,7 @@ import java.util.Set;
  */
 public final class Verifier {
 
-    public static <E,T extends Comparable<T>> boolean satisfies(LeveledServices<E> network, SetMatchFunction<E,T> matcher, Signature<E> request){
+    public static <E,T extends Comparable<T>> boolean satisfies(LeveledServices<E> network, SetMatchFunction<E,T> matcher){
         // Check if the network is well-formed and satisfies the request
         Set<E> available = new HashSet<E>(network.getSource().getSignature().getOutputs());
         for(int level=1; level < network.numberOfLevels()-1; level++){
