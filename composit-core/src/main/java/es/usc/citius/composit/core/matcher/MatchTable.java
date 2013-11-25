@@ -12,7 +12,6 @@ import java.util.SortedSet;
 public class MatchTable<E, T extends Comparable<T>> {
     // Row: source, Column: target, Value matchType
     private Table<E, E, T> matchTable = HashBasedTable.create();
-    private Set<E> elements = new HashSet<E>();
 
     public MatchTable(){}
 
@@ -26,33 +25,31 @@ public class MatchTable<E, T extends Comparable<T>> {
 
     public void addMatch(E x, E y, T type) {
         matchTable.put(x, y, type);
-        elements.add(x);
-        elements.add(y);
     }
 
     public Table<E, E, T> getMatchTable() {
-        return ImmutableTable.copyOf(matchTable);
+        return matchTable;//ImmutableTable.copyOf(matchTable);
     }
 
     public Set<E> getSourceElements() {
-        return getMatchTable().rowKeySet();
+        return matchTable.rowKeySet();
     }
 
     public Set<E> getTargetElements() {
-        return getMatchTable().columnKeySet();
+        return matchTable.columnKeySet();
     }
 
     public Set<E> getSourceElementsThatMatch(E targetElement){
-        return getMatchTable().row(targetElement).keySet();
+        return matchTable.row(targetElement).keySet();
     }
 
     public Set<E> getTargetElementsMatchedBy(E sourceElement){
-        return getMatchTable().column(sourceElement).keySet();
+        return matchTable.column(sourceElement).keySet();
     }
 
     public SortedSet<E> getSortedSourceElemsThatMatch(E targetElement) {
         // Get the map with matcher -> type
-        Map<E, T> sourceElements = this.getMatchTable().column(targetElement);
+        Map<E, T> sourceElements = matchTable.column(targetElement);
         // Order elements by the match type values
         Ordering<E> matchTypeComparator = Ordering.natural().onResultOf(Functions.forMap(sourceElements));
         return ImmutableSortedMap.copyOf(sourceElements, matchTypeComparator).keySet();
