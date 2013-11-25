@@ -16,9 +16,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class FunctionalDominanceTest {
 
-    @Test
-    public void testFunctionalDominanceOptimization() throws Exception {
-        WSCTest.Dataset dataset = WSCTest.TESTSET_2008_01.dataset();
+    public void test(WSCTest test, int expectedSize) throws Exception {
+        WSCTest.Dataset dataset = test.dataset();
         // Initial network, first pass
         ServiceMatchNetwork<Concept, Boolean> network1 = ForwardServiceDiscovererWSC.generateGraph(dataset);
         // Second pass optimization
@@ -26,7 +25,48 @@ public class FunctionalDominanceTest {
         // Third pass, functional dominance
         ServiceMatchNetwork<Concept, Boolean> network3 = new FunctionalDominanceOptimizer<Concept, Boolean>().optimize(network2);
         // Verify final result
-        assertEquals(15, network3.listOperations().size());
+        assertEquals(expectedSize, network3.listOperations().size());
+        // Use always a different matcher network to validate the result
         assertTrue(Verifier.satisfies(network3, network1, dataset.getRequest()));
+    }
+
+    @Test
+    public void testFunctionalDominanceWSC01() throws Exception {
+        test(WSCTest.TESTSET_2008_01, 15);
+    }
+
+    @Test
+    public void testFunctionalDominanceWSC02() throws Exception {
+        test(WSCTest.TESTSET_2008_02, 15);
+    }
+
+    @Test
+    public void testFunctionalDominanceWSC03() throws Exception {
+        test(WSCTest.TESTSET_2008_03, 42);
+    }
+
+    @Test
+    public void testFunctionalDominanceWSC04() throws Exception {
+        test(WSCTest.TESTSET_2008_04, 27);
+    }
+
+    @Test
+    public void testFunctionalDominanceWSC05() throws Exception {
+        test(WSCTest.TESTSET_2008_05, 54);
+    }
+
+    @Test
+    public void testFunctionalDominanceWSC06() throws Exception {
+        test(WSCTest.TESTSET_2008_06, 77);
+    }
+
+    @Test
+    public void testFunctionalDominanceWSC07() throws Exception {
+        test(WSCTest.TESTSET_2008_07, 72);
+    }
+
+    @Test
+    public void testFunctionalDominanceWSC08() throws Exception {
+        test(WSCTest.TESTSET_2008_08, 60);
     }
 }
