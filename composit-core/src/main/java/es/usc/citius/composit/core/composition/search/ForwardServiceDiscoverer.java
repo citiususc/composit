@@ -45,14 +45,14 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
 
         Stopwatch timer = Stopwatch.createStarted();
         Stopwatch levelTimer = Stopwatch.createUnstarted();
-
+        int level=0;
         do {
             HashSet<Operation<E>> candidates = new HashSet<Operation<E>>();
             levelTimer.start();
             for(E newConcept : newOutputs){
                 candidates.addAll(discovery.discoverOperationsForInput(newConcept));
             }
-            log.debug("Services retrieved from index in " + levelTimer.toString() + " (" + candidates.size() + " candidates)");
+            log.debug("(Level {}) {} potential candidates selected in {}", level++, candidates.size(), levelTimer.toString());
             // Remove services that cannot be invoked with the available inputs
             for(Iterator<Operation<E>> it=candidates.iterator(); it.hasNext();){
                 Operation<E> candidate = it.next();
@@ -76,7 +76,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
                     if (!isNew) it.remove();
                 }
             }
-            log.debug("Candidates selected in " + levelTimer.toString() + " (" + candidates.size() + " candidates)");
+            log.debug("   [{}] operations selected for this level in {}: {}", candidates.size(), levelTimer.toString(), candidates);
 
             // Collect the new outputs of the new candidates
             Set<E> nextOutputs = Operations.outputs(candidates);
@@ -100,17 +100,17 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
             levelTimer.reset();
         } while(!stop);
 
-        log.debug("Operation discovery finalized in {}", timer.toString());
-
         // Add the source and sink operations
         Source<E> sourceOp = new Source<E>(signature.getInputs());
         Sink<E> sinkOp = new Sink<E>(signature.getOutputs());
         leveledOps.add(0, Collections.<Operation<E>>singleton(sourceOp));
         leveledOps.add(leveledOps.size(), Collections.<Operation<E>>singleton(sinkOp));
+        Stopwatch networkWatch = Stopwatch.createStarted();
         // Create a service match network with the discovered services
-        LeveledServices<E> leveledServices = new HashLeveledServices<E>(leveledOps);
-        HashServiceMatchNetwork<E,T> matchNetwork = new HashServiceMatchNetwork<E, T>(leveledServices, this.matcher);
-        log.debug("Total time, including match network building: {}", timer.stop().toString());
+        HashServiceMatchNetwork<E,T> matchNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(leveledOps), this.matcher);
+        log.trace(" > Service match network computed in {}", networkWatch.stop().toString());
+        log.debug("Resulting Service Match Network has {} levels (including source and sink) and {} operations.", leveledOps.size(), matchNetwork.listOperations().size());
+        log.debug("Forward operation discovery done in {}", timer.toString());
         return matchNetwork;
     }
 }
