@@ -1,5 +1,6 @@
 package es.usc.citius.composit.wsc08.data.knowledge;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.SetMultimap;
@@ -54,7 +55,10 @@ public class WSCXMLKnowledgeBase implements HierarchicalKnowledgeBase, Serializa
 
     private void initialize() {
         // Load all superclasses, subclasses and instances
+        logger.debug("Initializing WSCXMLKnowledgeBase (root concept {})", taxonomy.getConcept().getID());
+        Stopwatch stopwatch = Stopwatch.createStarted();
         populate(taxonomy.getConcept());
+        logger.debug("Knowledge base created in {}", stopwatch.stop().toString());
 
     }
 
@@ -63,7 +67,7 @@ public class WSCXMLKnowledgeBase implements HierarchicalKnowledgeBase, Serializa
         if (root == null) {
             return new HashSet<Concept>();
         }
-        logger.debug("Processing concept {}", root.getName());
+        logger.trace("Processing concept {}", root.getName());
         conceptID.put(root.getID(), root);
         Set<Concept> rootSubclasses = this.subclasses.get(root);
         // Fill instances
