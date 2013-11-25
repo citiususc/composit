@@ -27,6 +27,8 @@ public class FunctionalDominanceTest {
         // Verify final result
         assertEquals(expectedSize, network3.listOperations().size());
         // Use always a different matcher network to validate the result
+        assertTrue(Verifier.satisfies(network1, dataset.getDefaultMatcher()));
+        assertTrue(Verifier.satisfies(network2, network1));
         assertTrue(Verifier.satisfies(network3, network1));
     }
 
