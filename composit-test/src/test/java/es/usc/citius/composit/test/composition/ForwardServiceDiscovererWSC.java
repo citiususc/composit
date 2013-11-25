@@ -3,6 +3,7 @@ package es.usc.citius.composit.test.composition;
 import com.google.common.base.Stopwatch;
 import es.usc.citius.composit.core.composition.DiscoveryIO;
 import es.usc.citius.composit.core.composition.MatchBasedDiscoveryIO;
+import es.usc.citius.composit.core.composition.Verifier;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.composition.search.ForwardServiceDiscoverer;
 import es.usc.citius.composit.core.knowledge.Concept;
@@ -38,9 +39,11 @@ public class ForwardServiceDiscovererWSC {
 
     private void test(WSCTest test) throws IOException {
         Stopwatch stopwatch = Stopwatch.createStarted();
-        ServiceMatchNetwork<Concept, Boolean> network = generateGraph(test.dataset());
+        WSCTest.Dataset dataset = test.dataset();
+        ServiceMatchNetwork<Concept, Boolean> network = generateGraph(dataset);
         // Perform a sanity check, checking the number of services in each layer
         sanityCheck(network, test);
+        Verifier.satisfies(network, dataset.getMatchGraph());
         log.debug("Total test time: {}", stopwatch.stop().toString());
     }
 
