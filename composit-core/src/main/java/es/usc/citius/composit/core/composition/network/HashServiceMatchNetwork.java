@@ -1,5 +1,6 @@
 package es.usc.citius.composit.core.composition.network;
 
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
@@ -31,23 +32,23 @@ public class HashServiceMatchNetwork<E,T extends Comparable<T>> implements Servi
     }
 
     private final MatchTable<E,T> computeLeveledMatch(){
-        MatchTable<E,T> matchTable = new MatchTable<E, T>();
+        Table<E,E,T> table = HashBasedTable.create();
         for(int level = 0; level < layers.numberOfLevels(); level++){
             Set<Operation<E>> ops = layers.getOperationsAtLevel(level);
-            for(Operation<E> op : ops){
-                for(Operation<E> dest : layers.getOperationsAfterLevel(level)){
+            Set<Operation<E>> followingOps = layers.getOperationsAfterLevel(level);
+            for(Operation<E> source : ops){
+                for(Operation<E> target : followingOps){
                     // Compute full match between these operations
                     // matcher -> matched
                     MatchTable<E,T> matchResult =
-                            setMatcher.fullMatch(op.getSignature().getOutputs(),
-                                    dest.getSignature().getInputs());
-                    for(Table.Cell<E,E,T> matchCell : matchResult.getMatchTable().cellSet()){
-                        matchTable.addMatch(matchCell.getRowKey(), matchCell.getColumnKey(), matchCell.getValue());
-                    }
+                            setMatcher.fullMatch(source.getSignature().getOutputs(),
+                                    target.getSignature().getInputs());
+                    table.putAll(matchResult.getMatchTable());
                 }
             }
         }
-        return matchTable;
+
+        return new MatchTable<E, T>(table);
     }
 
 
