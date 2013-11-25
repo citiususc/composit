@@ -8,7 +8,7 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>ComposIT iServe Adapter</name>
+    <name>${project.artifactId}</name>
     <artifactId>composit-iserve</artifactId>
     <description>
         ComposIT iServe support. The iServe framework (http://github.com/kmi/iserve) is a service

@@ -26,7 +26,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <name>ComposIT Core Module</name>
+    <name>${project.artifactId}</name>
     <description>
         Core of the ComposIT library. The core module contains
         the main API classes and interfaces, composition algorithms and search

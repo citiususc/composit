@@ -27,7 +27,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>composit-all</artifactId>
-    <name>ComposIT Bundle</name>
+    <name>${project.artifactId}</name>
     <description>This module contains all ComposIT submodules.</description>
     <packaging>jar</packaging>
 
