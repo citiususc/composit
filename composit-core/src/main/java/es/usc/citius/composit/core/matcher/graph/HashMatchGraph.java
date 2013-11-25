@@ -1,11 +1,28 @@
+/*
+ * Copyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS),
+ * University of Santiago de Compostela (USC).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package es.usc.citius.composit.core.matcher.graph;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.MatchTable;
+import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +78,7 @@ public class HashMatchGraph<E, T extends Comparable<T>> extends AbstractMatchGra
         MatchTable<E,T> matchResult = new MatchTable<E, T>();
         for(E x : source){
             for(E y : target){
-                T match = matchTable.getMatchTable().get(x,y);
+                T match = matchTable.getMatchTable().get(x, y);
                 if (match != null){
                     matchResult.addMatch(x, y, match);
                 }
