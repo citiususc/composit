@@ -71,6 +71,7 @@ public class ForwardServiceDiscovererWSC {
     }
 
     @Test
+    @Ignore
     public void testWSC01() throws Exception {
         test(WSCTest.TESTSET_2008_01);
     }
@@ -100,7 +101,6 @@ public class ForwardServiceDiscovererWSC {
     }
 
     @Test
-    @Ignore
     public void testWSC06() throws Exception {
         test(WSCTest.TESTSET_2008_06);
     }

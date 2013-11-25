@@ -50,12 +50,13 @@ public class BackwardMinimizationTest {
         float after = optimizedNetwork.listOperations().size();
         // % Reduction
         float reduction = (1f - after/before)*100f;
-        log.debug("Backward minimization. Ops before {}, after {}, reduction: {} % in {}", before, after, reduction, stopwatch.toString());
+        log.debug("Backward minimization reduction achieved: {} % in {}", reduction, stopwatch.toString());
         // Verify if the result is correct
         assertTrue(Verifier.satisfies(optimizedNetwork, dataset.getMatchGraph()));
     }
 
     @Test
+    @Ignore
     public void testBackwardOptimizationWSC01() throws Exception {
         test(WSCTest.TESTSET_2008_01);
     }
@@ -85,7 +86,6 @@ public class BackwardMinimizationTest {
     }
 
     @Test
-    @Ignore
     public void testBackwardOptimizationWSC06() throws Exception {
         test(WSCTest.TESTSET_2008_06);
     }

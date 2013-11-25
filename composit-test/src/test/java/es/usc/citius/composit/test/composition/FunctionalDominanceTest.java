@@ -23,6 +23,7 @@ import es.usc.citius.composit.core.composition.optimization.BackwardMinimization
 import es.usc.citius.composit.core.composition.optimization.FunctionalDominanceOptimizer;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.wsc08.data.WSCTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -52,26 +53,31 @@ public class FunctionalDominanceTest {
     }
 
     @Test
+    @Ignore
     public void testFunctionalDominanceWSC01() throws Exception {
         test(WSCTest.TESTSET_2008_01, 15);
     }
 
     @Test
+    @Ignore
     public void testFunctionalDominanceWSC02() throws Exception {
         test(WSCTest.TESTSET_2008_02, 15);
     }
 
     @Test
+    @Ignore
     public void testFunctionalDominanceWSC03() throws Exception {
         test(WSCTest.TESTSET_2008_03, 42);
     }
 
     @Test
+    @Ignore
     public void testFunctionalDominanceWSC04() throws Exception {
         test(WSCTest.TESTSET_2008_04, 27);
     }
 
     @Test
+    @Ignore
     public void testFunctionalDominanceWSC05() throws Exception {
         test(WSCTest.TESTSET_2008_05, 54);
     }
@@ -82,11 +88,13 @@ public class FunctionalDominanceTest {
     }
 
     @Test
+    @Ignore
     public void testFunctionalDominanceWSC07() throws Exception {
         test(WSCTest.TESTSET_2008_07, 72);
     }
 
     @Test
+    @Ignore
     public void testFunctionalDominanceWSC08() throws Exception {
         test(WSCTest.TESTSET_2008_08, 60);
     }
