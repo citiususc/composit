@@ -1,6 +1,6 @@
 ![Composit](src/main/doclava/custom/assets/composit-template/assets/images/composit-transparent.png?raw=true)
 
-Automatic Web Service Composition for Java.
+Automatic Web Service Composition Algorithms & Tools for Java.
 
 [![Build Status](https://drone.io/github.com/pablormier/composit/status.png)](https://drone.io/github.com/pablormier/composit/latest)
 
