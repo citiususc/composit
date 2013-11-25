@@ -8,6 +8,7 @@ import es.usc.citius.composit.core.matcher.logic.LogicMatcher;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
 import es.usc.citius.composit.core.util.FileUtils;
 import es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase;
+import es.usc.citius.composit.wsc08.data.matcher.WSCKBMatchGraph;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +47,7 @@ public enum WSCTest {
     public static class Dataset {
         private WSCXMLKnowledgeBase kb;
         private WSCLazyServiceProvider serviceProvider;
+        private WSCKBMatchGraph matchGraph;
         private SetMatchFunction<Concept, LogicMatchType> defaultMatcher;
         private SignatureIO<Concept> request;
 
@@ -53,6 +55,7 @@ public enum WSCTest {
             this.serviceProvider = serviceProvider;
             this.kb = kb;
             this.defaultMatcher = defaultMatcher;
+            this.matchGraph = new WSCKBMatchGraph(this.kb);
             // Translate the request
             Set<Concept> inputs = new HashSet<Concept>();
             for(String input : request.getInputs()){
@@ -75,6 +78,10 @@ public enum WSCTest {
 
         public SetMatchFunction<Concept, LogicMatchType> getDefaultMatcher() {
             return defaultMatcher;
+        }
+
+        public WSCKBMatchGraph getMatchGraph() {
+            return matchGraph;
         }
 
         public SignatureIO<Concept> getRequest() {

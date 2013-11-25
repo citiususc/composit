@@ -29,7 +29,7 @@ public class ForwardServiceDiscovererWSC {
         // Use an indexed service provider to optimize the graph generation phase
         ServiceProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
         // Create the KB match graph
-        WSCKBMatchGraph matchGraph = new WSCKBMatchGraph(dataset.getKb());
+        WSCKBMatchGraph matchGraph = dataset.getMatchGraph();
         // Create a simple I/O Discovery using a KB Match Graph
         DiscoveryIO<Concept> discovery = new MatchBasedDiscoveryIO<Concept, Boolean>(matchGraph, provider);
         ServiceMatchNetwork<Concept, Boolean> network = new ForwardServiceDiscoverer<Concept, Boolean>(discovery, matchGraph).search(dataset.getRequest());
