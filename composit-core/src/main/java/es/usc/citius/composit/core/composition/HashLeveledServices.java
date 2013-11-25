@@ -86,7 +86,7 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
         if (operationLayers.get(operationLayers.size()-1).size()!=1){
             throw new IllegalStateException("Malformed match network. Invalid sink layer.");
         }
-        return operationLayers.get(0).iterator().next();
+        return operationLayers.get(operationLayers.size()-1).iterator().next();
     }
 
     @Override
