@@ -111,28 +111,28 @@ public class FunctionalDominanceOptimizer<E, T extends Comparable<T>> implements
         Stopwatch globalWatch = Stopwatch.createStarted();
         Stopwatch localWatch = Stopwatch.createUnstarted();
         List<Set<Operation<E>>> optimized = new ArrayList<Set<Operation<E>>>(network.numberOfLevels());
-        log.trace("Starting functional dominance optimization...");
+        log.debug("Starting functional dominance optimization...");
         for(int i=0; i < network.numberOfLevels(); i++){
             // Analyze input dominance
-            log.trace(" > Analyzing functional dominance on {} (network level {})", network.getOperationsAtLevel(i), i);
+            log.debug(" > Analyzing functional dominance on {} (network level {})", network.getOperationsAtLevel(i), i);
             localWatch.start();
             Collection<Collection<Operation<E>>> groups = functionalInputEquivalence(network, i);
             localWatch.stop();
-            log.trace("   Input equivalence groups: {} (computed in {})", groups, localWatch.toString());
+            log.debug("\t\tInput equivalence groups: {} (computed in {})", groups, localWatch.toString());
             localWatch.reset();
             // For each equivalent group in this level, check the output dominance
             Set<Operation<E>> nonDominatedServices = new HashSet<Operation<E>>();
             for(Collection<Operation<E>> group : groups){
-                log.trace("   Analyzing output dominance for group {}", group);
+                log.debug("\t\tAnalyzing output dominance for group {}", group);
                 localWatch.start();
                 Collection<Collection<Operation<E>>> nonDominatedGroups = functionalOutputDominance(group, network, i);
                 localWatch.stop();
-                log.trace("     + Non-dominated groups detected: {} (computed in {})", nonDominatedGroups, localWatch.toString());
-                log.trace("     + Size before / after output dominance {}/{}", group.size(), nonDominatedGroups.size());
+                log.debug("\t\t\t+ Non-dominated groups detected: {} (computed in {})", nonDominatedGroups, localWatch.toString());
+                log.debug("\t\t\t+ Size before / after output dominance {}/{}", group.size(), nonDominatedGroups.size());
                 // Pick one non dominated service for each group randomly.
                 for(Collection<Operation<E>> ndGroup : nonDominatedGroups){
                     Operation<E> representant = ndGroup.iterator().next();
-                    log.trace("       - {} has been selected as the representative service of the group {}", representant, ndGroup);
+                    log.debug("\t\t\t\t- {} has been selected as the representative service of the group {}", representant, ndGroup);
                     nonDominatedServices.add(representant);
                 }
             }
@@ -141,8 +141,8 @@ public class FunctionalDominanceOptimizer<E, T extends Comparable<T>> implements
         localWatch.reset().start();
         HashServiceMatchNetwork<E, T> optimizedNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(optimized), network);
         localWatch.stop();
-        log.trace(" > Functional optimized match network computed in {}", localWatch.toString());
-        log.debug("Optimization done in {}. Size before/after {}/{}.", globalWatch.stop().toString(),  network.listOperations().size(), optimizedNetwork.listOperations().size());
+        log.debug(" > Functional optimized match network computed in {}", localWatch.toString());
+        log.info("Optimization done in {}. Size before/after {}/{}.", globalWatch.stop().toString(),  network.listOperations().size(), optimizedNetwork.listOperations().size());
         return optimizedNetwork;
     }
 }

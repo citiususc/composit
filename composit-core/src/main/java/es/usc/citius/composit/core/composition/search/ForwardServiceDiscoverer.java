@@ -92,7 +92,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
                     if (!isNew) it.remove();
                 }
             }
-            log.debug("   [{}] operations selected for this level in {}: {}", candidates.size(), levelTimer.toString(), candidates);
+            log.debug("\t + [{}] operations selected for this level in {}: {}", candidates.size(), levelTimer.toString(), candidates);
 
             // Collect the new outputs of the new candidates
             Set<E> nextOutputs = Operations.outputs(candidates);
@@ -110,7 +110,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
             // Add the discovered ops
             leveledOps.add(candidates);
 
-            //log.debug("Available Inputs {}, New Outputs {}", availableInputs.size(), newOutputs.size());
+            log.debug("\t + Available inputs: {}, new outputs: {}", availableInputs.size(), newOutputs.size());
             // Stop condition. Stop if there are no more candidates and/or expected outputs are satisfied.
             stop = (checkExpectedOutputs) ? candidates.isEmpty() || unmatchedOutputs.isEmpty() : candidates.isEmpty();
             levelTimer.reset();
@@ -124,9 +124,9 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
         Stopwatch networkWatch = Stopwatch.createStarted();
         // Create a service match network with the discovered services
         HashServiceMatchNetwork<E,T> matchNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(leveledOps), this.matcher);
-        log.trace(" > Service match network computed in {}", networkWatch.stop().toString());
-        log.debug("Resulting Service Match Network has {} levels (including source and sink) and {} operations.", leveledOps.size(), matchNetwork.listOperations().size());
-        log.debug("Forward operation discovery done in {}", timer.toString());
+        log.debug(" > Service match network computed in {}", networkWatch.stop().toString());
+        log.info("Service Match Network created with {} levels (including source and sink) and {} operations.", leveledOps.size(), matchNetwork.listOperations().size());
+        log.info("Forward Discovery done in {}", timer.toString());
         return matchNetwork;
     }
 }

@@ -37,21 +37,21 @@ public class BackwardMinimizationOptimizer<E, T extends Comparable<T>> implement
         Stopwatch localWatch = Stopwatch.createUnstarted();
         Set<E> newInputs = new HashSet<E>();
         List<Set<Operation<E>>> optimized = new ArrayList<Set<Operation<E>>>(network.numberOfLevels());
-        log.trace("Starting service-backward optimization...");
+        log.debug("Starting service-backward optimization...");
         localWatch.start();
         for(int i=network.numberOfLevels()-1;i>=0;i--){
             Set<Operation<E>> current = network.getOperationsAtLevel(i);
-            log.trace(" > Analyzing network level {} : {}", i, current);
+            log.debug(" > Analyzing network level {} : {}", i, current);
             Set<Operation<E>> optimizedSet = new HashSet<Operation<E>>();
             Set<E> futureInputs = new HashSet<E>();
             // Find all services that produces at least one of the required inputs. If new inputs is
             // empty, then select all
             for(Operation<E> op : current){
-                log.trace("    Checking operation {}", op.getID());
+                log.debug("\t\tChecking operation {}", op.getID());
                 if (newInputs.isEmpty()){
                     futureInputs.addAll(op.getSignature().getInputs());
                     optimizedSet.add(op);
-                    log.trace("    + {} selected as a mandatory operation", op.getID());
+                    log.debug("\t\t+ {} selected as a mandatory operation", op.getID());
                 } else {
                     boolean used = false;
                     next:
@@ -59,7 +59,7 @@ public class BackwardMinimizationOptimizer<E, T extends Comparable<T>> implement
                         for(E input : newInputs){
                             used = network.match(output, input) != null;
                             if (used){
-                                log.trace("    + Operation {} marked as useful (match detected between output {} and input {})", op.getID(), output, input);
+                                log.debug("\t\t+ Operation {} marked as useful (match detected between output {} and input {})", op.getID(), output, input);
                                 optimizedSet.add(op);
                                 // Update new inputs
                                 futureInputs.addAll(op.getSignature().getInputs());
@@ -67,7 +67,7 @@ public class BackwardMinimizationOptimizer<E, T extends Comparable<T>> implement
                             }
                         }
                     }
-                    if (!used) log.trace("    - Operation {} marked as useless", op.getID());
+                    if (!used) log.debug("\t\t- Operation {} marked as useless", op.getID());
                 }
                 //log.debug(" Inputs for the next iteration: {}", futureInputs);
             }
@@ -79,8 +79,8 @@ public class BackwardMinimizationOptimizer<E, T extends Comparable<T>> implement
         localWatch.reset().start();
         ServiceMatchNetwork<E, T> optimizedNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(optimized), network);
         localWatch.stop();
-        log.trace(" > Optimized match network created in {}", localWatch.toString());
-        log.debug("Backward optimization done in {}. Size before/after {}/{}", globalWatch.stop().toString(), network.listOperations().size(), optimizedNetwork.listOperations().size());
+        log.debug(" > Optimized match network created in {}", localWatch.toString());
+        log.info("Backward optimization done in {}. Size before/after {}/{}", globalWatch.stop().toString(), network.listOperations().size(), optimizedNetwork.listOperations().size());
         // Create a new optimized service match network
         return optimizedNetwork;
     }

@@ -24,8 +24,6 @@ import es.usc.citius.composit.core.knowledge.Instance;
 import es.usc.citius.composit.wsc08.data.WSCTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Set;
@@ -36,14 +34,12 @@ import static org.junit.Assert.*;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class WSCXMLKnowledgeBaseTest {
-    private static final Logger logger = LoggerFactory.getLogger(WSCXMLKnowledgeBaseTest.class);
     private static WSCXMLKnowledgeBase kb;
 
     @BeforeClass
     public static void setUp() throws IOException {
         Stopwatch w = Stopwatch.createStarted();
         kb = new WSCXMLKnowledgeBase(WSCTest.TESTSET_2008_01.openTaxonomyStream());
-        logger.debug("WSC Knowledge base processed in {}", w.stop().toString());
     }
 
     @Test
