@@ -142,7 +142,7 @@ public class FunctionalDominanceOptimizer<E, T extends Comparable<T>> implements
         HashServiceMatchNetwork<E, T> optimizedNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(optimized), network);
         localWatch.stop();
         log.debug(" > Functional optimized match network computed in {}", localWatch.toString());
-        log.info("Optimization done in {}. Size before/after {}/{}.", globalWatch.stop().toString(),  network.listOperations().size(), optimizedNetwork.listOperations().size());
+        log.info("Functional Dominance Optimization done in {}. Size before/after {}/{}.", globalWatch.stop().toString(),  network.listOperations().size(), optimizedNetwork.listOperations().size());
         return optimizedNetwork;
     }
 }
