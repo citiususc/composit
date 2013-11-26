@@ -78,7 +78,7 @@
     </prerequisites>
 
     <scm>
-        <connection>scm:git:git@github.com:pablormier/cmoposit.git</connection>
+        <connection>scm:git:git@github.com:pablormier/composit.git</connection>
         <developerConnection>scm:git:git@github.com:pablormier/composit.git</developerConnection>
         <url>https://github.com/pablormier/composit.git</url>
     </scm>
