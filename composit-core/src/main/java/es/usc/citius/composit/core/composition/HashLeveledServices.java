@@ -59,9 +59,10 @@ public class HashLeveledServices<E> implements LeveledServices<E> {
         int level=0;
         for(Set<Operation<E>> ops : operationLayers){
             for(Operation<E> op : ops){
-                levelMap.put(op, level++);
+                levelMap.put(op, level);
                 operations.put(op.getID(), op);
             }
+            level++;
             //operations.addAll(ops);
         }
         // Index inputs, outputs and operations
