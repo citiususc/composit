@@ -17,12 +17,17 @@
 
 package es.usc.citius.composit.wsc08.data;
 
+import es.usc.citius.composit.core.composition.DiscoveryIO;
+import es.usc.citius.composit.core.composition.MatchBasedDiscoveryIO;
+import es.usc.citius.composit.core.composition.search.CompositionProblem;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.SetMatchFunctionDecorator;
+import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.matcher.logic.LogicMatchType;
 import es.usc.citius.composit.core.matcher.logic.LogicMatcher;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
+import es.usc.citius.composit.core.provider.MemoryIndexServiceProvider;
 import es.usc.citius.composit.core.util.FileUtils;
 import es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase;
 import es.usc.citius.composit.wsc08.data.matcher.WSCKBMatchGraph;
@@ -83,6 +88,20 @@ public enum WSCTest {
                 outputs.add(kb.getConcept(output));
             }
             this.request = new SignatureIO<Concept>(inputs, outputs);
+        }
+
+        public CompositionProblem<Concept, Boolean> getDefaultCompositionProblem(){
+            return new CompositionProblem<Concept, Boolean>() {
+                @Override
+                public MatchGraph<Concept, Boolean> getMatchGraph() {
+                    return new WSCKBMatchGraph(kb);
+                }
+
+                @Override
+                public DiscoveryIO<Concept> getDiscoveryIO() {
+                    return new MatchBasedDiscoveryIO<Concept, Boolean>(getMatchGraph(), new MemoryIndexServiceProvider<Concept>(serviceProvider));
+                }
+            };
         }
 
         public WSCXMLKnowledgeBase getKb() {

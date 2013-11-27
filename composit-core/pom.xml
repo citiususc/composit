@@ -43,6 +43,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
+        <dependency>
+            <groupId>es.usc.citius.lab</groupId>
+            <artifactId>hipster-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
