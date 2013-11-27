@@ -25,15 +25,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Util class to verify the correctness of a composition.
+ *
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public final class Verifier {
 
-    public static <E,T extends Comparable<T>> boolean satisfies(LeveledServices<E> network, SetMatchFunction<E,T> matcher){
-        // Check if the network is well-formed and satisfies the request
-        Set<E> available = new HashSet<E>(network.getSource().getSignature().getOutputs());
-        for(int level=1; level < network.numberOfLevels()-1; level++){
-            Set<Operation<E>> operations = network.getOperationsAtLevel(level);
+    /**
+     * The composition, represented as a leveled structure of operations is validated using the provided matcher.
+     * @param composition Composition represented as a leveled operation structure (directed acyclic graph without match links).
+     * @param matcher Matcher that will be used to compute I/O matches.
+     * @param <E> type of the inputs/outputs of the operations.
+     * @param <T> type of the match links.
+     * @return true if the composition is forward-invokable, from source to sink node.
+     */
+    public static <E,T extends Comparable<T>> boolean satisfies(LeveledServices<E> composition, SetMatchFunction<E,T> matcher){
+        // Check if the composition is well-formed and satisfies the request
+        Set<E> available = new HashSet<E>(composition.getSource().getSignature().getOutputs());
+        for(int level=1; level < composition.numberOfLevels()-1; level++){
+            Set<Operation<E>> operations = composition.getOperationsAtLevel(level);
             // Check invokability
             for(Operation<E> op : operations){
                 if (!matcher.fullMatch(available, op.getSignature().getInputs()).getTargetElements().equals(op.getSignature().getInputs())){
@@ -42,7 +52,7 @@ public final class Verifier {
                 }
             }
             available.addAll(Operations.outputs(operations));
-            if (matcher.fullMatch(available, network.getSink().getSignature().getInputs()).getTargetElements().equals(network.getSink().getSignature().getInputs())){
+            if (matcher.fullMatch(available, composition.getSink().getSignature().getInputs()).getTargetElements().equals(composition.getSink().getSignature().getInputs())){
                 return true;
             }
         }
