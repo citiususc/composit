@@ -20,6 +20,8 @@ package es.usc.citius.composit.core.model;
 import java.util.*;
 
 /**
+ * Util class to manipulate operations.
+ *
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public final class Operations {
@@ -30,6 +32,12 @@ public final class Operations {
 
 	/* Static functions to manipulate operations */
 
+    /**
+     * Get all the operations of the services.
+     * @param services Iterable with the services.
+     * @param <E> input/output type of the operations.
+     * @return A set with the operations of the services.
+     */
     public static final <E> Set<Operation<E>> extract(Iterable<Service> services){
         Set<Operation<E>> operations = new HashSet<Operation<E>>();
         for(Service s : services){
@@ -38,42 +46,73 @@ public final class Operations {
         return operations;
     }
 
-    public static final <E> Set<E> inputs(Iterable<Operation<E>> processes){
+    /**
+     * Collect all inputs of the operations.
+     * @param operations Iterable with the operations.
+     * @param <E> input/output type of the operations.
+     * @return Set with all inputs.
+     */
+    public static final <E> Set<E> inputs(Iterable<Operation<E>> operations){
         Set<E> inputs = new HashSet<E>();
-        for(Operation<E> o : processes){
+        for(Operation<E> o : operations){
             inputs.addAll(o.getSignature().getInputs());
         }
         return inputs;
     }
 
-    public static final <E> Set<E> outputs(Iterable<Operation<E>> processes){
+    /**
+     * Collect all outputs of the operations.
+     * @param operations Iterable with the operations.
+     * @param <E> input/output type of the operations.
+     * @return Set with all outputs.
+     */
+    public static final <E> Set<E> outputs(Iterable<Operation<E>> operations){
         Set<E> outputs = new HashSet<E>();
-        for(Operation<E> o : processes){
+        for(Operation<E> o : operations){
             outputs.addAll(o.getSignature().getOutputs());
         }
         return outputs;
     }
 
-    public static final <E> Collection<Signature> signatures(Collection<Operation<E>> processes){
-        Set<Signature> signatures = new HashSet<Signature>();
-        for(Operation<E> o : processes){
+    /**
+     * Get all signatures of the operations.
+     * @param operations Iterable with the operations.
+     * @param <E> input/output type of the operations.
+     * @return A Set with all signatures.
+     */
+    public static final <E> Set<Signature<E>> signatures(Collection<Operation<E>> operations){
+        Set<Signature<E>> signatures = new HashSet<Signature<E>>();
+        for(Operation<E> o : operations){
             signatures.add(o.getSignature());
         }
         return signatures;
     }
 
-    public static final <E> Map<Signature, Operation<E>> signatureOperation(Collection<Operation<E>> processes){
-        Map<Signature, Operation<E>> mapping = new HashMap<Signature, Operation<E>>();
-        for(Operation<E> o : processes){
+    /**
+     * Generate a map between signatures and their operations.
+     * @param operations Iterable with the operations.
+     * @param <E> input/output type of the operations.
+     * @return Map with signature => operation.
+     */
+    public static final <E> Map<Signature<E>, Operation<E>> signatureOperation(Iterable<Operation<E>> operations){
+        Map<Signature<E>, Operation<E>> mapping = new HashMap<Signature<E>, Operation<E>>();
+        for(Operation<E> o : operations){
             mapping.put(o.getSignature(), o);
         }
         return mapping;
     }
 
-    public static final <E> Collection<Service> owners(Collection<Operation<E>> processes){
-        Set<Service> owners = new HashSet<Service>();
-        for(Operation<E> o : processes){
-            owners.add(o.getServiceOwner());
+    /**
+     * Get all service owners of the operations.
+     * @param operations Iterable with the operations.
+     * @param <E> input/output type of the operations.
+     * @return Set with the service owners.
+     */
+    public static final <E> Set<Service<E>> owners(Iterable<Operation<E>> operations){
+        Set<Service<E>> owners = new HashSet<Service<E>>();
+        for(Operation<E> o : operations){
+            Service<E> owner = o.getServiceOwner();
+            if (owner != null) owners.add(owner);
         }
         return owners;
     }
