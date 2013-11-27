@@ -24,9 +24,16 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Contains a source node at level 0, and a sink node at the last level. The source node has no inputs
- * and provides as outputs the inputs of the composition request. The sink node has no outputs and requires
- * as inputs the outputs of the composition request.
+ * Represents a leveled service operation graph without edges (without input/output matching). This structure
+ * is generated during the discovery phase of the composition, when a request (inputs/outputs) is provided
+ * to the engine.
+ *
+ * <center><img src="../../../../../../../assets/images/javadoc/LeveledServices.png"></img></center>
+ *
+ * The structure is organized in levels or layers. The first level (level 0) and the last level contain just one dummy
+ * operation. The dummy operation Source is located in level 0 and provides the inputs of the request, whereas
+ * the Sink operations is in the last layer and receives the outputs of the request. The example shows a leveled
+ * structure for a request with {@code inputs={o1,o2}} and {@code outputs={i9,i10,i11}}.
  *
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
