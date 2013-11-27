@@ -21,10 +21,20 @@ import java.util.Set;
 
 /**
  * Generic I/O Service Signature.
+ * @param <E> input/output data type.
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public interface Signature<E> {
+    /**
+     * Get inputs of the signature.
+     * @return Set with the inputs.
+     */
     Set<E> getInputs();
+
+    /**
+     * Get outputs of the signature.
+     * @return Set with the outputs.
+     */
     Set<E> getOutputs();
 }
 

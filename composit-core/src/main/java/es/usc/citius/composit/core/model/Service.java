@@ -20,7 +20,7 @@ package es.usc.citius.composit.core.model;
 import java.util.Set;
 
 /**
- * Generic interface to define a simple service.
+ * Generic interface to define a simple service. A Service is a {@link Resource} and thus has a unique ID.
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public interface Service<E> extends Resource {
