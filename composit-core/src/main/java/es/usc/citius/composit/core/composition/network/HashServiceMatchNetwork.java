@@ -31,6 +31,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * Hash-based implementation of a {@link ServiceMatchNetwork}. It builds a match network using a
+ * leveled services structure and a set matcher to compute the matches. The I/O match is computed
+ * forwards, starting from level 0 (i.e., outputs of operation at level 0 can match only inputs
+ * of services from level 1 to N (there are no match cycles). The resultant match network like the
+ * one represented in {@link ServiceMatchNetwork}.
+ *
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class HashServiceMatchNetwork<E,T extends Comparable<T>> implements ServiceMatchNetwork<E,T> {
