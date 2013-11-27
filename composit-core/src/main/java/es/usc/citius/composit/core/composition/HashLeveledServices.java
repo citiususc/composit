@@ -27,6 +27,8 @@ import es.usc.citius.composit.core.model.Service;
 import java.util.*;
 
 /**
+ * Default implementation of the {@link LeveledServices} using hash maps.
+ *
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class HashLeveledServices<E> implements LeveledServices<E> {
