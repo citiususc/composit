@@ -23,8 +23,8 @@ import es.usc.citius.composit.core.model.Operation;
 import java.util.Set;
 
 /**
- * Interface to define input/output operation discovery strategies.
- * @param <E>
+ * Defines input/output operation discovery strategies.
+ * @param <E> input/output type.
  */
 public interface DiscoveryIO<E> {
     /**
@@ -40,8 +40,8 @@ public interface DiscoveryIO<E> {
      * Discover relevant operation for an output. These operations
      * are those that can produce an output that is compatible with the
      * provided one.
-     * @param output
-     * @return
+     * @param output Provided output.
+     * @return Set of relevant operations for the output
      */
     Set<Operation<E>> discoverOperationsForOutput(E output);
 }
