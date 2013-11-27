@@ -20,9 +20,20 @@ package es.usc.citius.composit.core.model;
 import java.net.URI;
 
 /**
+ * Interface to define identifiable resources.
+ *
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public interface Resource {
+    /**
+     * Get a readable string ID. The ID cannot be null and must be unique.
+     * @return String ID.
+     */
     String getID();
+
+    /**
+     * Get the URI of the resource. A resource can be optionally annotated with an URI.
+     * @return Resource {@link URI}.
+     */
     URI getURI();
 }
