@@ -129,6 +129,7 @@
                         </additionalparam>
                         <useStandardDocletOptions>false</useStandardDocletOptions>
                         <additionalJOption>-J-Xmx1024m</additionalJOption>
+                        <docfilessubdirs>true</docfilessubdirs>
                     </configuration>
                 </plugin>
                 <plugin>
