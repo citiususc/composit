@@ -24,5 +24,9 @@ import java.util.Set;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public interface Service<E> extends Resource {
+    /**
+     * Get the operations of this service.
+     * @return Set of operations of the service.
+     */
     Set<Operation<E>> getOperations();
 }
