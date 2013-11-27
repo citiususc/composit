@@ -1,0 +1,9 @@
+language: java
+jdk:
+  - oraclejdk7
+  - oraclejdk6
+  - openjdk6
+branches:
+  only:
+    - master
+before_install: 'mvn -version'
