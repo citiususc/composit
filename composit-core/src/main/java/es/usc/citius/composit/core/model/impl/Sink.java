@@ -21,6 +21,11 @@ package es.usc.citius.composit.core.model.impl;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * Sink dummy operation.
+ *
+ * @param <E> input/output data type.
+ */
 public class Sink<E> extends DummyOperation<E> {
 
     public Sink(Set<E> inputs) {

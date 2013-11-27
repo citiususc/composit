@@ -25,6 +25,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Default implementation of a Service.
+ *
+ * @param <E> input/output data type.
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class ResourceService<E> extends ResourceComponent implements Service<E> {

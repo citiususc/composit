@@ -26,6 +26,9 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
+ * Default implementation of a Signature.
+ *
+ * @param <E> input/output data type.
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class SignatureIO<E> implements Signature<E>, Serializable{

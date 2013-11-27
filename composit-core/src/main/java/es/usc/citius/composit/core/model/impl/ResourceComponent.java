@@ -22,6 +22,9 @@ import es.usc.citius.composit.core.model.Resource;
 import java.io.Serializable;
 import java.net.URI;
 
+/**
+ * Serializable resource, identifiable by id.
+ */
 public class ResourceComponent implements Resource, Serializable{
     // ID cannot be null. The ID is used to identify unique instances of resource.
     private final String id;

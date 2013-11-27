@@ -23,6 +23,9 @@ import es.usc.citius.composit.core.model.Signature;
 
 
 /**
+ * Default implementation of an Operation.
+ *
+ * @param <E> input/output data type.
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class ResourceOperation<E> extends ResourceComponent implements Operation<E> {
