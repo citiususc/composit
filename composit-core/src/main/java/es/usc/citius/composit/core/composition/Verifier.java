@@ -31,6 +31,8 @@ import java.util.Set;
  */
 public final class Verifier {
 
+    private Verifier(){}
+
     /**
      * The composition, represented as a leveled structure of operations is validated using the provided matcher.
      * @param composition Composition represented as a leveled operation structure (directed acyclic graph without match links).
