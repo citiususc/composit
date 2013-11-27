@@ -35,6 +35,8 @@ import org.slf4j.LoggerFactory;
 public final class ComposIT {
     private static final Logger log = LoggerFactory.getLogger(ComposIT.class);
 
+    private ComposIT(){}
+
     public static <E, T extends Comparable<T>> void search(CompositionProblem<E,T> problem, Signature<E> request){
         // Create the 3-pass service match network.
         log.info("Initializing composition search problem...");
