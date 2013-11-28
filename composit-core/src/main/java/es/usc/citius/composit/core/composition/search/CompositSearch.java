@@ -51,11 +51,8 @@ public final class CompositSearch {
         //Provider -> inputs
         SetMultimap<Operation<E>, E> map = HashMultimap.create();
         for(E input : inputs){
-            Set<Operation<E>> providers = new HashSet<Operation<E>>();
-            Set<E> sources = network.getSourceElementsThatMatch(input).keySet();
-            for(E source : sources){
-                providers.addAll(Sets.newHashSet(network.getOperationsWithOutput(source)));
-            }
+            Set<Operation<E>> providers = network.getSourceOperationsThatMatch(input).keySet();
+
             providers.retainAll(Sets.newHashSet(network.getOperations()));
             if (providers.isEmpty()){
                 throw new RuntimeException("No candidates for input " + input + ". Unsolvable request");
@@ -135,11 +132,11 @@ public final class CompositSearch {
         return nonEquivalentGroups;
     }
 
-    public static <E, T extends Comparable<T>> Algorithms.Search<State, HeuristicNode<State, Double>> create(final ServiceMatchNetwork<E, T> network){
+    public static <E, T extends Comparable<T>> Algorithms.Search<State<E>, HeuristicNode<State<E>, Double>> create(final ServiceMatchNetwork<E, T> network){
 
-        TransitionFunction<State> tf = new TransitionFunction<State>() {
+        TransitionFunction<State<E>> tf = new TransitionFunction<State<E>>() {
             @Override
-            public Iterable<? extends Transition<State>> from(State current) {
+            public Iterable<? extends Transition<State<E>>> from(State<E> current) {
                 log.debug("> Computing successors of the state at level {}, with {} services: {}", current.level, current.countServices(), current.getStateOperations());
                 // Get all required inputs (inputs from all services in this state)
                 Set<E> inputs = Operations.inputs(current.getStateOperations());
@@ -153,7 +150,7 @@ public final class CompositSearch {
                 // Generate new states.
                 //result = nodeEquivalence(result, network);
                 //log.debug("\t- {} non-equivalent unique successor after node equivalence: {}", result.size(), result);
-                Set<State> neighbors = new HashSet<State>();
+                Set<State<E>> neighbors = new HashSet<State<E>>();
                 for(Set<Operation<E>> combination : result){
                     // Create the new state
                     if (!combination.isEmpty()){
@@ -164,23 +161,23 @@ public final class CompositSearch {
             }
         };
         // Define cost function
-        CostFunction<State, Double> cf = new CostFunction<State, Double>() {
+        CostFunction<State<E>, Double> cf = new CostFunction<State<E>, Double>() {
             @Override
-            public Double evaluate(Transition<State> transition) {
+            public Double evaluate(Transition<State<E>> transition) {
                 return (double)transition.to().countServices();
             }
         };
         // Define heuristic function
-        HeuristicFunction<State, Double> hf = new HeuristicFunction<State, Double>() {
+        HeuristicFunction<State<E>, Double> hf = new HeuristicFunction<State<E>, Double>() {
             @Override
-            public Double estimate(State state) {
+            public Double estimate(State<E> state) {
                 // Get layer
                 return (double)state.level;
             }
         };
-        State goal = new State<E>(Collections.singleton(network.getSource()), network.levelOf(network.getSource()));
-        State initial = new State<E>(Collections.singleton(network.getSink()), network.levelOf(network.getSink()));
-        DefaultSearchProblem<State> problem = new DefaultSearchProblem<State>(initial, goal, tf, cf);
+        State<E> goal = new State<E>(Collections.singleton(network.getSource()), network.levelOf(network.getSource()));
+        State<E> initial = new State<E>(Collections.singleton(network.getSink()), network.levelOf(network.getSink()));
+        DefaultSearchProblem<State<E>> problem = new DefaultSearchProblem<State<E>>(initial, goal, tf, cf);
         problem.setHeuristicFunction(hf);
         return Algorithms.createAStar(problem);
     }

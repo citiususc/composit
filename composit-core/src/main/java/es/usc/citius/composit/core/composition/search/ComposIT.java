@@ -37,7 +37,7 @@ public final class ComposIT {
 
     private ComposIT(){}
 
-    public static <E, T extends Comparable<T>> Algorithms.Search<State,HeuristicNode<State,Double>>.Result search(CompositionProblem<E,T> problem, Signature<E> request){
+    public static <E, T extends Comparable<T>> Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result search(CompositionProblem<E,T> problem, Signature<E> request){
         // Create the 3-pass service match network.
         log.info("Initializing composition search problem...");
         // Get the match graph
@@ -54,7 +54,7 @@ public final class ComposIT {
         ServiceMatchNetwork<E, T> network3 = new FunctionalDominanceOptimizer<E, T>().optimize(network2);
         log.info("Starting search over a network with {} levels and {} operations", network3.numberOfLevels(), network3.listOperations().size());
         // Run search over network3
-        Algorithms.Search<State,HeuristicNode<State,Double>>.Result searchResult = CompositSearch.create(network3).search();
+        Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result searchResult = CompositSearch.create(network3).search();
         log.info("Optimal composition search finished in {}: {}", searchResult.getStopwatch().toString(), searchResult.getOptimalPath());
         log.info("   Total iterations    : {}", searchResult.getIterations());
         log.info("   Composition runpath : {}", searchResult.getOptimalPath().size()-2);
