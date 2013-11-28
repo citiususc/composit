@@ -18,6 +18,7 @@
 package es.usc.citius.composit.core.composition.network;
 
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.matcher.MatchTable;
@@ -26,6 +27,7 @@ import es.usc.citius.composit.core.matcher.graph.HashMatchGraph;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -191,5 +193,55 @@ public class DirectedAcyclicSMN<E,T extends Comparable<T>> implements ServiceMat
     @Override
     public T match(E source, E target) {
         return matchGraph.match(source, target);
+    }
+
+    @Override
+    public Map<Operation<E>, Table<E, E, T>> getSourceOperationsThatMatch(Operation<E> target) {
+        // First, compute the source elements that match the op.inputs
+        Map<Operation<E>, Table<E,E,T>> matchMap = new HashMap<Operation<E>, Table<E, E, T>>();
+        for(E targetInput : target.getSignature().getInputs()){
+            Map<E,T> sourceMatch = getSourceElementsThatMatch(targetInput);
+            // Find the providers
+            for(Map.Entry<E,T> sourceMatchEntry : sourceMatch.entrySet()){
+                E sourceOutput = sourceMatchEntry.getKey();
+                Set<Operation<E>> sourceOps = Sets.newHashSet(getOperationsWithOutput(sourceOutput));
+                // Annotate source output->target input match
+                for(Operation<E> op : sourceOps){
+                    Table<E,E,T> matchTable = matchMap.get(op);
+                    if (matchTable==null){
+                        matchTable = HashBasedTable.create();
+                        matchMap.put(op, matchTable);
+                    }
+                    // Add match entry
+                    matchTable.put(sourceOutput, targetInput, sourceMatchEntry.getValue());
+                }
+            }
+        }
+        return matchMap;
+    }
+
+    @Override
+    public Map<Operation<E>, Table<E, E, T>> getTargetOperationsMatchedBy(Operation<E> source) {
+        // First, compute the target elements matched by op.outputs
+        Map<Operation<E>, Table<E,E,T>> matchMap = new HashMap<Operation<E>, Table<E, E, T>>();
+        for(E sourceOutput : source.getSignature().getOutputs()){
+            Map<E,T> targetMatch = getTargetElementsMatchedBy(sourceOutput);
+            // Find the providers
+            for(Map.Entry<E,T> targetMatchEntry : targetMatch.entrySet()){
+                E targetInput = targetMatchEntry.getKey();
+                Set<Operation<E>> targetOps = Sets.newHashSet(getOperationsWithInput(targetInput));
+                // Annotate output -> input
+                for(Operation<E> op : targetOps){
+                    Table<E,E,T> matchTable = matchMap.get(op);
+                    if (matchTable==null){
+                        matchTable = HashBasedTable.create();
+                        matchMap.put(op, matchTable);
+                    }
+                    // Add match entry
+                    matchTable.put(sourceOutput, targetInput, targetMatchEntry.getValue());
+                }
+            }
+        }
+        return matchMap;
     }
 }
