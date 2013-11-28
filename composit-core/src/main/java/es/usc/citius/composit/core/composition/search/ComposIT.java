@@ -37,7 +37,7 @@ public final class ComposIT {
 
     private ComposIT(){}
 
-    public static <E, T extends Comparable<T>> void search(CompositionProblem<E,T> problem, Signature<E> request){
+    public static <E, T extends Comparable<T>> Algorithms.Search<State,HeuristicNode<State,Double>>.Result search(CompositionProblem<E,T> problem, Signature<E> request){
         // Create the 3-pass service match network.
         log.info("Initializing composition search problem...");
         // Get the match graph
@@ -60,5 +60,6 @@ public final class ComposIT {
         log.info("   Composition runpath : {}", searchResult.getOptimalPath().size()-2);
         log.info("   Composition services: {}", searchResult.getGoalNode().getScore());
         log.info("Total composition time : {}", compositionWatch.stop().toString());
+        return searchResult;
     }
 }
