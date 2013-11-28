@@ -230,7 +230,7 @@ public class DirectedAcyclicSMN<E,T extends Comparable<T>> implements ServiceMat
         return matchMap;
     }
 
-    @Override
+
     public Map<Operation<E>, Table<E, E, T>> getSourceOperationsThatMatch(Operation<E> target) {
         // First, compute the source elements that match the op.inputs
         Map<Operation<E>, Table<E,E,T>> matchMap = new HashMap<Operation<E>, Table<E, E, T>>();
@@ -255,7 +255,7 @@ public class DirectedAcyclicSMN<E,T extends Comparable<T>> implements ServiceMat
         return matchMap;
     }
 
-    @Override
+
     public Map<Operation<E>, Table<E, E, T>> getTargetOperationsMatchedBy(Operation<E> source) {
         // First, compute the target elements matched by op.outputs
         Map<Operation<E>, Table<E,E,T>> matchMap = new HashMap<Operation<E>, Table<E, E, T>>();

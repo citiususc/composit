@@ -18,7 +18,6 @@
 package es.usc.citius.composit.core.composition.network;
 
 
-import com.google.common.collect.Table;
 import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.model.Operation;
@@ -49,8 +48,5 @@ public interface ServiceMatchNetwork<E,T extends Comparable<T>> extends LeveledS
 
     Map<Operation<E>, Map<E,T>> getTargetOperationsMatchedBy(E source);
 
-    Map<Operation<E>, Table<E,E,T>> getSourceOperationsThatMatch(Operation<E> target);
-
-    Map<Operation<E>, Table<E,E,T>> getTargetOperationsMatchedBy(Operation<E> source);
 
 }
