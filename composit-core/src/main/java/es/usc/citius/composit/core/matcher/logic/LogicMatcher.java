@@ -26,15 +26,9 @@ import es.usc.citius.composit.core.matcher.MatchFunction;
  */
 public class LogicMatcher implements MatchFunction<Concept, LogicMatchType> {
     private HierarchicalKnowledgeBase kb;
-    private boolean returnFail = false;
 
     public LogicMatcher(HierarchicalKnowledgeBase kb){
         this.kb = kb;
-    }
-
-    public LogicMatcher(HierarchicalKnowledgeBase kb, boolean returnFail){
-        this.kb = kb;
-        this.returnFail = returnFail;
     }
 
     @Override
@@ -45,9 +39,6 @@ public class LogicMatcher implements MatchFunction<Concept, LogicMatchType> {
             return LogicMatchType.PLUGIN;
         } else if (kb.isSuperclass(source, target)){
             return LogicMatchType.SUBSUMES;
-        }
-        if (returnFail){
-            return LogicMatchType.FAIL;
         }
         return null;
     }
