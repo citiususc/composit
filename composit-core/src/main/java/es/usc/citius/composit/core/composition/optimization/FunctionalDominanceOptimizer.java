@@ -22,7 +22,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.composition.HashLeveledServices;
-import es.usc.citius.composit.core.composition.network.HashServiceMatchNetwork;
+import es.usc.citius.composit.core.composition.network.DirectedAcyclicSMN;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.model.Operation;
 import org.slf4j.Logger;
@@ -139,7 +139,7 @@ public class FunctionalDominanceOptimizer<E, T extends Comparable<T>> implements
             optimized.add(nonDominatedServices);
         }
         localWatch.reset().start();
-        HashServiceMatchNetwork<E, T> optimizedNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(optimized), network);
+        DirectedAcyclicSMN<E, T> optimizedNetwork = new DirectedAcyclicSMN<E, T>(new HashLeveledServices<E>(optimized), network);
         localWatch.stop();
         log.debug(" > Functional optimized match network computed in {}", localWatch.toString());
         log.info("Functional Dominance Optimization done in {}. Size before/after {}/{}.", globalWatch.stop().toString(),  network.listOperations().size(), optimizedNetwork.listOperations().size());

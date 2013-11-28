@@ -19,7 +19,7 @@ package es.usc.citius.composit.test.composition;
 
 import es.usc.citius.composit.core.composition.HashLeveledServices;
 import es.usc.citius.composit.core.composition.Verifier;
-import es.usc.citius.composit.core.composition.network.HashServiceMatchNetwork;
+import es.usc.citius.composit.core.composition.network.DirectedAcyclicSMN;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.model.Operation;
@@ -58,7 +58,7 @@ public class VerifierTest {
         }
         System.out.println(layers);
         if (!removed) fail(operation + " not found in network");
-        ServiceMatchNetwork<Concept, Boolean> invalid = new HashServiceMatchNetwork<Concept, Boolean>(new HashLeveledServices<Concept>(layers),  network);
+        ServiceMatchNetwork<Concept, Boolean> invalid = new DirectedAcyclicSMN<Concept, Boolean>(new HashLeveledServices<Concept>(layers),  network);
         assertFalse(Verifier.satisfies(invalid, dataset.getDefaultMatcher()));
     }
 }

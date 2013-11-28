@@ -39,14 +39,14 @@ import java.util.Set;
  *
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class HashServiceMatchNetwork<E,T extends Comparable<T>> implements ServiceMatchNetwork<E,T> {
+public class DirectedAcyclicSMN<E,T extends Comparable<T>> implements ServiceMatchNetwork<E,T> {
 
     private LeveledServices<E> layers;
     private SetMatchFunction<E,T> setMatcher;
     private MatchTable<E,T> matchTable = new MatchTable<E, T>();
     private HashMatchGraph<E,T> matchGraph;
 
-    public HashServiceMatchNetwork(LeveledServices<E> layers, SetMatchFunction<E, T> setMatcher) {
+    public DirectedAcyclicSMN(LeveledServices<E> layers, SetMatchFunction<E, T> setMatcher) {
         this.layers = layers;
         this.setMatcher = setMatcher;
         this.matchTable = computeLeveledMatch();

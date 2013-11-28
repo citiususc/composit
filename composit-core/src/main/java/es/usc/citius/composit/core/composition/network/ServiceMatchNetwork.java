@@ -30,7 +30,7 @@ import es.usc.citius.composit.core.matcher.graph.MatchGraph;
  *
  * <center><img src="../../../../../../../../assets/images/javadoc/ServiceMatchNetwork.png"></img></center>
  *
- * <p>There is a default implementation called {@link HashServiceMatchNetwork} that holds all the information
+ * <p>There is a default implementation called {@link DirectedAcyclicSMN} that holds all the information
  * in memory using hash maps.</p>
  *
  * @param <E> type of the inputs/outputs of the services.

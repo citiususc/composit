@@ -20,7 +20,7 @@ package es.usc.citius.composit.core.composition.optimization;
 
 import com.google.common.base.Stopwatch;
 import es.usc.citius.composit.core.composition.HashLeveledServices;
-import es.usc.citius.composit.core.composition.network.HashServiceMatchNetwork;
+import es.usc.citius.composit.core.composition.network.DirectedAcyclicSMN;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.model.Operation;
 import org.slf4j.Logger;
@@ -77,7 +77,7 @@ public class BackwardMinimizationOptimizer<E, T extends Comparable<T>> implement
         Collections.reverse(optimized);
         // Create a new match network
         localWatch.reset().start();
-        ServiceMatchNetwork<E, T> optimizedNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(optimized), network);
+        ServiceMatchNetwork<E, T> optimizedNetwork = new DirectedAcyclicSMN<E, T>(new HashLeveledServices<E>(optimized), network);
         localWatch.stop();
         log.debug(" > Optimized match network created in {}", localWatch.toString());
         log.info("Backward Optimization done in {}. Size before/after {}/{}", globalWatch.stop().toString(), network.listOperations().size(), optimizedNetwork.listOperations().size());

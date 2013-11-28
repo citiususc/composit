@@ -21,7 +21,7 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.composition.DiscoveryIO;
 import es.usc.citius.composit.core.composition.HashLeveledServices;
-import es.usc.citius.composit.core.composition.network.HashServiceMatchNetwork;
+import es.usc.citius.composit.core.composition.network.DirectedAcyclicSMN;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.model.Operation;
@@ -123,7 +123,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
         leveledOps.add(leveledOps.size(), Collections.<Operation<E>>singleton(sinkOp));
         Stopwatch networkWatch = Stopwatch.createStarted();
         // Create a service match network with the discovered services
-        HashServiceMatchNetwork<E,T> matchNetwork = new HashServiceMatchNetwork<E, T>(new HashLeveledServices<E>(leveledOps), this.matcher);
+        DirectedAcyclicSMN<E,T> matchNetwork = new DirectedAcyclicSMN<E, T>(new HashLeveledServices<E>(leveledOps), this.matcher);
         log.debug(" > Service match network computed in {}", networkWatch.stop().toString());
         log.info("Service Match Network created with {} levels (including source and sink) and {} operations.", leveledOps.size(), matchNetwork.listOperations().size());
         log.info("Forward Discovery done in {}", timer.toString());
