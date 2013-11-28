@@ -22,13 +22,16 @@ import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 
 /**
- * <p>A Service Match Network (SMN) represents the full directed acyclic composition graph model. This network
- * consists of two well-differentiated parts: a leveled structure with multiple layers
- * that correspond with the levels (or layers) of the directed acyclic graph ({@link LeveledServices}),
+ * <p>A Service Match Network (SMN) represents a directed composition match graph model. This network
+ * consists of two well-differentiated parts: a leveled structure of service operations with multiple layers
+ * that correspond with the levels (or layers) of the directed graph ({@link LeveledServices}),
  * and the match relations between concepts ({@link MatchGraph}). A Service Match Network contains all
  * the information needed to search for optimal compositions.</p>
  *
- * <center><img src="../../../../../../../../assets/images/javadoc/ServiceMatchNetwork.png"></img></center>
+ * <center>
+ *     <img src="../../../../../../../../assets/images/javadoc/ServiceMatchNetwork.png"
+ *          alt="Service Match Network representation." border="0" />
+ * </center>
  *
  * <p>There is a default implementation called {@link DirectedAcyclicSMN} that holds all the information
  * in memory using hash maps.</p>
