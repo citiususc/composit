@@ -195,6 +195,41 @@ public class DirectedAcyclicSMN<E,T extends Comparable<T>> implements ServiceMat
         return matchGraph.match(source, target);
     }
 
+
+    @Override
+    public Map<Operation<E>, Map<E, T>> getSourceOperationsThatMatch(E target) {
+        Map<E, T> sources = getSourceElementsThatMatch(target);
+        Map<Operation<E>, Map<E,T>> matchMap = new HashMap<Operation<E>, Map<E, T>>();
+        for(Map.Entry<E,T> sourceEntry : sources.entrySet()){
+            for(Operation<E> sourceOp : getOperationsWithOutput(sourceEntry.getKey())){
+                Map<E,T> operationMatchMap = matchMap.get(sourceOp);
+                if (operationMatchMap == null){
+                    operationMatchMap = new HashMap<E, T>();
+                    matchMap.put(sourceOp, operationMatchMap);
+                }
+                operationMatchMap.put(sourceEntry.getKey(), sourceEntry.getValue());
+            }
+        }
+        return matchMap;
+    }
+
+    @Override
+    public Map<Operation<E>, Map<E, T>> getTargetOperationsMatchedBy(E source) {
+        Map<E, T> targets = getTargetElementsMatchedBy(source);
+        Map<Operation<E>, Map<E,T>> matchMap = new HashMap<Operation<E>, Map<E, T>>();
+        for(Map.Entry<E,T> targetEntry : targets.entrySet()){
+            for(Operation<E> targetOp : getOperationsWithInput(targetEntry.getKey())){
+                Map<E,T> operationMatchMap = matchMap.get(targetOp);
+                if (operationMatchMap == null){
+                    operationMatchMap = new HashMap<E, T>();
+                    matchMap.put(targetOp, operationMatchMap);
+                }
+                operationMatchMap.put(targetEntry.getKey(), targetEntry.getValue());
+            }
+        }
+        return matchMap;
+    }
+
     @Override
     public Map<Operation<E>, Table<E, E, T>> getSourceOperationsThatMatch(Operation<E> target) {
         // First, compute the source elements that match the op.inputs

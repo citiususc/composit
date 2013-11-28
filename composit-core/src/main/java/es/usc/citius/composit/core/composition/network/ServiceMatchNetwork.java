@@ -45,7 +45,12 @@ import java.util.Map;
  */
 public interface ServiceMatchNetwork<E,T extends Comparable<T>> extends LeveledServices<E>, MatchGraph<E,T> {
 
-    Map<Operation<E>,Table<E,E,T>> getSourceOperationsThatMatch(Operation<E> op);
+    Map<Operation<E>, Map<E,T>> getSourceOperationsThatMatch(E target);
 
-    Map<Operation<E>, Table<E,E,T>> getTargetOperationsMatchedBy(Operation<E> op);
+    Map<Operation<E>, Map<E,T>> getTargetOperationsMatchedBy(E source);
+
+    Map<Operation<E>, Table<E,E,T>> getSourceOperationsThatMatch(Operation<E> target);
+
+    Map<Operation<E>, Table<E,E,T>> getTargetOperationsMatchedBy(Operation<E> source);
+
 }
