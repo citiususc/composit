@@ -17,60 +17,107 @@
 
 package es.usc.citius.composit.test.composition;
 
+import com.google.common.collect.Lists;
+import es.usc.citius.composit.core.composition.HashLeveledServices;
+import es.usc.citius.composit.core.composition.LeveledServices;
+import es.usc.citius.composit.core.composition.Verifier;
 import es.usc.citius.composit.core.composition.search.ComposIT;
+import es.usc.citius.composit.core.composition.search.State;
+import es.usc.citius.composit.core.knowledge.Concept;
+import es.usc.citius.composit.core.model.Operation;
+import es.usc.citius.composit.core.model.impl.DummyOperation;
 import es.usc.citius.composit.wsc08.data.WSCTest;
+import es.usc.citius.lab.hipster.algorithm.Algorithms;
+import es.usc.citius.lab.hipster.node.HeuristicNode;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class CompositSearchTest {
+    private static final int timeout=10000;
 
-
-    private void run(WSCTest test) throws IOException {
+    private Algorithms.Search<State<Concept>,HeuristicNode<State<Concept>,Double>>.Result run(WSCTest test) throws IOException {
         WSCTest.Dataset dataset = test.dataset();
-        ComposIT.search(dataset.getDefaultCompositionProblem(), dataset.getRequest());
+        return ComposIT.search(dataset.getDefaultCompositionProblem(), dataset.getRequest());
     }
 
-    @Test
+    private void verify(WSCTest test, int runpath, int services) throws IOException {
+        WSCTest.Dataset dataset = test.dataset();
+        Algorithms.Search<State<Concept>, HeuristicNode<State<Concept>, Double>>.Result result
+                = ComposIT.search(dataset.getDefaultCompositionProblem(), dataset.getRequest());
+
+        List<Set<Operation<Concept>>> composition = new ArrayList<Set<Operation<Concept>>>();
+        int level=0;
+        for(State<Concept> state : Lists.reverse(result.getOptimalPath())){
+            Set<Operation<Concept>> ops = new HashSet<Operation<Concept>>();
+            for(Operation<Concept> op : state.getStateOperations()){
+                if (level==0 || level==result.getOptimalPath().size()-1){
+                    ops.add(op);
+                } else {
+                    if (!(ops instanceof DummyOperation)){
+                        ops.add(op);
+                    }
+                }
+            }
+            if (!ops.isEmpty()){
+                composition.add(state.getStateOperations());
+            }
+            level++;
+        }
+        LeveledServices<Concept> cmp = new HashLeveledServices<Concept>(composition);
+        assertTrue(Verifier.satisfies(cmp, dataset.getMatchGraph()));
+        assertTrue(Verifier.satisfies(cmp, dataset.getDefaultMatcher()));
+        assertEquals(runpath, result.getOptimalPath().size()-2);
+        assertEquals(services, result.getGoalNode().getScore().intValue());
+    }
+
+    @Test(timeout=timeout)
     public void testComposition01() throws Exception {
-        run(WSCTest.TESTSET_2008_01);
+        verify(WSCTest.TESTSET_2008_01, 3, 10);
     }
 
-    @Test
+    @Test(timeout=timeout)
     public void testComposition02() throws Exception {
-        run(WSCTest.TESTSET_2008_02);
+        verify(WSCTest.TESTSET_2008_02, 3, 5);
     }
 
-    @Test
+    @Test(timeout=timeout)
     public void testComposition03() throws Exception {
-        run(WSCTest.TESTSET_2008_03);
+        verify(WSCTest.TESTSET_2008_03, 23, 40);
     }
 
-    @Test
+    @Test(timeout=timeout)
     public void testComposition04() throws Exception {
-        run(WSCTest.TESTSET_2008_04);
+        verify(WSCTest.TESTSET_2008_04, 5, 10);
     }
 
-    @Test
+    @Test(timeout=timeout)
     public void testComposition05() throws Exception {
-        run(WSCTest.TESTSET_2008_05);
+        verify(WSCTest.TESTSET_2008_05, 8, 20);
     }
 
-    @Test
+    @Test(timeout=timeout)
     public void testComposition06() throws Exception {
-        run(WSCTest.TESTSET_2008_06);
+        verify(WSCTest.TESTSET_2008_06, 7, 42);
     }
 
-    @Test
+    @Test(timeout=timeout)
     public void testComposition07() throws Exception {
-        run(WSCTest.TESTSET_2008_07);
+        verify(WSCTest.TESTSET_2008_07, 12, 20);
     }
 
-    @Test
+    @Test(timeout=timeout)
     public void testComposition08() throws Exception {
-        run(WSCTest.TESTSET_2008_08);
+        verify(WSCTest.TESTSET_2008_08, 20, 30);
     }
 }

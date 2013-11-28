@@ -20,6 +20,9 @@ package es.usc.citius.composit.core.composition.network;
 
 import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
+import es.usc.citius.composit.core.model.Operation;
+
+import java.util.Map;
 
 /**
  * <p>A Service Match Network (SMN) represents a directed composition match graph model. This network
@@ -40,5 +43,10 @@ import es.usc.citius.composit.core.matcher.graph.MatchGraph;
  * @param <T> type of a match between inputs and outputs.
  */
 public interface ServiceMatchNetwork<E,T extends Comparable<T>> extends LeveledServices<E>, MatchGraph<E,T> {
-    // TODO; Add methods to retrieve source/target operation match
+
+    Map<Operation<E>, Map<E,T>> getSourceOperationsThatMatch(E target);
+
+    Map<Operation<E>, Map<E,T>> getTargetOperationsMatchedBy(E source);
+
+
 }
