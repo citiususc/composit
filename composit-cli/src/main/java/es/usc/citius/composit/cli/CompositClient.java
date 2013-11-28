@@ -1,6 +1,7 @@
 package es.usc.citius.composit.cli;
 
 import es.usc.citius.composit.core.composition.search.ComposIT;
+import es.usc.citius.composit.core.matcher.logic.LogicMatchType;
 import es.usc.citius.composit.wsc08.data.WSCTest;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
@@ -27,6 +28,9 @@ public class CompositClient {
 
     @Option(name="-opt-eqnode", usage="Use node equivalence detection.")
     private boolean nodeEquivalenceOpt = false;
+
+    @Option(name="-smatch", usage="Select semantic match type")
+    private LogicMatchType matchType = LogicMatchType.EXACT;
 
     @Option(name="-debug", usage="Dump debug information.")
     private boolean debug = false;
