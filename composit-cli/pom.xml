@@ -11,6 +11,10 @@
 
     <artifactId>composit-cli</artifactId>
 
+    <properties>
+        <composit.root.dir>${project.basedir}/..</composit.root.dir>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>args4j</groupId>
@@ -23,6 +27,10 @@
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-wsc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-resources</artifactId>
         </dependency>
     </dependencies>
 

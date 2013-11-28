@@ -1,5 +1,7 @@
 package es.usc.citius.composit.cli;
 
+import es.usc.citius.composit.core.composition.search.ComposIT;
+import es.usc.citius.composit.wsc08.data.WSCTest;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -51,6 +53,11 @@ public class CompositClient {
         }
 
         // Configure all according to the options
+    }
+
+    private void search() throws IOException {
+        WSCTest.Dataset dataset = WSCTest.TESTSET_2008_01.dataset();
+        ComposIT.search(dataset.getDefaultCompositionProblem(), dataset.getRequest());
     }
 
     private void header(){

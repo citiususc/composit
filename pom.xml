@@ -39,6 +39,7 @@
         <module>composit-wsc</module>
         <module>composit-test</module>
         <module>composit-cli</module>
+        <module>composit-resources</module>
     </modules>
 
     <properties>
@@ -255,6 +256,11 @@
             <dependency>
                 <groupId>es.usc.citius.composit</groupId>
                 <artifactId>composit-wsc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>es.usc.citius.composit</groupId>
+                <artifactId>composit-resources</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

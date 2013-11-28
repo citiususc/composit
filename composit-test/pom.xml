@@ -36,25 +36,21 @@
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-iserve</artifactId>
-            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-core</artifactId>
-            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-wsc</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
-            <artifactId>composit-wsc</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
+            <artifactId>composit-resources</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -62,12 +62,17 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
         </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-resources</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
-
+    <!--
     <build>
         <plugins>
-            <!-- Package tests to be reused in different modules -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -82,4 +87,5 @@
             </plugin>
         </plugins>
     </build>
+    -->
 </project>
