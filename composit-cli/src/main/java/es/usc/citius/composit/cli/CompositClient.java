@@ -14,19 +14,19 @@ import java.util.List;
  */
 public class CompositClient {
 
-    @Option(name="-dataset", usage="Select WSC'08 dataset between 1 and 8")
+    @Option(name="-dataset", usage="Select WSC'08 dataset between 1 and 8.")
     private int dataset = 1;
 
-    @Option(name="-opt-backmin", usage="Use backward minimization")
+    @Option(name="-opt-backmin", usage="Use backward minimization.")
     private boolean backwardMinimizationOpt = true;
 
-    @Option(name="-opt-dominance", usage="Use functional dominance optimization")
+    @Option(name="-opt-dominance", usage="Use functional dominance optimization.")
     private boolean functionalDominanceOpt = true;
 
-    @Option(name="-opt-eqnode", usage="Use node equivalence detection")
+    @Option(name="-opt-eqnode", usage="Use node equivalence detection.")
     private boolean nodeEquivalenceOpt = false;
 
-    @Option(name="-debug", usage="Dump debug information")
+    @Option(name="-debug", usage="Dump debug information.")
     private boolean debug = false;
 
     @Argument
@@ -37,6 +37,7 @@ public class CompositClient {
     }
 
     private void run(String[] args) {
+        header();
         CmdLineParser parser = new CmdLineParser(this);
 
         try {
@@ -50,5 +51,41 @@ public class CompositClient {
         }
 
         // Configure all according to the options
+    }
+
+    private void header(){
+        String header =
+                "   _____                                _____ _______   \n" +
+                "  / ____|                              |_   _|__   __|  \n" +
+                " | |     ___  _ __ ___  _ __   ___  ___  | |    | |     \n" +
+                " | |    / _ \\| '_ ` _ \\| '_ \\ / _ \\/ __| | |    | | \n" +
+                " | |___| (_) | | | | | | |_) | (_) \\__ \\_| |_   | |   \n" +
+                "  \\_____\\___/|_| |_| |_| .__/ \\___/|___/_____|  |_|  \n" +
+                "                       | |                              \n" +
+                "                       |_|                              \n";
+        System.out.println(header);
+        System.out.println("ComposIT :: Semantic Web Service Composition API");
+        System.out.println();
+        System.out.println(license());
+        System.out.println();
+    }
+
+    private String license(){
+        return  "This software is licensed under Apache 2.0 license:\n" +
+                "\n" +
+                "\tCopyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS)\n" +
+                "\tUniversity of Santiago de Compostela (USC).\n" +
+                "\n" +
+                "\tLicensed under the Apache License, Version 2.0 (the \"License\");\n" +
+                "\tyou may not use this file except in compliance with the License.\n" +
+                "\tYou may obtain a copy of the License at\n" +
+                "\n" +
+                "\t    http://www.apache.org/licenses/LICENSE-2.0\n" +
+                "\n" +
+                "\tUnless required by applicable law or agreed to in writing, software\n" +
+                "\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n" +
+                "\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
+                "\tSee the License for the specific language governing permissions and\n" +
+                "\tlimitations under the License.";
     }
 }
