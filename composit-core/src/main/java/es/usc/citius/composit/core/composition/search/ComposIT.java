@@ -40,10 +40,16 @@ public final class ComposIT<E, T extends Comparable<T>> {
     // Optimizations will be applied in order
     private List<NetworkOptimizer<E,T>> optimizations = new LinkedList<NetworkOptimizer<E, T>>();
     private CompositionProblem<E,T> problem;
+    private MatchGraph<E, T> matchGraph;
+    private DiscoveryIO<E> discoveryIO;
+    private ForwardServiceDiscoverer<E, T> discoverer;
 
     // Use a builder?
     public ComposIT(CompositionProblem<E,T> compositionProblem){
         this.problem = compositionProblem;
+        this.matchGraph = problem.getMatchGraph();
+        this.discoveryIO = problem.getDiscoveryIO();
+        this.discoverer = new ForwardServiceDiscoverer<E, T>(discoveryIO, matchGraph);
     }
 
     public ComposIT addOptimization(NetworkOptimizer<E,T> opt){
@@ -54,14 +60,10 @@ public final class ComposIT<E, T extends Comparable<T>> {
     public Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result search(Signature<E> request){
         // Create the 3-pass service match network.
         log.info("Initializing composition search problem...");
-        // Get the match graph
-        MatchGraph<E, T> matchGraph = problem.getMatchGraph();
-        // Get the Discovery I/O algorithm
-        DiscoveryIO<E> discovery = problem.getDiscoveryIO();
         // Composition starts with the request:
         Stopwatch compositionWatch = Stopwatch.createStarted();
         // Build the initial match graph network (first pass)
-        ServiceMatchNetwork<E, T> network = new ForwardServiceDiscoverer<E, T>(discovery, matchGraph).search(request);
+        ServiceMatchNetwork<E, T> network = discoverer.search(request);
         // Apply optimizations
         for(NetworkOptimizer<E,T> opt : optimizations){
             network = opt.optimize(network);
