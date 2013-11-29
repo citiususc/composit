@@ -52,7 +52,7 @@ public class BackwardMinimizationTest {
         float reduction = (1f - after/before)*100f;
         log.debug("Backward minimization reduction achieved: {} % in {}", reduction, stopwatch.toString());
         // Verify if the result is correct
-        assertTrue(Verifier.satisfies(optimizedNetwork, dataset.getMatchGraph()));
+        assertTrue(Verifier.isExecutable(optimizedNetwork, dataset.getMatchGraph()));
         assertTrue(after < before);
     }
 

@@ -42,7 +42,7 @@ public class VerifierTest {
     public void testVerifier() throws Exception {
         WSCTest.Dataset dataset = WSCTest.TESTSET_2008_01.dataset();
         ServiceMatchNetwork<Concept, Boolean> network = ForwardServiceDiscovererWSC.generateGraph(dataset);
-        assertTrue(Verifier.satisfies(network, dataset.getDefaultMatcher()));
+        assertTrue(Verifier.isExecutable(network, dataset.getDefaultMatcher()));
         // Now remove a required service
         List<Set<Operation<Concept>>> layers = new ArrayList<Set<Operation<Concept>>>(network.getLeveledList());
         Set<Operation<Concept>> layer = layers.get(layers.size()-2);
@@ -59,6 +59,6 @@ public class VerifierTest {
         System.out.println(layers);
         if (!removed) fail(operation + " not found in network");
         ServiceMatchNetwork<Concept, Boolean> invalid = new DirectedAcyclicSMN<Concept, Boolean>(new HashLeveledServices<Concept>(layers),  network);
-        assertFalse(Verifier.satisfies(invalid, dataset.getDefaultMatcher()));
+        assertFalse(Verifier.isExecutable(invalid, dataset.getDefaultMatcher()));
     }
 }

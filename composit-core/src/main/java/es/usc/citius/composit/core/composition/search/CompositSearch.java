@@ -146,7 +146,7 @@ public final class CompositSearch {
                 SetMultimap<Set<E>, Operation<E>> groups = group(providers);
                 log.debug("\t- {} groups generated based on the inputs matched: {}", groups.size(), groups);
                 Set<Set<Operation<E>>> result = combine(groups);
-                log.debug("\t- {} optimal successor states found that satisfies the unsolved inputs: {}", result.size(), result);
+                log.debug("\t- {} optimal successor states found that isExecutable the unsolved inputs: {}", result.size(), result);
                 // Generate new states.
                 //result = nodeEquivalence(result, network);
                 //log.debug("\t- {} non-equivalent unique successor after node equivalence: {}", result.size(), result);

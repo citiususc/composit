@@ -41,8 +41,8 @@ public final class Verifier {
      * @param <T> type of the match links.
      * @return true if the composition is forward-invokable, from source to sink node.
      */
-    public static <E,T extends Comparable<T>> boolean satisfies(LeveledServices<E> composition, SetMatchFunction<E,T> matcher){
-        // Check if the composition is well-formed and satisfies the request
+    public static <E,T extends Comparable<T>> boolean isExecutable(LeveledServices<E> composition, SetMatchFunction<E, T> matcher){
+        // Check if the composition is well-formed and isExecutable the request
         Set<E> available = new HashSet<E>(composition.getSource().getSignature().getOutputs());
         for(int level=1; level < composition.numberOfLevels()-1; level++){
             Set<Operation<E>> operations = composition.getOperationsAtLevel(level);

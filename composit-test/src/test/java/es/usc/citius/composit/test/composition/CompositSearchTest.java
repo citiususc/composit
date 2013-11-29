@@ -81,8 +81,8 @@ public class CompositSearchTest {
             level++;
         }
         LeveledServices<Concept> cmp = new HashLeveledServices<Concept>(composition);
-        assertTrue(Verifier.satisfies(cmp, dataset.getMatchGraph()));
-        assertTrue(Verifier.satisfies(cmp, dataset.getDefaultMatcher()));
+        assertTrue(Verifier.isExecutable(cmp, dataset.getMatchGraph()));
+        assertTrue(Verifier.isExecutable(cmp, dataset.getDefaultMatcher()));
         assertEquals(runpath, result.getOptimalPath().size()-2);
         assertEquals(services, result.getGoalNode().getScore().intValue());
     }

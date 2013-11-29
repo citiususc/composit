@@ -60,7 +60,7 @@ public class ForwardServiceDiscovererWSC {
         ServiceMatchNetwork<Concept, Boolean> network = generateGraph(dataset);
         // Perform a sanity check, checking the number of services in each layer
         sanityCheck(network, test);
-        Verifier.satisfies(network, dataset.getMatchGraph());
+        Verifier.isExecutable(network, dataset.getMatchGraph());
         log.debug("Total test time: {}", stopwatch.stop().toString());
     }
 
