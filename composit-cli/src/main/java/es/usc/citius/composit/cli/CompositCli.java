@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class CompositClient {
+public class CompositCli {
 
     private static final String nl = System.getProperty("line.separator");
 
@@ -39,14 +39,14 @@ public class CompositClient {
     @Option(name="-smatch", usage="Select semantic match type (subsumes > plugin > exact)")
     private LogicMatchType matchType = LogicMatchType.PLUGIN;
 
-    @Option(name="-benchmark-cycles", usage="Use this option with a number N > 0 to run N benchmark cycles")
-    private int benchmarkCycles = 0;
+    @Option(name="-benchmark-cycles", usage="Use this option with a number N > 1 to run N benchmark cycles")
+    private int benchmarkCycles = 1;
 
     @Option(name="-debug", usage="Dump debug information.")
     private boolean debug = false;
 
     public static void main(String[] args) throws IOException {
-        new CompositClient().run(args);
+        new CompositCli().run(args);
     }
 
     private void setLogbackLevel(Level level){
@@ -65,6 +65,11 @@ public class CompositClient {
             return;
         }
 
+        setLogbackLevel(Level.INFO);
+
+        if (debug){
+            setLogbackLevel(Level.DEBUG);
+        }
         // Configure all according to the options
         WSCTest.Dataset wscDataset;
 
@@ -98,8 +103,6 @@ public class CompositClient {
                 System.err.println("Unrecognized dataset. Using WSC'08 Dataset 01");
         }
 
-        setLogbackLevel(Level.INFO);
-
         ComposIT<Concept, Boolean> composit = new ComposIT<Concept, Boolean>(wscDataset.getDefaultCompositionProblem());
 
         // Configure search
@@ -109,22 +112,22 @@ public class CompositClient {
         if (functionalDominanceOpt){
             composit.addOptimization(new FunctionalDominanceOptimizer<Concept, Boolean>());
         }
-        if (debug){
-            setLogbackLevel(Level.DEBUG);
-        }
 
         // Compute benchmark
+        Stopwatch watch = Stopwatch.createUnstarted();
         long minMS = Long.MAX_VALUE;
         for(int i=0; i<benchmarkCycles; i++){
-            Stopwatch benchWatch = Stopwatch.createStarted();
+            System.out.println("[ComposIT Search] Starting search cycle " + (i+1));
+            watch.start();
             composit.search(wscDataset.getRequest());
-            long ms = benchWatch.stop().elapsed(TimeUnit.MILLISECONDS);
+            long ms = watch.stop().elapsed(TimeUnit.MILLISECONDS);
             if (ms < minMS){
                 minMS = ms;
             }
+            watch.reset();
         }
-        if (benchmarkCycles > 0){
-            System.out.println(" > " + benchmarkCycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
+        if (benchmarkCycles > 1){
+            System.out.println("[Benchmark Result] " + benchmarkCycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
         }
 
     }
