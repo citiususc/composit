@@ -80,7 +80,7 @@ public class BackwardMinimizationOptimizer<E, T extends Comparable<T>> implement
         ServiceMatchNetwork<E, T> optimizedNetwork = new DirectedAcyclicSMN<E, T>(new HashLeveledServices<E>(optimized), network);
         localWatch.stop();
         log.debug(" > Optimized match network created in {}", localWatch.toString());
-        log.info("Backward Optimization done in {}. Size before/after {}/{}", globalWatch.stop().toString(), network.listOperations().size(), optimizedNetwork.listOperations().size());
+        log.debug("Backward Optimization done in {}. Size before/after {}/{}", globalWatch.stop().toString(), network.listOperations().size(), optimizedNetwork.listOperations().size());
         // Create a new optimized service match network
         return optimizedNetwork;
     }

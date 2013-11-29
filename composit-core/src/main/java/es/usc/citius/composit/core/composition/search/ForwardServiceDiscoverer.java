@@ -125,8 +125,8 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
         // Create a service match network with the discovered services
         DirectedAcyclicSMN<E,T> matchNetwork = new DirectedAcyclicSMN<E, T>(new HashLeveledServices<E>(leveledOps), this.matcher);
         log.debug(" > Service match network computed in {}", networkWatch.stop().toString());
-        log.info("Service Match Network created with {} levels (including source and sink) and {} operations.", leveledOps.size(), matchNetwork.listOperations().size());
-        log.info("Forward Discovery done in {}", timer.toString());
+        log.debug("Service Match Network created with {} levels (including source and sink) and {} operations.", leveledOps.size(), matchNetwork.listOperations().size());
+        log.debug("Forward Discovery done in {}", timer.toString());
         return matchNetwork;
     }
 }
