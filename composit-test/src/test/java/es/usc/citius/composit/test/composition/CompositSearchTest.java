@@ -21,6 +21,8 @@ import com.google.common.collect.Lists;
 import es.usc.citius.composit.core.composition.HashLeveledServices;
 import es.usc.citius.composit.core.composition.LeveledServices;
 import es.usc.citius.composit.core.composition.Verifier;
+import es.usc.citius.composit.core.composition.optimization.BackwardMinimizationOptimizer;
+import es.usc.citius.composit.core.composition.optimization.FunctionalDominanceOptimizer;
 import es.usc.citius.composit.core.composition.search.ComposIT;
 import es.usc.citius.composit.core.composition.search.State;
 import es.usc.citius.composit.core.knowledge.Concept;
@@ -48,13 +50,17 @@ public class CompositSearchTest {
 
     private Algorithms.Search<State<Concept>,HeuristicNode<State<Concept>,Double>>.Result run(WSCTest test) throws IOException {
         WSCTest.Dataset dataset = test.dataset();
-        return ComposIT.search(dataset.getDefaultCompositionProblem(), dataset.getRequest());
+        ComposIT<Concept, Boolean> composit = new ComposIT<Concept, Boolean>(dataset.getDefaultCompositionProblem());
+        return composit.search(dataset.getRequest());
     }
 
     private void verify(WSCTest test, int runpath, int services) throws IOException {
         WSCTest.Dataset dataset = test.dataset();
+        ComposIT<Concept, Boolean> composit = new ComposIT<Concept, Boolean>(dataset.getDefaultCompositionProblem());
+        composit.addOptimization(new BackwardMinimizationOptimizer<Concept, Boolean>());
+        composit.addOptimization(new FunctionalDominanceOptimizer<Concept, Boolean>());
         Algorithms.Search<State<Concept>, HeuristicNode<State<Concept>, Double>>.Result result
-                = ComposIT.search(dataset.getDefaultCompositionProblem(), dataset.getRequest());
+                = composit.search(dataset.getRequest());
 
         List<Set<Operation<Concept>>> composition = new ArrayList<Set<Operation<Concept>>>();
         int level=0;
