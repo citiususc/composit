@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>composit-all</artifactId>
     <name>${project.artifactId}</name>
-    <description>This module contains all ComposIT submodules.</description>
+    <description>This module aggregates all ComposIT submodules.</description>
     <packaging>jar</packaging>
 
     <properties>
@@ -39,17 +39,22 @@
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-iserve</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-wsc</artifactId>
-            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-resources</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-cli</artifactId>
         </dependency>
     </dependencies>
 </project>
