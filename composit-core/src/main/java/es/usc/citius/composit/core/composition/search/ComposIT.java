@@ -20,8 +20,7 @@ package es.usc.citius.composit.core.composition.search;
 import com.google.common.base.Stopwatch;
 import es.usc.citius.composit.core.composition.DiscoveryIO;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
-import es.usc.citius.composit.core.composition.optimization.BackwardMinimizationOptimizer;
-import es.usc.citius.composit.core.composition.optimization.FunctionalDominanceOptimizer;
+import es.usc.citius.composit.core.composition.optimization.NetworkOptimizer;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.model.Signature;
 import es.usc.citius.lab.hipster.algorithm.Algorithms;
@@ -29,15 +28,30 @@ import es.usc.citius.lab.hipster.node.HeuristicNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public final class ComposIT {
+public final class ComposIT<E, T extends Comparable<T>> {
     private static final Logger log = LoggerFactory.getLogger(ComposIT.class);
 
-    private ComposIT(){}
+    // Optimizations will be applied in order
+    private List<NetworkOptimizer<E,T>> optimizations = new LinkedList<NetworkOptimizer<E, T>>();
+    private CompositionProblem<E,T> problem;
 
-    public static <E, T extends Comparable<T>> Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result search(CompositionProblem<E,T> problem, Signature<E> request){
+    // Use a builder?
+    public ComposIT(CompositionProblem<E,T> compositionProblem){
+        this.problem = compositionProblem;
+    }
+
+    public ComposIT addOptimization(NetworkOptimizer<E,T> opt){
+        this.optimizations.add(opt);
+        return this;
+    }
+
+    public Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result search(Signature<E> request){
         // Create the 3-pass service match network.
         log.info("Initializing composition search problem...");
         // Get the match graph
@@ -47,14 +61,14 @@ public final class ComposIT {
         // Composition starts with the request:
         Stopwatch compositionWatch = Stopwatch.createStarted();
         // Build the initial match graph network (first pass)
-        ServiceMatchNetwork<E, T> network1 = new ForwardServiceDiscoverer<E, T>(discovery, matchGraph).search(request);
-        // Second pass optimization
-        ServiceMatchNetwork<E, T> network2 = new BackwardMinimizationOptimizer<E, T>().optimize(network1);
-        // Third pass, functional dominance
-        ServiceMatchNetwork<E, T> network3 = new FunctionalDominanceOptimizer<E, T>().optimize(network2);
-        log.info("Starting search over a network with {} levels and {} operations", network3.numberOfLevels(), network3.listOperations().size());
-        // Run search over network3
-        Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result searchResult = CompositSearch.create(network3).search();
+        ServiceMatchNetwork<E, T> network = new ForwardServiceDiscoverer<E, T>(discovery, matchGraph).search(request);
+        // Apply optimizations
+        for(NetworkOptimizer<E,T> opt : optimizations){
+            network = opt.optimize(network);
+        }
+        log.info("Starting search over a network with {} levels and {} operations", network.numberOfLevels(), network.listOperations().size());
+        // Run search over network
+        Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result searchResult = CompositSearch.create(network).search();
         log.info("Optimal composition search finished in {}: {}", searchResult.getStopwatch().toString(), searchResult.getOptimalPath());
         log.info("   Total iterations    : {}", searchResult.getIterations());
         log.info("   Composition runpath : {}", searchResult.getOptimalPath().size()-2);

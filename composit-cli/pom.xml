@@ -32,6 +32,15 @@
             <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-resources</artifactId>
         </dependency>
+
+        <!--
+            Composit-cli uses logback directly instead of using it
+            through slf4j
+        -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
