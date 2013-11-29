@@ -53,6 +53,7 @@ public class BackwardMinimizationTest {
         log.debug("Backward minimization reduction achieved: {} % in {}", reduction, stopwatch.toString());
         // Verify if the result is correct
         assertTrue(Verifier.satisfies(optimizedNetwork, dataset.getMatchGraph()));
+        assertTrue(after < before);
     }
 
     @Test
