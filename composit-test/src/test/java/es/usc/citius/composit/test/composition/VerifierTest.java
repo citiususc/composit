@@ -56,7 +56,6 @@ public class VerifierTest {
                 break;
             }
         }
-        System.out.println(layers);
         if (!removed) fail(operation + " not found in network");
         ServiceMatchNetwork<Concept, Boolean> invalid = new DirectedAcyclicSMN<Concept, Boolean>(new HashLeveledServices<Concept>(layers),  network);
         assertFalse(Verifier.isExecutable(invalid, dataset.getDefaultMatcher()));
