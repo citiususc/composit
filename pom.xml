@@ -52,7 +52,7 @@
         <junit.test.version>4.11</junit.test.version>
         <log.slf4j.version>1.7.5</log.slf4j.version>
         <log.logback.version>1.0.13</log.logback.version>
-        <args4j.version>2.0.26</args4j.version>
+        <jcommander.version>1.32</jcommander.version>
         <composit.root.dir>${project.basedir}</composit.root.dir>
         <!-- Project build encoding UTF-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -282,9 +282,9 @@
                 <version>${guava.version}</version>
             </dependency>
             <dependency>
-                <groupId>args4j</groupId>
-                <artifactId>args4j</artifactId>
-                <version>${args4j.version}</version>
+                <groupId>com.beust</groupId>
+                <artifactId>jcommander</artifactId>
+                <version>${jcommander.version}</version>
             </dependency>
 
             <!-- Logging -->
