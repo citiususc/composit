@@ -50,7 +50,7 @@
         </dependency>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
-            <artifactId>composit-resources</artifactId>
+            <artifactId>composit-datasets</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
