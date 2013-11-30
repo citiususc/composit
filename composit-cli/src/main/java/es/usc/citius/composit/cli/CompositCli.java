@@ -2,20 +2,17 @@ package es.usc.citius.composit.cli;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
-import com.google.common.base.Stopwatch;
-import es.usc.citius.composit.core.composition.optimization.BackwardMinimizationOptimizer;
-import es.usc.citius.composit.core.composition.optimization.FunctionalDominanceOptimizer;
-import es.usc.citius.composit.core.composition.search.ComposIT;
-import es.usc.citius.composit.core.knowledge.Concept;
-import es.usc.citius.composit.core.matcher.logic.LogicMatchType;
-import es.usc.citius.composit.wsc08.data.WSCTest;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.Option;
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import es.usc.citius.composit.cli.command.CliCommand;
+import es.usc.citius.composit.cli.command.CompositionCommand;
+import es.usc.citius.composit.cli.command.HelpCommand;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
@@ -24,26 +21,17 @@ public class CompositCli {
 
     private static final String nl = System.getProperty("line.separator");
 
-    @Option(name="-dataset", usage="Select WSC'08 dataset between 1 and 8.")
-    private int dataset = 1;
+    // Command binding
+    private Map<String, CliCommand> bindings = new HashMap<String, CliCommand>();
 
-    @Option(name="-opt-backmin", usage="Use backward minimization.")
-    private boolean backwardMinimizationOpt = true;
-
-    @Option(name="-opt-dominance", usage="Use functional dominance optimization.")
-    private boolean functionalDominanceOpt = true;
-
-    @Option(name="-opt-eqnode", usage="Use node equivalence detection.")
-    private boolean nodeEquivalenceOpt = false;
-
-    @Option(name="-smatch", usage="Select semantic match type (subsumes > plugin > exact)")
-    private LogicMatchType matchType = LogicMatchType.PLUGIN;
-
-    @Option(name="-benchmark-cycles", usage="Use this option with a number N > 1 to run N benchmark cycles")
-    private int benchmarkCycles = 1;
-
-    @Option(name="-debug", usage="Dump debug information.")
+    @Parameter(names = "--debug", description = "Change log level to Debug mode")
     private boolean debug = false;
+
+    @Parameter(names = "--help", help = true, description = "Print general command usage options")
+    private boolean showHelp = false;
+
+    @Parameter(names = {"-v", "--version"}, description = "Print ComposIT version")
+    private boolean version = false;
 
     public static void main(String[] args) throws IOException {
         new CompositCli().run(args);
@@ -55,84 +43,59 @@ public class CompositCli {
 
     private void run(String[] args) throws IOException {
         header();
-        CmdLineParser parser = new CmdLineParser(this);
+        systemInfo();
+        System.out.println("Arguments: " + Arrays.toString(args));
+        separator();
+        System.out.println();
 
+        // Configure cli with the available commands
+        JCommander cli = new JCommander(this);
+        cli.setProgramName("Composit");
+
+        // Add command bindings
+        CompositionCommand compose = new CompositionCommand();
+        HelpCommand help = new HelpCommand();
+        bindings.put(compose.getCommandName(), compose);
+        bindings.put(help.getCommandName(), help);
+
+        // Add all available commands to JCommander
+        for(CliCommand cmd : bindings.values()){
+            cli.addCommand(cmd.getCommandName(), cmd);
+        }
+
+        if (args.length == 0){
+            cli.usage();
+            System.exit(0);
+        }
+        // Parse options
         try {
-            parser.parseArgument(args);
-        } catch (CmdLineException e) {
+            cli.parse(args);
+        }catch(Exception e){
             System.err.println(e.getMessage());
-            parser.printUsage(System.err);
-            return;
+            e.printStackTrace();
+            System.err.println("To see the commands and options available, use --help");
+            System.exit(-1);
         }
 
-        setLogbackLevel(Level.INFO);
-
-        if (debug){
-            setLogbackLevel(Level.DEBUG);
-        }
-        // Configure all according to the options
-        WSCTest.Dataset wscDataset;
-
-        switch(dataset){
-            case 1:
-                wscDataset = WSCTest.TESTSET_2008_01.dataset();
-                break;
-            case 2:
-                wscDataset = WSCTest.TESTSET_2008_02.dataset();
-                break;
-            case 3:
-                wscDataset = WSCTest.TESTSET_2008_03.dataset();
-                break;
-            case 4:
-                wscDataset = WSCTest.TESTSET_2008_04.dataset();
-                break;
-            case 5:
-                wscDataset = WSCTest.TESTSET_2008_05.dataset();
-                break;
-            case 6:
-                wscDataset = WSCTest.TESTSET_2008_06.dataset();
-                break;
-            case 7:
-                wscDataset = WSCTest.TESTSET_2008_07.dataset();
-                break;
-            case 8:
-                wscDataset = WSCTest.TESTSET_2008_08.dataset();
-                break;
-            default:
-                wscDataset = WSCTest.TESTSET_2008_01.dataset();
-                System.err.println("Unrecognized dataset. Using WSC'08 Dataset 01");
+        // Print help?
+        if (showHelp){
+            cli.usage();
+            System.exit(0);
         }
 
-        ComposIT<Concept, Boolean> composit = new ComposIT<Concept, Boolean>(wscDataset.getDefaultCompositionProblem());
+        // Configure log level
+        Level level = (debug)? Level.DEBUG : Level.INFO;
+        setLogbackLevel(level);
 
-        // Configure search
-        if (backwardMinimizationOpt){
-            composit.addOptimization(new BackwardMinimizationOptimizer<Concept, Boolean>());
-        }
-        if (functionalDominanceOpt){
-            composit.addOptimization(new FunctionalDominanceOptimizer<Concept, Boolean>());
-        }
-
-        // Compute benchmark
-        Stopwatch watch = Stopwatch.createUnstarted();
-        long minMS = Long.MAX_VALUE;
-        for(int i=0; i<benchmarkCycles; i++){
-            System.out.println("[ComposIT Search] Starting search cycle " + (i+1));
-            watch.start();
-            composit.search(wscDataset.getRequest());
-            long ms = watch.stop().elapsed(TimeUnit.MILLISECONDS);
-            if (ms < minMS){
-                minMS = ms;
-            }
-            watch.reset();
-        }
-        if (benchmarkCycles > 1){
-            System.out.println("[Benchmark Result] " + benchmarkCycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
-        }
-
+        // Run command
+        bindings.get(cli.getParsedCommand()).invoke(cli, this);
     }
 
-    private void header(){
+    public void separator(){
+        System.out.println("========================================================================");
+    }
+
+    public void header(){
         String header =
                 "   _____                                _____ _______  " + nl +
                 "  / ____|                              |_   _|__   __| " + nl +
@@ -141,21 +104,25 @@ public class CompositCli {
                 " | |___| (_) | | | | | | |_) | (_) \\__ \\_| |_   | |  " + nl +
                 "  \\_____\\___/|_| |_| |_| .__/ \\___/|___/_____|  |_| " + nl +
                 "                       | |                             " + nl +
-                "                       |_|                             ";
+                "                       |_|                             " + nl;
         System.out.println(header);
         System.out.println("  ComposIT :: Semantic Web Service Composition API" + nl);
         System.out.println();
-        System.out.println(license());
-        System.out.println();
-        System.out.println(systemInfo());
+        System.out.println(getLicense());
         System.out.println();
     }
 
-    private String systemInfo(){
+    public void systemInfo(){
+        System.out.println(getSystemInfo());
+        System.out.println();
+    }
+
+    private String getSystemInfo(){
         String info =
-                "Running on: " + System.getProperty("os.name") + " " + System.getProperty("os.version") + " " + System.getProperty("os.arch") + nl +
-                "Available processors: " + Runtime.getRuntime().availableProcessors() + nl +
+                "Java: " + System.getProperty("java.version") + nl +
+                "OS: " + System.getProperty("os.name") + " " + System.getProperty("os.version") + " " + System.getProperty("os.arch") + nl +
                 "Free/Total/Max memory: " + byteCount(Runtime.getRuntime().freeMemory(), true) + "/" + byteCount(Runtime.getRuntime().totalMemory(), true) + "/" + byteCount(Runtime.getRuntime().maxMemory(), true);
+                //"Available processors: " + Runtime.getRuntime().availableProcessors() + nl +
         return info;
     }
 
@@ -171,7 +138,7 @@ public class CompositCli {
         return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
     }
 
-    private String license(){
+    public String getLicense(){
         return  "This software is licensed under Apache 2.0 license:\n" +
                 "\n" +
                 "\tCopyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS)\n" +
