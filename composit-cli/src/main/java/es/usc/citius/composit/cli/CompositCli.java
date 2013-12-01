@@ -4,15 +4,22 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.google.common.base.Strings;
+import com.google.common.io.CharStreams;
 import es.usc.citius.composit.cli.command.CliCommand;
 import es.usc.citius.composit.cli.command.CompositionCommand;
 import es.usc.citius.composit.cli.command.HelpCommand;
+import org.fusesource.jansi.AnsiConsole;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
@@ -33,23 +40,16 @@ public class CompositCli {
     @Parameter(names = {"-v", "--version"}, description = "Print ComposIT version")
     private boolean version = false;
 
+    private JCommander cli;
+
     public static void main(String[] args) throws IOException {
+        AnsiConsole.systemInstall();
         new CompositCli().run(args);
     }
 
-    private void setLogbackLevel(Level level){
-        ((Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME)).setLevel(level);
-    }
-
-    private void run(String[] args) throws IOException {
-        header();
-        systemInfo();
-        System.out.println("Arguments: " + Arrays.toString(args));
-        separator();
-        System.out.println();
-
+    public CompositCli() {
         // Configure cli with the available commands
-        JCommander cli = new JCommander(this);
+        this.cli = new JCommander(this);
         cli.setProgramName("Composit");
 
         // Add command bindings
@@ -62,53 +62,70 @@ public class CompositCli {
         for(CliCommand cmd : bindings.values()){
             cli.addCommand(cmd.getCommandName(), cmd);
         }
+    }
 
+    private void setLogbackLevel(Level level){
+        ((Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME)).setLevel(level);
+    }
+
+    private void run(String[] args) throws IOException {
+        header(args);
+
+        // If no arguments are provided, show help and return
         if (args.length == 0){
             cli.usage();
-            System.exit(0);
+            return;
         }
+
         // Parse options
         try {
             cli.parse(args);
         }catch(Exception e){
             System.err.println(e.getMessage());
-            e.printStackTrace();
             System.err.println("To see the commands and options available, use --help");
             System.exit(-1);
         }
 
+        // Configure log level
+        setLogbackLevel((debug)? Level.DEBUG : Level.INFO);
+
         // Print help?
         if (showHelp){
             cli.usage();
-            System.exit(0);
+            return;
         }
 
-        // Configure log level
-        Level level = (debug)? Level.DEBUG : Level.INFO;
-        setLogbackLevel(level);
-
-        // Run command
-        bindings.get(cli.getParsedCommand()).invoke(cli, this);
+        // Run command and exit
+        try {
+            bindings.get(cli.getParsedCommand()).invoke(cli, this);
+        } catch (Exception e) {
+            System.err.println(e);
+            System.exit(-1);
+        }
     }
 
     public void separator(){
-        System.out.println("========================================================================");
+        System.out.println(Strings.repeat("=", 80));
     }
 
-    public void header(){
-        String header =
-                "   _____                                _____ _______  " + nl +
-                "  / ____|                              |_   _|__   __| " + nl +
-                " | |     ___  _ __ ___  _ __   ___  ___  | |    | |    " + nl +
-                " | |    / _ \\| '_ ` _ \\| '_ \\ / _ \\/ __| | |    | |" + nl +
-                " | |___| (_) | | | | | | |_) | (_) \\__ \\_| |_   | |  " + nl +
-                "  \\_____\\___/|_| |_| |_| .__/ \\___/|___/_____|  |_| " + nl +
-                "                       | |                             " + nl +
-                "                       |_|                             " + nl;
-        System.out.println(header);
-        System.out.println("  ComposIT :: Semantic Web Service Composition API" + nl);
+    public void header(String[] args) throws IOException {
+        InputStream logoRsc = this.getClass().getClassLoader().getResourceAsStream("logo.txt");
+        //InputStream licenseRsc = this.getClass().getClassLoader().getResourceAsStream("LICENSE.txt");
+        String logo = CharStreams.toString(new InputStreamReader(logoRsc));
+        //String license = CharStreams.toString(new InputStreamReader(licenseRsc));
+
+        System.out.println(ansi().render("@|yellow " + logo + "|@"));
+        System.out.println();
+        System.out.println(ansi().render("\t  @|yellow ComposIT|@ " + ":: Semantic Web Service Composition API"));
+        System.out.println();
+        System.out.println();
+        System.out.println(ansi().render("This software is licensed under @|green Apache 2.0|@ license:"));
         System.out.println();
         System.out.println(getLicense());
+        System.out.println();
+        systemInfo();
+        System.out.println("Arguments: " + Arrays.toString(args));
+        separator();
         System.out.println();
     }
 
@@ -122,7 +139,6 @@ public class CompositCli {
                 "Java: " + System.getProperty("java.version") + nl +
                 "OS: " + System.getProperty("os.name") + " " + System.getProperty("os.version") + " " + System.getProperty("os.arch") + nl +
                 "Free/Total/Max memory: " + byteCount(Runtime.getRuntime().freeMemory(), true) + "/" + byteCount(Runtime.getRuntime().totalMemory(), true) + "/" + byteCount(Runtime.getRuntime().maxMemory(), true);
-                //"Available processors: " + Runtime.getRuntime().availableProcessors() + nl +
         return info;
     }
 
@@ -139,10 +155,9 @@ public class CompositCli {
     }
 
     public String getLicense(){
-        return  "This software is licensed under Apache 2.0 license:\n" +
-                "\n" +
+        return
                 "\tCopyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS)\n" +
-                "\tUniversity of Santiago de Compostela (USC).\n" +
+                "\tUniversity of Santiago de Compostela (USC) http://citius.usc.es.\n" +
                 "\n" +
                 "\tLicensed under the Apache License, Version 2.0 (the \"License\");\n" +
                 "\tyou may not use this file except in compliance with the License.\n" +

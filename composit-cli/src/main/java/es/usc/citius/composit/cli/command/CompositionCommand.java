@@ -17,7 +17,9 @@
 
 package es.usc.citius.composit.cli.command;
 
-import com.beust.jcommander.*;
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.Parameters;
 import com.google.common.base.Stopwatch;
 import es.usc.citius.composit.cli.CompositCli;
 import es.usc.citius.composit.core.composition.optimization.BackwardMinimizationOptimizer;
@@ -27,7 +29,6 @@ import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.matcher.logic.LogicMatchType;
 import es.usc.citius.composit.wsc08.data.WSCTest;
 
-import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -55,35 +56,19 @@ public class CompositionCommand implements CliCommand {
     private boolean nodeEquivalence = false;
 
     @Parameter(names = {"-b", "--benchmark-cycles"}, description = "Activate benchmark mode using N cycles")
-    private int benchmarkCycles;
+    private int benchmarkCycles = 0;
 
     @Parameter(names = {"-sm", "--semantic-match"}, description = "Select semantic match type allowed [ SUBSUMES | PLUGIN | EXACT ]")
     private LogicMatchType matchType = LogicMatchType.PLUGIN;
 
-    public class LogicMatchTypeConverter implements IStringConverter<LogicMatchType> {
-
-        public LogicMatchType convert(String value) {
-            LogicMatchType convertedValue = LogicMatchType.valueOf(value);
-            if(convertedValue == null) {
-                throw new ParameterException("Value " + value + "can not be converted to LogicMatchType. " +
-                        "Available values: " + LogicMatchType.values());
-            }
-            return convertedValue;
-        }
-    }
-
     @Override
-    public void invoke(JCommander cli, CompositCli context) {
+    public void invoke(JCommander cli, CompositCli context) throws Exception {
         // Print system information
         System.out.println("> Running composition on: " + this.test.toString());
 
         // Load dataset
-        WSCTest.Dataset dataset = null;
-        try {
-            dataset = test.dataset();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        WSCTest.Dataset dataset = test.dataset();
+
         ComposIT<Concept, Boolean> composit = new ComposIT<Concept, Boolean>(dataset.getDefaultCompositionProblem());
 
         // Configure search
@@ -94,11 +79,20 @@ public class CompositionCommand implements CliCommand {
             composit.addOptimization(new FunctionalDominanceOptimizer<Concept, Boolean>());
         }
 
+        if (benchmarkCycles > 0){
+            benchmark(composit, dataset, benchmarkCycles);
+        } else {
+            composit.search(dataset.getRequest());
+        }
+
+    }
+
+    private void benchmark(ComposIT<Concept, Boolean> composit, WSCTest.Dataset dataset, int cycles){
         // Compute benchmark
         Stopwatch watch = Stopwatch.createUnstarted();
         long minMS = Long.MAX_VALUE;
-        for(int i=0; i<benchmarkCycles; i++){
-            System.out.println("[ComposIT Search] Starting search cycle " + (i+1));
+        for(int i=0; i<cycles; i++){
+            System.out.println("[ComposIT Search] Starting benchmark cycle " + (i+1));
             watch.start();
             composit.search(dataset.getRequest());
             long ms = watch.stop().elapsed(TimeUnit.MILLISECONDS);
@@ -107,9 +101,7 @@ public class CompositionCommand implements CliCommand {
             }
             watch.reset();
         }
-        if (benchmarkCycles > 0){
-            System.out.println("[Benchmark Result] " + benchmarkCycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
-        }
+        System.out.println("[Benchmark Result] " + cycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
     }
 
     @Override

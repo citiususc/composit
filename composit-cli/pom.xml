@@ -31,7 +31,16 @@
         </dependency>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
+            <artifactId>composit-datasets</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-resources</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fusesource.jansi</groupId>
+            <artifactId>jansi</artifactId>
+            <version>1.11</version>
         </dependency>
 
         <!--

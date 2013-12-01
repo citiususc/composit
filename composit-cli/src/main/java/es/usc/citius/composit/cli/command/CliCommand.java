@@ -23,6 +23,6 @@ import com.beust.jcommander.JCommander;
 import es.usc.citius.composit.cli.CompositCli;
 
 public interface CliCommand {
-    void invoke(JCommander cli, CompositCli context);
+    void invoke(JCommander cli, CompositCli context) throws Exception;
     String getCommandName();
 }
