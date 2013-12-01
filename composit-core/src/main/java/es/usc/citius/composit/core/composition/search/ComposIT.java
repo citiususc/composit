@@ -71,8 +71,9 @@ public final class ComposIT<E, T extends Comparable<T>> {
         log.info("Starting search over a network with {} levels and {} operations", network.numberOfLevels(), network.listOperations().size());
         // Run search over network
         Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result searchResult = CompositSearch.create(network).search();
-        log.info("Optimal composition search finished in {}: {}", searchResult.getStopwatch().toString(), searchResult.getOptimalPath());
-        log.info("   Total iterations    : {}", searchResult.getIterations());
+        log.info("Optimal composition search finished in {}", searchResult.getStopwatch().toString());
+        log.debug("   Composition         : {}", searchResult.getOptimalPath());
+        log.debug("   Total iterations    : {}", searchResult.getIterations());
         log.info("   Composition runpath : {}", searchResult.getOptimalPath().size()-2);
         log.info("   Composition services: {}", searchResult.getGoalNode().getScore());
         log.info("Total composition time : {}", compositionWatch.stop().toString());
