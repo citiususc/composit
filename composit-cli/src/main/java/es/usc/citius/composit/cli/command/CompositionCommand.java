@@ -17,7 +17,6 @@
 
 package es.usc.citius.composit.cli.command;
 
-import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import com.google.common.base.Stopwatch;
@@ -61,8 +60,10 @@ public class CompositionCommand implements CliCommand {
     @Parameter(names = {"-sm", "--semantic-match"}, description = "Select semantic match type allowed [ SUBSUMES | PLUGIN | EXACT ]")
     private LogicMatchType matchType = LogicMatchType.PLUGIN;
 
+    private CompositCli cli;
+
     @Override
-    public void invoke(JCommander cli, CompositCli context) throws Exception {
+    public void invoke(CompositCli contextCli) throws Exception {
         // Print system information
         System.out.println("> Running composition on: " + this.test.toString());
 

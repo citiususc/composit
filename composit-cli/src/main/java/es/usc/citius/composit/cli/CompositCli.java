@@ -30,7 +30,6 @@ import org.fusesource.jansi.AnsiConsole;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -59,15 +58,15 @@ public class CompositCli {
 
     private JCommander cli;
 
-    public static void main(String[] args) throws IOException {
-        AnsiConsole.systemInstall();
+    public static void main(String[] args) throws Exception {
         new CompositCli().run(args);
     }
 
     public CompositCli() {
+        AnsiConsole.systemInstall();
         // Configure cli with the available commands
         this.cli = new JCommander(this);
-        cli.setProgramName("Composit");
+        cli.setProgramName(ansi().render("@|yellow Composit|@").toString());
 
         // Add command bindings
         CompositionCommand compose = new CompositionCommand();
@@ -85,70 +84,94 @@ public class CompositCli {
         ((Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME)).setLevel(level);
     }
 
-    private void run(String[] args) throws IOException {
+    private void run(String[] args) {
         header(args);
-
-        // If no arguments are provided, show help and return
-        if (args.length == 0){
-            cli.usage();
-            return;
-        }
 
         // Parse options
         try {
+            if (args.length == 0) throw new Exception("No arguments specified");
             cli.parse(args);
         }catch(Exception e){
-            System.err.println(e.getMessage());
-            System.err.println("To see the commands and options available, use --help");
+            errorln(e.getMessage());
+            errorln("To see the commands and options available, use --help");
             System.exit(-1);
         }
 
+        handleParameters();
+
+        // Process command
+
+        try {
+            String command = cli.getParsedCommand();
+            if (command != null && !command.isEmpty()){
+                bindings.get(cli.getParsedCommand()).invoke(this);
+            }
+        } catch (Exception e) {
+            errorln(e.getMessage());
+            System.exit(-1);
+        }
+    }
+
+    private void handleParameters() {
         // Configure log level
         setLogbackLevel((debug)? Level.DEBUG : Level.INFO);
 
         // Print help?
         if (showHelp){
             cli.usage();
-            return;
+            System.exit(0);
         }
+    }
 
-        // Run command and exit
-        try {
-            bindings.get(cli.getParsedCommand()).invoke(cli, this);
-        } catch (Exception e) {
-            System.err.println(e);
-            System.exit(-1);
-        }
+    public void println(Object obj){
+        AnsiConsole.out().println(obj.toString());
+    }
+
+    public void println(String msg){;
+        AnsiConsole.out().println(msg);
+    }
+
+    public void errorln(String msg){
+        AnsiConsole.err().println(ansi().render("@|red " + msg + "|@"));
+    }
+
+    private void newline(){
+        AnsiConsole.out().println();
+    }
+
+    public void separator(int size){
+        println(Strings.repeat("=", size));
     }
 
     public void separator(){
-        System.out.println(Strings.repeat("=", 80));
+        separator(80);
     }
 
-    public void header(String[] args) throws IOException {
-        InputStream logoRsc = this.getClass().getClassLoader().getResourceAsStream("logo.txt");
-        //InputStream licenseRsc = this.getClass().getClassLoader().getResourceAsStream("LICENSE.txt");
-        String logo = CharStreams.toString(new InputStreamReader(logoRsc));
-        //String license = CharStreams.toString(new InputStreamReader(licenseRsc));
+    public void header(String[] args) {
 
-        System.out.println(ansi().render("@|yellow " + logo + "|@"));
-        System.out.println();
-        System.out.println(ansi().render("\t  @|yellow ComposIT|@ " + ":: Semantic Web Service Composition API"));
-        System.out.println();
-        System.out.println();
-        System.out.println(ansi().render("This software is licensed under @|green Apache 2.0|@ license:"));
-        System.out.println();
-        System.out.println(getLicense());
-        System.out.println();
-        systemInfo();
-        System.out.println("Arguments: " + Arrays.toString(args));
-        separator();
-        System.out.println();
+        println(ansi().render("@|yellow " + getLogo() + "|@"));
+        newline();
+        println(ansi().render("\t   @|yellow ComposIT|@ " + ":: Automatic Service Composition API"));
+        println("\t   Copyright(c) 2013 CITIUS http://citius.usc.es");
+        newline();
+        newline();
+        println(ansi().render("This software is licensed under @|green Apache 2.0|@ license:"));
+        newline();
+        println(getLicense());
+        newline();
+        println("Command-line argument: " + Arrays.toString(args));
+        pause(500);
+    }
+
+    public void pause(int ms){
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {}
     }
 
     public void systemInfo(){
-        System.out.println(getSystemInfo());
-        System.out.println();
+        println(getSystemInfo());
+        newline();
     }
 
     private String getSystemInfo(){
@@ -171,21 +194,45 @@ public class CompositCli {
         return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
     }
 
+    public String getLogo(){
+        try {
+            return CharStreams.toString(new InputStreamReader(
+                    this.getClass().getClassLoader().getResourceAsStream("logo.txt")));
+        } catch (IOException e) {
+            return "";
+        }
+    }
+
     public String getLicense(){
+        try {
+            String mark = "\t~ ";
+            String license = CharStreams.toString(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("LICENSE.txt")));
+            // Format license
+            return mark + license.replaceAll("\\r?\\n", nl + mark);
+        } catch (IOException e) {
+            return "";
+        }
+    }
+
+    public String getLicense2(){
         return
-                "\tCopyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS)\n" +
-                "\tUniversity of Santiago de Compostela (USC) http://citius.usc.es.\n" +
-                "\n" +
-                "\tLicensed under the Apache License, Version 2.0 (the \"License\");\n" +
-                "\tyou may not use this file except in compliance with the License.\n" +
-                "\tYou may obtain a copy of the License at\n" +
-                "\n" +
-                "\t    http://www.apache.org/licenses/LICENSE-2.0\n" +
-                "\n" +
-                "\tUnless required by applicable law or agreed to in writing, software\n" +
-                "\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n" +
-                "\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
-                "\tSee the License for the specific language governing permissions and\n" +
+                "\tCopyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS)"+ nl +
+                "\tUniversity of Santiago de Compostela (USC) http://citius.usc.es." + nl +
+                nl +
+                "\tLicensed under the Apache License, Version 2.0 (the \"License\");" + nl +
+                "\tyou may not use this file except in compliance with the License." + nl +
+                "\tYou may obtain a copy of the License at" + nl +
+                nl +
+                "\t    http://www.apache.org/licenses/LICENSE-2.0" + nl +
+                nl +
+                "\tUnless required by applicable law or agreed to in writing, software" + nl +
+                "\tdistributed under the License is distributed on an \"AS IS\" BASIS," + nl +
+                "\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." + nl +
+                "\tSee the License for the specific language governing permissions and" + nl +
                 "\tlimitations under the License.";
+    }
+
+    public JCommander getCli() {
+        return cli;
     }
 }

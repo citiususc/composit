@@ -18,7 +18,6 @@
 package es.usc.citius.composit.cli.command;
 
 
-import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import com.beust.jcommander.internal.Lists;
@@ -33,10 +32,10 @@ public class HelpCommand implements CliCommand {
     private List<String> command = Lists.newArrayList();
 
     @Override
-    public void invoke(JCommander cli, CompositCli context) {
+    public void invoke(CompositCli contextCli) {
         for(String cmd : command){
             System.out.println("Printing " + cmd + " documentation:");
-            cli.usage(cmd);
+            contextCli.getCli().usage(cmd);
             System.out.println();
         }
     }

@@ -19,10 +19,9 @@ package es.usc.citius.composit.cli.command;
 
 
 
-import com.beust.jcommander.JCommander;
 import es.usc.citius.composit.cli.CompositCli;
 
 public interface CliCommand {
-    void invoke(JCommander cli, CompositCli context) throws Exception;
+    void invoke(CompositCli contextCli) throws Exception;
     String getCommandName();
 }
