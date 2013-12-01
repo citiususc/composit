@@ -265,7 +265,7 @@
                     <arguments>
                         <argument>install:install-file</argument>
                         <argument>-Dfile=${project.basedir}/lib/hipster-core-0.0.1-SNAPSHOT.jar</argument>
-                        <argument>-DgroupId=es.usc.citius.lab.hipster</argument>
+                        <argument>-DgroupId=es.usc.citius.lab</argument>
                         <argument>-DartifactId=hipster-core</argument>
                         <argument>-Dversion=0.0.1-SNAPSHOT</argument>
                         <argument>-Dpackaging=jar</argument>
