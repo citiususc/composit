@@ -6,4 +6,5 @@ jdk:
 branches:
   only:
     - master
-before_install: 'mvn -version'
+before_install:
+    - mvn -version
