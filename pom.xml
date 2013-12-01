@@ -245,6 +245,34 @@
                 </configuration>
             </plugin>
 
+            <!-- Install Hipster library. Remove this when hipster is published to maven repository -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>install-hipster</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>mvn</executable>
+                    <arguments>
+                        <argument>install:install-file</argument>
+                        <argument>-Dfile=${project.basedir}/lib/hipster-core-0.0.1-SNAPSHOT.jar</argument>
+                        <argument>-DgroupId=es.usc.citius.hipster</argument>
+                        <argument>-DartifactId=hipster-core</argument>
+                        <argument>-Dversion=0.0.1-SNAPSHOT</argument>
+                        <argument>-Dpackaging=jar</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+
             <!-- Generate Java 1.6 signature -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
