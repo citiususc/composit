@@ -100,7 +100,7 @@ public class CompositCli {
             System.exit(-1);
         }
 
-        handleParameters();
+        handleGlobalParameters();
 
         // Process command
 
@@ -116,7 +116,7 @@ public class CompositCli {
         }
     }
 
-    private void handleParameters() {
+    private void handleGlobalParameters() {
         // Configure log level
         setLogbackLevel((debug)? Level.DEBUG : Level.INFO);
 

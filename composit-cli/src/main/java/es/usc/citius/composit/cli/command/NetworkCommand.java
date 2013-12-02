@@ -56,7 +56,7 @@ public class NetworkCommand implements CliCommand {
         // Print network info
         int level = 0;
         for(Set<Operation<Concept>> op : network.getLeveledList()){
-            contextCli.println("\t- Level " + level++ + ": " + op);
+            contextCli.println("\t- Level " + level++ + " (" + op.size() + " ops): " + op);
         }
 
         // Export?
