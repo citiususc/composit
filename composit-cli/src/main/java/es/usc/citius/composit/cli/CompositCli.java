@@ -26,6 +26,7 @@ import com.google.common.io.CharStreams;
 import es.usc.citius.composit.cli.command.CliCommand;
 import es.usc.citius.composit.cli.command.CompositionCommand;
 import es.usc.citius.composit.cli.command.HelpCommand;
+import es.usc.citius.composit.cli.command.NetworkCommand;
 import org.fusesource.jansi.AnsiConsole;
 import org.slf4j.LoggerFactory;
 
@@ -71,8 +72,10 @@ public class CompositCli {
         // Add command bindings
         CompositionCommand compose = new CompositionCommand();
         HelpCommand help = new HelpCommand();
+        NetworkCommand network = new NetworkCommand();
         bindings.put(compose.getCommandName(), compose);
         bindings.put(help.getCommandName(), help);
+        bindings.put(network.getCommandName(), network);
 
         // Add all available commands to JCommander
         for(CliCommand cmd : bindings.values()){
@@ -104,6 +107,7 @@ public class CompositCli {
         try {
             String command = cli.getParsedCommand();
             if (command != null && !command.isEmpty()){
+                println("Invoking " + command + " command...");
                 bindings.get(cli.getParsedCommand()).invoke(this);
             }
         } catch (Exception e) {

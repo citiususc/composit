@@ -57,6 +57,10 @@ public final class ComposIT<E, T extends Comparable<T>> {
         return this;
     }
 
+    public ServiceMatchNetwork<E, T> generateNetwork(Signature<E> request){
+        return discoverer.search(request);
+    }
+
     public Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result search(Signature<E> request){
         // Create the 3-pass service match network.
         log.info("Initializing composition search problem...");
