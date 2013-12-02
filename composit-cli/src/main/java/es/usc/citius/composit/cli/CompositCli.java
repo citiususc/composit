@@ -214,24 +214,6 @@ public class CompositCli {
         }
     }
 
-    public String getLicense2(){
-        return
-                "\tCopyright 2013 Centro de Investigación en Tecnoloxías da Información (CITIUS)"+ nl +
-                "\tUniversity of Santiago de Compostela (USC) http://citius.usc.es." + nl +
-                nl +
-                "\tLicensed under the Apache License, Version 2.0 (the \"License\");" + nl +
-                "\tyou may not use this file except in compliance with the License." + nl +
-                "\tYou may obtain a copy of the License at" + nl +
-                nl +
-                "\t    http://www.apache.org/licenses/LICENSE-2.0" + nl +
-                nl +
-                "\tUnless required by applicable law or agreed to in writing, software" + nl +
-                "\tdistributed under the License is distributed on an \"AS IS\" BASIS," + nl +
-                "\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." + nl +
-                "\tSee the License for the specific language governing permissions and" + nl +
-                "\tlimitations under the License.";
-    }
-
     public JCommander getCli() {
         return cli;
     }
