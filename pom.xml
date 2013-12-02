@@ -385,6 +385,7 @@
                 </file>
             </activation>
             <properties>
+                <!-- Change property value to not skip the local installation -->
                 <skip.hipster.install>false</skip.hipster.install>
             </properties>
         </profile>
