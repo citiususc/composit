@@ -66,7 +66,7 @@ public class CompositCli {
         AnsiConsole.systemInstall();
         // Configure cli with the available commands
         this.cli = new JCommander(this);
-        cli.setProgramName(ansi().render("@|yellow Composit|@").toString());
+        cli.setProgramName("Composit");
 
         // Add command bindings
         CompositionCommand compose = new CompositionCommand();
