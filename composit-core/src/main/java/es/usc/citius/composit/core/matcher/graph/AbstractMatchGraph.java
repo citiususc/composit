@@ -19,8 +19,10 @@ package es.usc.citius.composit.core.matcher.graph;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
+import es.usc.citius.composit.core.matcher.MatchTable;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
@@ -57,5 +59,28 @@ public abstract class AbstractMatchGraph<E, T extends Comparable<T>> implements 
         return filter(getSourceElementsThatMatch(target), type, selector);
     }
 
+    @Override
+    public MatchTable<E, T> partialMatch(Set<E> source, Set<E> target) {
+        return fullMatch(source, target);
+    }
+
+    @Override
+    public MatchTable<E, T> fullMatch(Set<E> source, Set<E> target) {
+        MatchTable<E,T> matchResult = new MatchTable<E, T>();
+        for(E x : source){
+            Map<E, T> y = getTargetElementsMatchedBy(x);
+            for(E ey : y.keySet()){
+                if (target.contains(ey)){
+                    matchResult.addMatch(x, ey, y.get(ey));
+                }
+            }
+        }
+        return matchResult;
+    }
+
+    @Override
+    public T match(E source, E target) {
+        return getTargetElementsMatchedBy(source).get(target);
+    }
 
 }
