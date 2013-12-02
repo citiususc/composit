@@ -17,6 +17,7 @@
 
 package es.usc.citius.composit.blueprints;
 
+import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Graph;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
@@ -36,6 +37,12 @@ public class NetworkGraphMaker {
         for(Operation<E> op : network.getOperations()){
             // Add the operation as a graph vertex
             Vertex opv = graph.addVertex(op);
+            opv.setProperty("name", op.getID());
+            if (op.getServiceOwner()!=null){
+                opv.setProperty("service", op.getServiceOwner().getID());
+            }
+            opv.setProperty("type", "operation");
+
             vertexOps.put(op,opv);
             // Add inputs and outputs if not added before
             for(E e : op.getSignature().getInputs()){
@@ -44,9 +51,11 @@ public class NetworkGraphMaker {
                     ev = graph.addVertex(e);
                     vertexElems.put(e, ev);
                 }
+                ev.setProperty("type","io");
+                ev.setProperty("name", e.toString());
                 // Connect input with operation
                 String edgeId = "input_" + e.toString() + "_" + op.getID();
-                graph.addEdge(edgeId, ev, opv, edgeId);
+                graph.addEdge(edgeId, ev, opv, "is_input_of");
             }
             for(E e : op.getSignature().getOutputs()){
                 // Try to get the elem vertex from the map
@@ -55,24 +64,29 @@ public class NetworkGraphMaker {
                     ev = graph.addVertex(e);
                     vertexElems.put(e, ev);
                 }
+                ev.setProperty("type", "io");
                 // Connect output with operation
                 String edgeId = "output_" + e.toString() + "_" + op.getID();
-                graph.addEdge(edgeId, opv, ev, edgeId);
+                graph.addEdge(edgeId, opv, ev, "has_output");
             }
         }
 
         // Make connections between elements (inputs/outputs)
         for(E source : vertexElems.keySet()){
             for(Map.Entry<E,T> target : network.getTargetElementsMatchedBy(source).entrySet()){
-                String key = source.toString() + "->" + target.toString();
                 Vertex srcVertex = vertexElems.get(source);
                 Vertex targetVertex = vertexElems.get(target.getKey());
                 if (targetVertex == null){
                     throw new RuntimeException(source + " match " + target + " but target is not in the graph");
                 }
-                graph.addEdge(key, srcVertex, targetVertex, target.getValue().toString());
+                String key = source.toString() + "-[" + target.getValue() + "]->"+ target.getKey();
+                Edge matchEdge = graph.addEdge(key, srcVertex, targetVertex, "match");
+                matchEdge.setProperty("match_type", target.getValue());
+                matchEdge.setProperty("source", source);
+                matchEdge.setProperty("target", target.getKey());
             }
         }
+        graph.shutdown();
         return graph;
     }
 }
