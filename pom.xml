@@ -47,7 +47,7 @@
     <properties>
         <!-- Dependencies version -->
         <java.version>1.6</java.version>
-        <hipster.version>0.1.0-SNAPSHOT</hipster.version>
+        <hipster.version>0.0.1-SNAPSHOT</hipster.version>
         <guava.version>15.0</guava.version>
         <mockito.test.version>1.9.5</mockito.test.version>
         <junit.test.version>4.11</junit.test.version>
@@ -381,7 +381,7 @@
             <!-- Trigger installation if the artifact is missing -->
             <activation>
                 <file>
-                    <missing>${settings.localRepository}/es/usc/citius/lab/hipster-core/0.0.1-SNAPSHOT/hipster-core-0.0.1-SNAPSHOT.jar</missing>
+                    <missing>${settings.localRepository}/es/usc/citius/lab/hipster-core/${hipster.version}/hipster-core-${hipster.version}.jar</missing>
                 </file>
             </activation>
             <properties>
