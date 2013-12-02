@@ -4,7 +4,9 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import com.beust.jcommander.ParametersDelegate;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLWriter;
-import es.usc.citius.composit.blueprints.NetworkGraphMaker;
+import es.usc.citius.composit.blueprints.NetworkToGraphFactory;
+import es.usc.citius.composit.blueprints.TinkerGraphSMNFactory;
+import es.usc.citius.composit.blueprints.TinkerGraphSNFactory;
 import es.usc.citius.composit.cli.CompositCli;
 import es.usc.citius.composit.cli.NetworkConfig;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
@@ -25,11 +27,17 @@ import java.util.Set;
 @Parameters(commandDescription = "Generate a match network")
 public class NetworkCommand implements CliCommand {
 
+    public enum ExportMode { NORMAL, DETAILED }
+
     @Parameter(names = {"-o", "--export"}, description = "Export match network to the specified file (GraphML format)")
     private String exportFile = null;
 
     @ParametersDelegate
     private NetworkConfig config = new NetworkConfig();
+
+    @Parameter(names = {"-m", "--mode"}, description = "Export mode. Detailed mode contains services, " +
+            "inputs and outputs, whereas the normal service network contains only the services connected")
+    private ExportMode exportMode = ExportMode.DETAILED;
 
     @Override
     public void invoke(CompositCli contextCli) throws Exception {
@@ -61,9 +69,17 @@ public class NetworkCommand implements CliCommand {
 
         // Export?
         if (exportFile != null && !exportFile.isEmpty()){
+            // Select mode
+            NetworkToGraphFactory graphFactory;
+
+            if (exportMode == ExportMode.DETAILED){
+                graphFactory = new TinkerGraphSMNFactory();
+            } else {
+                graphFactory = new TinkerGraphSNFactory();
+            }
             // Try to generate the graph with blueprints
             contextCli.println("Exporting network to " + exportFile + "...");
-            GraphMLWriter.outputGraph(NetworkGraphMaker.create(network), new FileOutputStream(new File(exportFile)));
+            GraphMLWriter.outputGraph(graphFactory.createGraph(network), new FileOutputStream(new File(exportFile)));
             contextCli.println("Graph exported");
         }
     }

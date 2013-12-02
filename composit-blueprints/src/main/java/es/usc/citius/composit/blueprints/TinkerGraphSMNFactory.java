@@ -27,7 +27,7 @@ import es.usc.citius.composit.core.model.Operation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NetworkGraphMaker {
+public class TinkerGraphSMNFactory<E, T extends Comparable<T>> implements NetworkToGraphFactory<E, T> {
 
     public static <E, T extends Comparable<T>> Graph create(ServiceMatchNetwork<E,T> network){
         Map<Operation<E>, Vertex> vertexOps = new HashMap<Operation<E>, Vertex>();
@@ -88,5 +88,10 @@ public class NetworkGraphMaker {
         }
         graph.shutdown();
         return graph;
+    }
+
+    @Override
+    public Graph createGraph(ServiceMatchNetwork<E, T> network) {
+        return create(network);
     }
 }
