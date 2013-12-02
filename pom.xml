@@ -47,7 +47,7 @@
     <properties>
         <!-- Dependencies version -->
         <java.version>1.6</java.version>
-        <hipster.version>0.1.0</hipster.version>
+        <hipster.version>0.1.0-SNAPSHOT</hipster.version>
         <guava.version>15.0</guava.version>
         <mockito.test.version>1.9.5</mockito.test.version>
         <junit.test.version>4.11</junit.test.version>
@@ -57,6 +57,10 @@
         <composit.root.dir>${project.basedir}</composit.root.dir>
         <!-- Project build encoding UTF-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Parameter to skip installation of local bundled hipster copy -->
+        <skip.hipster.install>true</skip.hipster.install>
+        <!-- Use this path to check the existence of the Hipster artifact -->
+        <settings.localRepository>${user.home}/.m2/repository</settings.localRepository>
     </properties>
 
     <organization>
@@ -262,13 +266,14 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <skip>${skip.hipster.install}</skip>
                     <executable>mvn</executable>
                     <arguments>
                         <argument>install:install-file</argument>
-                        <argument>-Dfile=${project.basedir}/lib/hipster-core-0.0.1-SNAPSHOT.jar</argument>
+                        <argument>-Dfile=${project.basedir}/lib/hipster-core-${hipster.version}.jar</argument>
                         <argument>-DgroupId=es.usc.citius.lab</argument>
                         <argument>-DartifactId=hipster-core</argument>
-                        <argument>-Dversion=0.0.1-SNAPSHOT</argument>
+                        <argument>-Dversion=${hipster.version}</argument>
                         <argument>-Dpackaging=jar</argument>
                     </arguments>
                 </configuration>
@@ -372,7 +377,20 @@
 
     <profiles>
         <profile>
-            <id>gpg</id>
+            <id>install-bundled-hipster</id>
+            <!-- Trigger installation if the artifact is missing -->
+            <activation>
+                <file>
+                    <missing>${settings.localRepository}/es/usc/citius/lab/hipster-core/0.0.1-SNAPSHOT/hipster-core-0.0.1-SNAPSHOT.jar</missing>
+                </file>
+            </activation>
+            <properties>
+                <skip.hipster.install>false</skip.hipster.install>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>gpg-sign</id>
             <build>
                 <plugins>
                     <plugin>
