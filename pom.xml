@@ -41,6 +41,7 @@
         <module>composit-cli</module>
         <module>composit-resources</module>
         <module>composit-datasets</module>
+        <module>composit-blueprints</module>
     </modules>
 
     <properties>
@@ -300,6 +301,11 @@
             <dependency>
                 <groupId>es.usc.citius.composit</groupId>
                 <artifactId>composit-cli</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>es.usc.citius.composit</groupId>
+                <artifactId>composit-blueprints</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
