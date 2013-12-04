@@ -29,6 +29,8 @@ import es.usc.citius.composit.core.model.Operations;
 import es.usc.citius.composit.core.model.Signature;
 import es.usc.citius.composit.core.model.impl.Sink;
 import es.usc.citius.composit.core.model.impl.Source;
+import org.javasimon.SimonManager;
+import org.javasimon.Split;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +40,7 @@ import java.util.*;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
+    public static final String METRICS_FORWARD_DISCOVERY = ForwardServiceDiscoverer.class.getName();
     private static final Logger log = LoggerFactory.getLogger(ForwardServiceDiscoverer.class);
     private DiscoveryIO<E> discovery;
     private SetMatchFunction<E, T> matcher;
@@ -60,6 +63,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
         boolean checkExpectedOutputs = !signature.getOutputs().isEmpty();
         boolean stop;
 
+        Split split = SimonManager.getStopwatch(METRICS_FORWARD_DISCOVERY).start();
         Stopwatch timer = Stopwatch.createStarted();
         Stopwatch levelTimer = Stopwatch.createUnstarted();
         int level=0;
@@ -116,7 +120,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
             stop = (checkExpectedOutputs) ? candidates.isEmpty() || unmatchedOutputs.isEmpty() : candidates.isEmpty();
             levelTimer.reset();
         } while(!stop);
-
+        split.stop();
         // Add the source and sink operations
         Source<E> sourceOp = new Source<E>(signature.getInputs());
         Sink<E> sinkOp = new Sink<E>(signature.getOutputs());
