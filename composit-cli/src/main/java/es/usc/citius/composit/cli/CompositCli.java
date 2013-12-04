@@ -28,6 +28,7 @@ import es.usc.citius.composit.cli.command.CompositionCommand;
 import es.usc.citius.composit.cli.command.HelpCommand;
 import es.usc.citius.composit.cli.command.NetworkCommand;
 import org.fusesource.jansi.AnsiConsole;
+import org.javasimon.SimonManager;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
@@ -56,6 +57,9 @@ public class CompositCli {
 
     @Parameter(names = {"-v", "--version"}, description = "Print ComposIT version")
     private boolean version = false;
+
+    @Parameter(names = {"-m", "--metrics"}, description = "Record advanced metrics")
+    private boolean metrics = false;
 
     private JCommander cli;
 
@@ -124,6 +128,13 @@ public class CompositCli {
         if (showHelp){
             cli.usage();
             System.exit(0);
+        }
+
+        // Record metrics?
+        if (metrics){
+            SimonManager.enable();
+        } else {
+            SimonManager.disable();
         }
     }
 
@@ -216,6 +227,22 @@ public class CompositCli {
         } catch (IOException e) {
             return "";
         }
+    }
+
+    public boolean isShowHelp() {
+        return showHelp;
+    }
+
+    public boolean isVersion() {
+        return version;
+    }
+
+    public boolean isMetrics() {
+        return metrics;
+    }
+
+    public boolean isDebug() {
+        return debug;
     }
 
     public JCommander getCli() {

@@ -29,6 +29,9 @@ import es.usc.citius.composit.core.composition.search.ComposIT;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.matcher.logic.LogicMatchType;
 import es.usc.citius.composit.wsc08.data.WSCTest;
+import org.javasimon.Simon;
+import org.javasimon.SimonManager;
+import org.javasimon.SimonPattern;
 
 import java.util.concurrent.TimeUnit;
 
@@ -51,6 +54,7 @@ public class CompositionCommand implements CliCommand {
 
     @Override
     public void invoke(CompositCli contextCli) throws Exception {
+        this.cli = contextCli;
         // Print system information
         System.out.println("> Running composition on: " + this.config.getTest().toString());
 
@@ -73,6 +77,8 @@ public class CompositionCommand implements CliCommand {
             composit.search(dataset.getRequest());
         }
 
+
+
     }
 
     private void benchmark(ComposIT<Concept, Boolean> composit, WSCTest.Dataset dataset, int cycles){
@@ -81,6 +87,7 @@ public class CompositionCommand implements CliCommand {
         long minMS = Long.MAX_VALUE;
         for(int i=0; i<cycles; i++){
             System.out.println("[ComposIT Search] Starting benchmark cycle " + (i+1));
+            SimonManager.clear();
             watch.start();
             composit.search(dataset.getRequest());
             long ms = watch.stop().elapsed(TimeUnit.MILLISECONDS);
@@ -88,6 +95,13 @@ public class CompositionCommand implements CliCommand {
                 minMS = ms;
             }
             watch.reset();
+
+            if (cli.isMetrics()){
+                cli.println(" > Metrics: ");
+                for(Simon s : SimonManager.getSimons(SimonPattern.create("es.usc.citius.composit.core.*"))){
+                    cli.println("\t- " + s.toString());
+                }
+            }
         }
         System.out.println("[Benchmark Result] " + cycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
     }
