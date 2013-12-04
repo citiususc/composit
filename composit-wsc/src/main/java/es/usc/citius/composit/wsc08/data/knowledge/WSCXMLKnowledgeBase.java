@@ -75,7 +75,7 @@ public class WSCXMLKnowledgeBase implements HierarchicalKnowledgeBase, Serializa
         logger.debug("Initializing WSCXMLKnowledgeBase (root concept {})", taxonomy.getConcept().getID());
         Stopwatch stopwatch = Stopwatch.createStarted();
         populate(taxonomy.getConcept());
-        logger.debug("Knowledge base created in {}", stopwatch.stop().toString());
+        logger.debug("Knowledge base created in {}. Total concepts {}.", stopwatch.stop().toString(), conceptID.keySet().size());
 
     }
 
