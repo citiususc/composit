@@ -83,6 +83,7 @@ public class CompositionCommand implements CliCommand {
 
     private void benchmark(ComposIT<Concept, Boolean> composit, WSCTest.Dataset dataset, int cycles){
         // Compute benchmark
+        String bestSample = null;
         Stopwatch watch = Stopwatch.createUnstarted();
         long minMS = Long.MAX_VALUE;
         for(int i=0; i<cycles; i++){
@@ -93,6 +94,9 @@ public class CompositionCommand implements CliCommand {
             long ms = watch.stop().elapsed(TimeUnit.MILLISECONDS);
             if (ms < minMS){
                 minMS = ms;
+                if (cli.isMetrics()){
+                    bestSample = SimonManager.getSimons(SimonPattern.create("*")).toString();
+                }
             }
             watch.reset();
 
@@ -104,6 +108,9 @@ public class CompositionCommand implements CliCommand {
             }
         }
         System.out.println("[Benchmark Result] " + cycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
+        if (cli.isMetrics() && bestSample != null){
+            cli.println("Best sample: " + bestSample);
+        }
     }
 
     @Override
