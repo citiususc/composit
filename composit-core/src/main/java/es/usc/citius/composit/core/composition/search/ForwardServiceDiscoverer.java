@@ -49,6 +49,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
 
 
     public ServiceMatchNetwork<E,T> search(Signature<E> signature){
+        // Instrumentation for input discovery
         Set<E> availableInputs = new HashSet<E>(signature.getInputs());
         Set<E> newOutputs = new HashSet<E>(signature.getInputs());
         Set<E> unmatchedOutputs = new HashSet<E>(signature.getOutputs());

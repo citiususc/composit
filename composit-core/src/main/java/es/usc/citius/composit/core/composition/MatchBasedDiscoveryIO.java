@@ -21,6 +21,8 @@ import com.google.common.collect.Sets;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.provider.ServiceProvider;
+import org.javasimon.SimonManager;
+import org.javasimon.Split;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -33,6 +35,9 @@ import java.util.Set;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class MatchBasedDiscoveryIO<E, T extends Comparable<T>> implements DiscoveryIO<E> {
+    public static final String STOPWATCH_INPUT_DISCOVER = MatchBasedDiscoveryIO.class.getName() + ".discoverOperationsForInput";
+    public static final String STOPWATCH_OUTPUT_DISCOVER = MatchBasedDiscoveryIO.class.getName() + ".discoverOperationsForOutput";
+
     private MatchGraph<E,T> matchGraph;
     private ServiceProvider<E> provider;
 
@@ -43,6 +48,7 @@ public class MatchBasedDiscoveryIO<E, T extends Comparable<T>> implements Discov
 
     @Override
     public Set<Operation<E>> discoverOperationsForInput(E input) {
+        Split split = SimonManager.getStopwatch(STOPWATCH_INPUT_DISCOVER).start();
         Map<E,T> targets = matchGraph.getTargetElementsMatchedBy(input);
         // For each target, get the services that uses the input
         Set<Operation<E>> relevantOps = new HashSet<Operation<E>>();
@@ -52,11 +58,13 @@ public class MatchBasedDiscoveryIO<E, T extends Comparable<T>> implements Discov
                 relevantOps.addAll(Sets.newHashSet(result));
             }
         }
+        split.stop();
         return relevantOps;
     }
 
     @Override
     public Set<Operation<E>> discoverOperationsForOutput(E output) {
+        Split split = SimonManager.getStopwatch(STOPWATCH_OUTPUT_DISCOVER).start();
         Map<E,T> sources = matchGraph.getSourceElementsThatMatch(output);
         // For each target, get the services that uses the input
         Set<Operation<E>> relevantOps = new HashSet<Operation<E>>();
@@ -66,6 +74,7 @@ public class MatchBasedDiscoveryIO<E, T extends Comparable<T>> implements Discov
                 relevantOps.addAll(Sets.newHashSet(result));
             }
         }
+        split.stop();
         return relevantOps;
     }
 }

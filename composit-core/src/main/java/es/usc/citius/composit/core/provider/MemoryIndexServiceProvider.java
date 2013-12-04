@@ -22,6 +22,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Service;
+import org.javasimon.SimonManager;
+import org.javasimon.Split;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +33,9 @@ import java.util.Set;
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
 public class MemoryIndexServiceProvider<E> implements ServiceProvider<E> {
+    public static final String METRICS_GET_OP_BY_INPUT = MemoryIndexServiceProvider.class.getName() + ".getOperationsWithInput";
+    public static final String METRICS_GET_OP_BY_OUTPUT = MemoryIndexServiceProvider.class.getName() + ".getOperationsWithOutput";
+
     private Map<String, Service<E>> serviceIndex = new HashMap<String, Service<E>>();
     private Map<String, Operation<E>> operationIndex = new HashMap<String, Operation<E>>();
     private Multimap<E, Operation<E>> inputIndex = HashMultimap.create();
@@ -64,12 +69,18 @@ public class MemoryIndexServiceProvider<E> implements ServiceProvider<E> {
 
     @Override
     public Set<Operation<E>> getOperationsWithInput(E input) {
-        return ImmutableSet.copyOf(inputIndex.get(input));
+        Split split = SimonManager.getStopwatch(METRICS_GET_OP_BY_INPUT).start();
+        Set<Operation<E>> ops = ImmutableSet.copyOf(inputIndex.get(input));
+        split.stop();
+        return ops;
     }
 
     @Override
     public Set<Operation<E>> getOperationsWithOutput(E output) {
-        return ImmutableSet.copyOf(outputIndex.get(output));
+        Split split = SimonManager.getStopwatch(METRICS_GET_OP_BY_OUTPUT).start();
+        Set<Operation<E>> ops = ImmutableSet.copyOf(outputIndex.get(output));
+        split.stop();
+        return ops;
     }
 
     @Override
