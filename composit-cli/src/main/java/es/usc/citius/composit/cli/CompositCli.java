@@ -58,6 +58,9 @@ public class CompositCli {
     @Parameter(names = {"-v", "--version"}, description = "Print ComposIT version")
     private boolean version = false;
 
+    @Parameter(names = {"-c", "--countdown"}, description = "Start a countdown before invoking the command")
+    private Integer countdown = 0;
+
     @Parameter(names = {"-m", "--metrics"}, description = "Record advanced metrics")
     private boolean metrics = false;
 
@@ -107,6 +110,7 @@ public class CompositCli {
         handleGlobalParameters();
 
         // Process command
+        countdown(countdown);
 
         try {
             String command = cli.getParsedCommand();
@@ -135,6 +139,16 @@ public class CompositCli {
             SimonManager.enable();
         } else {
             SimonManager.disable();
+        }
+    }
+
+    public void countdown(int seconds){
+        while(seconds > 0){
+            println("Starting in " + seconds + " seconds...");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) { }
+            seconds--;
         }
     }
 
