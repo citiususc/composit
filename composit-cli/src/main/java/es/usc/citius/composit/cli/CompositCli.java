@@ -23,10 +23,7 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
-import es.usc.citius.composit.cli.command.CliCommand;
-import es.usc.citius.composit.cli.command.CompositionCommand;
-import es.usc.citius.composit.cli.command.HelpCommand;
-import es.usc.citius.composit.cli.command.NetworkCommand;
+import es.usc.citius.composit.cli.command.*;
 import org.fusesource.jansi.AnsiConsole;
 import org.javasimon.SimonManager;
 import org.slf4j.LoggerFactory;
@@ -80,9 +77,11 @@ public class CompositCli {
         CompositionCommand compose = new CompositionCommand();
         HelpCommand help = new HelpCommand();
         NetworkCommand network = new NetworkCommand();
+        GraphCommand graph = new GraphCommand();
         bindings.put(compose.getCommandName(), compose);
         bindings.put(help.getCommandName(), help);
         bindings.put(network.getCommandName(), network);
+        bindings.put(graph.getCommandName(), graph);
 
         // Add all available commands to JCommander
         for(CliCommand cmd : bindings.values()){
