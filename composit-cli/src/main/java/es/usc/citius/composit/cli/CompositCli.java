@@ -73,7 +73,8 @@ public class CompositCli {
         this.cli = new JCommander(this);
         cli.setProgramName("Composit");
 
-        // Add command bindings
+        // Add command bindings. This step can be automated or even improved
+        // with a plugin system using the ClassLoader or injection.
         CompositionCommand compose = new CompositionCommand();
         HelpCommand help = new HelpCommand();
         NetworkCommand network = new NetworkCommand();
@@ -108,9 +109,8 @@ public class CompositCli {
 
         handleGlobalParameters();
 
-        // Process command
         countdown(countdown);
-
+        // Process command
         try {
             String command = cli.getParsedCommand();
             if (command != null && !command.isEmpty()){
