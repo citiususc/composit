@@ -57,6 +57,12 @@ public class CompositCli {
     @Parameter(names = {"-v", "--version"}, description = "Print ComposIT version")
     private boolean version = false;
 
+    @Parameter(names = {"-c", "--countdown"}, description = "Start a countdown before invoking the command")
+    private Integer countdown = 0;
+
+    @Parameter(names = {"-m", "--metrics"}, description = "Record advanced metrics")
+    private boolean metrics = false;
+
     private JCommander cli;
 
     public static void main(String[] args) throws Exception {
@@ -103,6 +109,7 @@ public class CompositCli {
         handleGlobalParameters();
 
         // Process command
+        countdown(countdown);
 
         try {
             String command = cli.getParsedCommand();
@@ -124,6 +131,16 @@ public class CompositCli {
         if (showHelp){
             cli.usage();
             System.exit(0);
+        }
+    }
+
+    public void countdown(int seconds){
+        while(seconds > 0){
+            println("Starting in " + seconds + " seconds...");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) { }
+            seconds--;
         }
     }
 
@@ -216,6 +233,22 @@ public class CompositCli {
         } catch (IOException e) {
             return "";
         }
+    }
+
+    public boolean isShowHelp() {
+        return showHelp;
+    }
+
+    public boolean isVersion() {
+        return version;
+    }
+
+    public boolean isMetrics() {
+        return metrics;
+    }
+
+    public boolean isDebug() {
+        return debug;
     }
 
     public JCommander getCli() {
