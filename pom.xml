@@ -35,7 +35,6 @@
     <modules>
         <module>composit-core</module>
         <module>composit-all</module>
-        <module>composit-iserve</module>
         <module>composit-wsc</module>
         <module>composit-test</module>
         <module>composit-cli</module>
@@ -311,11 +310,6 @@
             <dependency>
                 <groupId>es.usc.citius.composit</groupId>
                 <artifactId>composit-blueprints</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>es.usc.citius.composit</groupId>
-                <artifactId>composit-iserve</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -35,11 +35,6 @@
     <dependencies>
         <dependency>
             <groupId>es.usc.citius.composit</groupId>
-            <artifactId>composit-iserve</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>es.usc.citius.composit</groupId>
             <artifactId>composit-core</artifactId>
             <scope>test</scope>
         </dependency>
