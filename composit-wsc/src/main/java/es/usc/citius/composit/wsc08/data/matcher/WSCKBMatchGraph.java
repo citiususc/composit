@@ -67,7 +67,17 @@ public class WSCKBMatchGraph extends AbstractMatchGraph<Concept, Boolean> {
 
     @Override
     public MatchTable<Concept, Boolean> partialMatch(Set<Concept> source, Set<Concept> target) {
-        return fullMatch(source, target);
+        // Compute first match between source and target elements
+        MatchTable<Concept, Boolean> matchTable = new MatchTable<Concept, Boolean>();
+        for(Concept tg : target){
+            for(Concept src : source){
+                if (kb.isSubclass(src, tg) || kb.equivalent(src, tg)){
+                    matchTable.addMatch(src, tg, true);
+                    break; // skip to the next target
+                }
+            }
+        }
+        return matchTable;
     }
 
     @Override

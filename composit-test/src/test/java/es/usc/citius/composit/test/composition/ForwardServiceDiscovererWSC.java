@@ -18,16 +18,16 @@
 package es.usc.citius.composit.test.composition;
 
 import com.google.common.base.Stopwatch;
-import es.usc.citius.composit.core.composition.DiscoveryIO;
 import es.usc.citius.composit.core.composition.MatchBasedDiscoveryIO;
 import es.usc.citius.composit.core.composition.Verifier;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.composition.search.ForwardServiceDiscoverer;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.provider.MemoryIndexServiceProvider;
-import es.usc.citius.composit.core.provider.ServiceProvider;
 import es.usc.citius.composit.wsc08.data.WSCTest;
 import es.usc.citius.composit.wsc08.data.matcher.WSCKBMatchGraph;
+import org.javasimon.SimonManager;
+import org.javasimon.SimonPattern;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -45,12 +45,13 @@ public class ForwardServiceDiscovererWSC {
 
     public static ServiceMatchNetwork<Concept, Boolean> generateGraph(WSCTest.Dataset dataset) throws IOException {
         // Use an indexed service provider to optimize the graph generation phase
-        ServiceProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
+        MemoryIndexServiceProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
         // Create the KB match graph
         WSCKBMatchGraph matchGraph = dataset.getMatchGraph();
         // Create a simple I/O Discovery using a KB Match Graph
-        DiscoveryIO<Concept> discovery = new MatchBasedDiscoveryIO<Concept, Boolean>(matchGraph, provider);
+        MatchBasedDiscoveryIO<Concept, Boolean> discovery = new MatchBasedDiscoveryIO<Concept, Boolean>(matchGraph, provider);
         ServiceMatchNetwork<Concept, Boolean> network = new ForwardServiceDiscoverer<Concept, Boolean>(discovery, matchGraph).search(dataset.getRequest());
+        log.debug("Metrics: {}", SimonManager.getSimons(SimonPattern.create("es.usc.citius.composit.core.*")));
         return network;
     }
 

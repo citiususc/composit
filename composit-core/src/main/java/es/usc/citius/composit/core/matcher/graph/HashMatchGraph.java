@@ -70,7 +70,17 @@ public class HashMatchGraph<E, T extends Comparable<T>> extends AbstractMatchGra
 
     @Override
     public MatchTable<E, T> partialMatch(Set<E> source, Set<E> target) {
-        return fullMatch(source, target);
+        MatchTable<E,T> matchResult = new MatchTable<E, T>();
+        for(E y : target){
+            for(E x : source){
+                T match = matchTable.getMatchTable().get(x, y);
+                if (match != null){
+                    matchResult.addMatch(x, y, match);
+                    break;
+                }
+            }
+        }
+        return matchResult;
     }
 
     @Override

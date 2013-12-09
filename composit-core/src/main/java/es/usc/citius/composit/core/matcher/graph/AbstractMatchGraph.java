@@ -61,7 +61,17 @@ public abstract class AbstractMatchGraph<E, T extends Comparable<T>> implements 
 
     @Override
     public MatchTable<E, T> partialMatch(Set<E> source, Set<E> target) {
-        return fullMatch(source, target);
+        MatchTable<E,T> matchResult = new MatchTable<E, T>();
+        for(E y : target){
+            Map<E, T> x = getSourceElementsThatMatch(y);
+            for(E ex : x.keySet()){
+                if (source.contains(ex)){
+                    matchResult.addMatch(ex, y, x.get(ex));
+                    break;
+                }
+            }
+        }
+        return matchResult;
     }
 
     @Override
