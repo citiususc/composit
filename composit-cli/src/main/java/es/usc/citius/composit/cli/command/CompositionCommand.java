@@ -59,6 +59,9 @@ public class CompositionCommand implements CliCommand {
         // Print system information
         cli.println("> Running composition on: " + this.config.getTest().toString());
 
+        // Check options
+        config.validate();
+
         // Load dataset
         WSCTest.Dataset dataset = config.getTest().dataset();
 
