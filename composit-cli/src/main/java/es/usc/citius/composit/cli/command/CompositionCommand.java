@@ -51,8 +51,10 @@ public class CompositionCommand implements CliCommand {
 
     @Override
     public void invoke(CompositCli contextCli) throws Exception {
+        this.cli = contextCli;
+
         // Print system information
-        System.out.println("> Running composition on: " + this.config.getTest().toString());
+        cli.println("> Running composition on: " + this.config.getTest().toString());
 
         // Load dataset
         WSCTest.Dataset dataset = config.getTest().dataset();
@@ -80,7 +82,7 @@ public class CompositionCommand implements CliCommand {
         Stopwatch watch = Stopwatch.createUnstarted();
         long minMS = Long.MAX_VALUE;
         for(int i=0; i<cycles; i++){
-            System.out.println("[ComposIT Search] Starting benchmark cycle " + (i+1));
+            cli.println("[ComposIT Search] Starting benchmark cycle " + (i + 1));
             watch.start();
             composit.search(dataset.getRequest());
             long ms = watch.stop().elapsed(TimeUnit.MILLISECONDS);
@@ -89,7 +91,7 @@ public class CompositionCommand implements CliCommand {
             }
             watch.reset();
         }
-        System.out.println("[Benchmark Result] " + cycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
+        cli.println("[Benchmark Result] " + cycles + "-cycle benchmark completed. Best time: " + minMS + " ms.");
     }
 
     @Override

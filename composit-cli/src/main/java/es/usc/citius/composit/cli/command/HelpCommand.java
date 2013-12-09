@@ -34,9 +34,9 @@ public class HelpCommand implements CliCommand {
     @Override
     public void invoke(CompositCli contextCli) {
         for(String cmd : command){
-            System.out.println("Printing " + cmd + " documentation:");
+            contextCli.println("Printing " + cmd + " documentation:");
             contextCli.getCli().usage(cmd);
-            System.out.println();
+            contextCli.println("");
         }
     }
 
