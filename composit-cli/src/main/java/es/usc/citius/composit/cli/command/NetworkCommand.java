@@ -8,7 +8,7 @@ import es.usc.citius.composit.blueprints.NetworkToGraphFactory;
 import es.usc.citius.composit.blueprints.TinkerGraphSMNFactory;
 import es.usc.citius.composit.blueprints.TinkerGraphSNFactory;
 import es.usc.citius.composit.cli.CompositCli;
-import es.usc.citius.composit.cli.NetworkConfig;
+import es.usc.citius.composit.cli.CompositionConfig;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.composition.optimization.BackwardMinimizationOptimizer;
 import es.usc.citius.composit.core.composition.optimization.FunctionalDominanceOptimizer;
@@ -33,7 +33,7 @@ public class NetworkCommand implements CliCommand {
     private String exportFile = null;
 
     @ParametersDelegate
-    private NetworkConfig config = new NetworkConfig();
+    private CompositionConfig config = new CompositionConfig();
 
     @Parameter(names = {"-m", "--mode"}, description = "Export mode. Detailed mode contains services, " +
             "inputs and outputs, whereas the normal service network contains only the services connected")

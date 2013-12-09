@@ -22,7 +22,7 @@ import com.beust.jcommander.Parameters;
 import com.beust.jcommander.ParametersDelegate;
 import com.google.common.base.Stopwatch;
 import es.usc.citius.composit.cli.CompositCli;
-import es.usc.citius.composit.cli.NetworkConfig;
+import es.usc.citius.composit.cli.CompositionConfig;
 import es.usc.citius.composit.core.composition.optimization.BackwardMinimizationOptimizer;
 import es.usc.citius.composit.core.composition.optimization.FunctionalDominanceOptimizer;
 import es.usc.citius.composit.core.composition.search.ComposIT;
@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 public class CompositionCommand implements CliCommand {
 
     @ParametersDelegate
-    private NetworkConfig config = new NetworkConfig();
+    private CompositionConfig config = new CompositionConfig();
 
     @Parameter(names = {"-oeq", "--opt-node-eq"}, description = "Use node equivalence detection during search node expansion")
     private boolean nodeEquivalence = false;

@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
  */
-public class NetworkConfig {
+public class CompositionConfig {
     @Parameter(names = {"-d", "--dataset"}, description = "Select a WSC'08 dataset.", required = true)
     private WSCTest test;
 
