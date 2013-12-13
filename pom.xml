@@ -104,6 +104,7 @@
     </developers>
 
     <!-- Custom repository for snapshots -->
+    <!--
     <repositories>
         <repository>
             <id>snapshots</id>
@@ -114,6 +115,7 @@
             </snapshots>
         </repository>
     </repositories>
+    -->
 
     <build>
         <pluginManagement>
@@ -383,7 +385,7 @@
 
     <profiles>
         <!-- Trigger installation if the artifact is missing -->
-        <!--
+
         <profile>
             <id>install-bundled-hipster</id>
             <activation>
@@ -395,7 +397,6 @@
                 <skip.hipster.install>false</skip.hipster.install>
             </properties>
         </profile>
-        -->
 
         <profile>
             <id>gpg-sign</id>
