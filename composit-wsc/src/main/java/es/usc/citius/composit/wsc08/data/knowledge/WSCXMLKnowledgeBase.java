@@ -63,6 +63,11 @@ public class WSCXMLKnowledgeBase implements HierarchicalKnowledgeBase, Serializa
         initialize();
     }
 
+    public WSCXMLKnowledgeBase(String xmlTaxonomy) {
+        this.taxonomy = JAXB.unmarshal(xmlTaxonomy, XMLTaxonomy.class);
+        initialize();
+    }
+
     public WSCXMLKnowledgeBase(File xmlTaxonomyFile) {
         this.taxonomy = JAXB.unmarshal(xmlTaxonomyFile, XMLTaxonomy.class);
         initialize();
