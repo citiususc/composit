@@ -21,11 +21,14 @@ package es.usc.citius.composit.wsc08.data.util;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.knowledge.Instance;
 import es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
 public class OWLTransformer {
     private static final String eol = System.getProperty("line.separator");
+    private static final Logger log = LoggerFactory.getLogger(OWLTransformer.class);
 
     public static String convertKbToOwl(WSCXMLKnowledgeBase kb, String baseUri) {
         StringBuffer output = new StringBuffer();
@@ -55,7 +58,7 @@ public class OWLTransformer {
                 strData.append("<owl:Class rdf:ID=\"" + concept.getID() + "\" />" + eol);
             }
             counter++;
-            System.out.println("Concept " + concept + " processed (" + counter + "/" + totalConcepts + ")");
+            log.debug("Concept {} processed ({}/{})", concept, counter, totalConcepts);
         }
 
         counter = 0;
