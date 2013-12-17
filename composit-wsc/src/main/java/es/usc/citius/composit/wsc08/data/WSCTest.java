@@ -139,8 +139,8 @@ public enum WSCTest {
             String zipPath,
             SignatureIO<String> request,
             int[] expected,
-            int concepts,
-            int services) {
+            int services,
+            int concepts) {
         this.resourceName = resourceName;
         this.zipPath = zipPath;
         this.request = request;
