@@ -44,14 +44,14 @@ import java.util.zip.ZipInputStream;
 public enum WSCTest {
 
 
-    TESTSET_2008_01(Ref.resourceName, "TESTSET/Set01MetaData/", Ref.request2008_01, new int[]{16, 12, 7, 10, 3, 4, 1, 1, 1, 5}),
-    TESTSET_2008_02(Ref.resourceName, "TESTSET/Set02MetaData/", Ref.request2008_02, new int[]{9, 15, 11, 16, 5, 4, 1, 1}),
-    TESTSET_2008_03(Ref.resourceName, "TESTSET/Set03MetaData/", Ref.request2008_03, new int[]{4, 2, 1, 3, 6, 5, 2, 4, 4, 4, 5, 9, 10, 2, 2, 15, 5, 1, 2, 2, 8, 6, 3}),
-    TESTSET_2008_04(Ref.resourceName, "TESTSET/Set04MetaData/", Ref.request2008_04, new int[]{15, 9, 10, 7, 3}),
-    TESTSET_2008_05(Ref.resourceName, "TESTSET/Set05MetaData/", Ref.request2008_05, new int[]{11, 14, 12, 17, 9, 12, 13, 9, 4, 1}),
-    TESTSET_2008_06(Ref.resourceName, "TESTSET/Set06MetaData/", Ref.request2008_06, new int[]{43, 15, 47, 20, 31, 24, 9, 2, 6, 2, 1, 2, 1, 1}),
-    TESTSET_2008_07(Ref.resourceName, "TESTSET/Set07MetaData/", Ref.request2008_07, new int[]{6, 18, 15, 12, 7, 6, 4, 9, 13, 15, 8, 11, 10, 17, 9, 3, 1}),
-    TESTSET_2008_08(Ref.resourceName, "TESTSET/Set08MetaData/", Ref.request2008_08, new int[]{11, 5, 4, 6, 5, 9, 3, 2, 10, 7, 7, 3, 5, 4, 2, 4, 12, 3, 4, 15, 5, 1, 3, 1});
+    TESTSET_2008_01(Ref.resourceName, "TESTSET/Set01MetaData/", Ref.request2008_01, new int[]{16, 12, 7, 10, 3, 4, 1, 1, 1, 5}, 158, 1540),
+    TESTSET_2008_02(Ref.resourceName, "TESTSET/Set02MetaData/", Ref.request2008_02, new int[]{9, 15, 11, 16, 5, 4, 1, 1}, 558, 1565),
+    TESTSET_2008_03(Ref.resourceName, "TESTSET/Set03MetaData/", Ref.request2008_03, new int[]{4, 2, 1, 3, 6, 5, 2, 4, 4, 4, 5, 9, 10, 2, 2, 15, 5, 1, 2, 2, 8, 6, 3}, 604, 3089),
+    TESTSET_2008_04(Ref.resourceName, "TESTSET/Set04MetaData/", Ref.request2008_04, new int[]{15, 9, 10, 7, 3}, 1041, 3135),
+    TESTSET_2008_05(Ref.resourceName, "TESTSET/Set05MetaData/", Ref.request2008_05, new int[]{11, 14, 12, 17, 9, 12, 13, 9, 4, 1}, 1090, 3067),
+    TESTSET_2008_06(Ref.resourceName, "TESTSET/Set06MetaData/", Ref.request2008_06, new int[]{43, 15, 47, 20, 31, 24, 9, 2, 6, 2, 1, 2, 1, 1}, 2198, 12468),
+    TESTSET_2008_07(Ref.resourceName, "TESTSET/Set07MetaData/", Ref.request2008_07, new int[]{6, 18, 15, 12, 7, 6, 4, 9, 13, 15, 8, 11, 10, 17, 9, 3, 1}, 4113, 3075),
+    TESTSET_2008_08(Ref.resourceName, "TESTSET/Set08MetaData/", Ref.request2008_08, new int[]{11, 5, 4, 6, 5, 9, 3, 2, 10, 7, 7, 3, 5, 4, 2, 4, 12, 3, 4, 15, 5, 1, 3, 1}, 8119, 12337);
 
     private static class Ref {
         private static final String resourceName = "wsc08-testsets.zip";
@@ -128,13 +128,25 @@ public enum WSCTest {
     private String resourceName, zipPath;
     // Default dataset request
     private SignatureIO<String> request;
+    // Expected number of services in each layer for the default request
     private int[] expected;
+    // Number of concepts in the dataset
+    private int concepts;
+    // Number of services in the dataset
+    private int services;
 
-    WSCTest(String resourceName, String zipPath, SignatureIO<String> request, int[] expected) {
+    WSCTest(String resourceName,
+            String zipPath,
+            SignatureIO<String> request,
+            int[] expected,
+            int concepts,
+            int services) {
         this.resourceName = resourceName;
         this.zipPath = zipPath;
         this.request = request;
         this.expected = expected;
+        this.concepts = concepts;
+        this.services = services;
     }
 
     private InputStream openStream(String resource) {
@@ -180,7 +192,25 @@ public enum WSCTest {
         return new Dataset(request, serviceProvider, kb, setMatcher);
     }
 
+    public String getResourceName() {
+        return resourceName;
+    }
 
+    public String getZipPath() {
+        return zipPath;
+    }
+
+    public SignatureIO<String> getRequest() {
+        return request;
+    }
+
+    public int getConcepts() {
+        return concepts;
+    }
+
+    public int getServices() {
+        return services;
+    }
 
     public int[] getExpected() {
         return expected;
