@@ -71,7 +71,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
             HashSet<Operation<E>> candidates = new HashSet<Operation<E>>();
             levelTimer.start();
             candidates.addAll(discovery.findOperationsConsumingSome(newOutputs));
-            log.debug("(Level {}) {} potential candidates selected in {}", level++, candidates.size(), levelTimer.toString());
+            log.info("(Level {}) {} potential candidates selected in {}", level++, candidates.size(), levelTimer.toString());
             // Remove services that cannot be invoked with the available inputs
             for(Iterator<Operation<E>> it=candidates.iterator(); it.hasNext();){
                 Operation<E> candidate = it.next();
@@ -95,7 +95,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
                     if (!isNew) it.remove();
                 }
             }
-            log.debug("\t + [{}] operations selected for this level in {}: {}", candidates.size(), levelTimer.toString(), candidates);
+            log.info("\t + [{}] operations selected for this level in {}: {}", candidates.size(), levelTimer.toString(), candidates);
 
             // Collect the new outputs of the new candidates
             Set<E> nextOutputs = Operations.outputs(candidates);
@@ -127,9 +127,9 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
         Stopwatch networkWatch = Stopwatch.createStarted();
         // Create a service match network with the discovered services
         DirectedAcyclicSMN<E,T> matchNetwork = new DirectedAcyclicSMN<E, T>(new HashLeveledServices<E>(leveledOps), this.matcher);
-        log.debug(" > Service match network computed in {}", networkWatch.stop().toString());
-        log.debug("Service Match Network created with {} levels (including source and sink) and {} operations.", leveledOps.size(), matchNetwork.listOperations().size());
-        log.debug("Forward Discovery done in {}", timer.toString());
+        log.info(" > Service match network computed in {}", networkWatch.stop().toString());
+        log.info("Service Match Network created with {} levels (including source and sink) and {} operations.", leveledOps.size(), matchNetwork.listOperations().size());
+        log.info("Forward Discovery done in {}", timer.toString());
         return matchNetwork;
     }
 }
