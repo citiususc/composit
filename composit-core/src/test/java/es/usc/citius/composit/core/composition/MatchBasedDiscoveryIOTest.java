@@ -81,7 +81,7 @@ public class MatchBasedDiscoveryIOTest {
     @Test
     public void testDiscoverOperationsForInput() throws Exception {
         // Get all services that can consume input x (Op1 and Op2).
-        Set<Operation<String>> result = matchDiscovery.discoverOperationsForInput("x");
+        Set<Operation<String>> result = matchDiscovery.findOperationsConsuming("x");
         assertNotNull(result);
         assertEquals(2, result.size());
     }
@@ -89,7 +89,7 @@ public class MatchBasedDiscoveryIOTest {
     @Test
     public void testDiscoverOperationsForOutput() throws Exception {
         // Get all services that can provide y (Op1 and Op2)
-        Set<Operation<String>> result = matchDiscovery.discoverOperationsForOutput("y");
+        Set<Operation<String>> result = matchDiscovery.findOperationsProducing("y");
         assertNotNull(result);
         assertEquals(2, result.size());
     }

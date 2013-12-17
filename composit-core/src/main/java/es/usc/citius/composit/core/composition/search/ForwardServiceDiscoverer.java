@@ -19,8 +19,8 @@ package es.usc.citius.composit.core.composition.search;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Sets;
-import es.usc.citius.composit.core.composition.DiscoveryIO;
 import es.usc.citius.composit.core.composition.HashLeveledServices;
+import es.usc.citius.composit.core.composition.InputDiscoverer;
 import es.usc.citius.composit.core.composition.network.DirectedAcyclicSMN;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
@@ -42,10 +42,10 @@ import java.util.*;
 public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
     public static final String METRICS_FORWARD_DISCOVERY = ForwardServiceDiscoverer.class.getName();
     private static final Logger log = LoggerFactory.getLogger(ForwardServiceDiscoverer.class);
-    private DiscoveryIO<E> discovery;
+    private InputDiscoverer<E> discovery;
     private SetMatchFunction<E, T> matcher;
 
-    public ForwardServiceDiscoverer(DiscoveryIO<E> discovery, SetMatchFunction<E, T> matcher) {
+    public ForwardServiceDiscoverer(InputDiscoverer<E> discovery, SetMatchFunction<E, T> matcher) {
         this.discovery = discovery;
         this.matcher = matcher;
     }
@@ -70,9 +70,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
         do {
             HashSet<Operation<E>> candidates = new HashSet<Operation<E>>();
             levelTimer.start();
-            for(E newConcept : newOutputs){
-                candidates.addAll(discovery.discoverOperationsForInput(newConcept));
-            }
+            candidates.addAll(discovery.findOperationsConsumingSome(newOutputs));
             log.debug("(Level {}) {} potential candidates selected in {}", level++, candidates.size(), levelTimer.toString());
             // Remove services that cannot be invoked with the available inputs
             for(Iterator<Operation<E>> it=candidates.iterator(); it.hasNext();){

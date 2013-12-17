@@ -17,31 +17,24 @@
 
 package es.usc.citius.composit.core.composition;
 
-
 import es.usc.citius.composit.core.model.Operation;
 
+import java.util.Collection;
 import java.util.Set;
 
-/**
- * Defines input/output operation discovery strategies.
- * @param <E> input/output type.
- */
-public interface DiscoveryIO<E> {
+public interface InputDiscoverer<E> {
     /**
-     * Discover relevant operations for an input. In general, these
-     * operations, depending on the matching strategies of the composition engine,
-     * are the operations that can consume the provided input.
+     * Discover operations that can consume the input.
      * @param input Provided input.
      * @return Relevant operations for the input.
      */
     Set<Operation<E>> findOperationsConsuming(E input);
 
     /**
-     * Discover relevant operation for an output. These operations
-     * are those that can produce an output that is compatible with the
-     * provided one.
-     * @param output Provided output.
-     * @return Set of relevant operations for the output
+     * Discover candidate operations that can consume some of the
+     * inputs provided.
+     * @param inputs
+     * @return
      */
-    Set<Operation<E>> findOperationsProducing(E output);
+    Set<Operation<E>> findOperationsConsumingSome(Collection<E> inputs);
 }

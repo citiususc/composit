@@ -18,6 +18,7 @@
 package es.usc.citius.composit.core.composition.search;
 
 import es.usc.citius.composit.core.composition.DiscoveryIO;
+import es.usc.citius.composit.core.composition.InputDiscoverer;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 
 /**
@@ -31,5 +32,5 @@ import es.usc.citius.composit.core.matcher.graph.MatchGraph;
  */
 public interface CompositionProblem<E, T extends Comparable<T>> {
     MatchGraph<E, T> getMatchGraph();
-    DiscoveryIO<E> getDiscoveryIO();
+    InputDiscoverer<E> getInputDiscoverer();
 }

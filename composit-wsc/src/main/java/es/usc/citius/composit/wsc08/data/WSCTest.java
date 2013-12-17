@@ -17,8 +17,8 @@
 
 package es.usc.citius.composit.wsc08.data;
 
-import es.usc.citius.composit.core.composition.DiscoveryIO;
-import es.usc.citius.composit.core.composition.MatchBasedDiscoveryIO;
+import es.usc.citius.composit.core.composition.InputDiscoverer;
+import es.usc.citius.composit.core.composition.MatchBasedInputDiscoverer;
 import es.usc.citius.composit.core.composition.search.CompositionProblem;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
@@ -98,8 +98,8 @@ public enum WSCTest {
                 }
 
                 @Override
-                public DiscoveryIO<Concept> getDiscoveryIO() {
-                    return new MatchBasedDiscoveryIO<Concept, Boolean>(getMatchGraph(), new MemoryIndexServiceProvider<Concept>(serviceProvider));
+                public InputDiscoverer<Concept> getInputDiscoverer() {
+                    return new MatchBasedInputDiscoverer<Concept>(getMatchGraph(), new MemoryIndexServiceProvider<Concept>(serviceProvider));
                 }
             };
         }

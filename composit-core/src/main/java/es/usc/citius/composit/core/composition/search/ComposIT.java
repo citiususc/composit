@@ -18,7 +18,7 @@
 package es.usc.citius.composit.core.composition.search;
 
 import com.google.common.base.Stopwatch;
-import es.usc.citius.composit.core.composition.DiscoveryIO;
+import es.usc.citius.composit.core.composition.InputDiscoverer;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.composition.optimization.NetworkOptimizer;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
@@ -41,14 +41,14 @@ public final class ComposIT<E, T extends Comparable<T>> {
     private List<NetworkOptimizer<E,T>> optimizations = new LinkedList<NetworkOptimizer<E, T>>();
     private CompositionProblem<E,T> problem;
     private MatchGraph<E, T> matchGraph;
-    private DiscoveryIO<E> discoveryIO;
+    private InputDiscoverer<E> discoveryIO;
     private ForwardServiceDiscoverer<E, T> discoverer;
 
     // Use a builder?
     public ComposIT(CompositionProblem<E,T> compositionProblem){
         this.problem = compositionProblem;
         this.matchGraph = problem.getMatchGraph();
-        this.discoveryIO = problem.getDiscoveryIO();
+        this.discoveryIO = problem.getInputDiscoverer();
         this.discoverer = new ForwardServiceDiscoverer<E, T>(discoveryIO, matchGraph);
     }
 

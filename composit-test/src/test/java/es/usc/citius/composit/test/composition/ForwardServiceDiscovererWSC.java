@@ -18,7 +18,7 @@
 package es.usc.citius.composit.test.composition;
 
 import com.google.common.base.Stopwatch;
-import es.usc.citius.composit.core.composition.MatchBasedDiscoveryIO;
+import es.usc.citius.composit.core.composition.MatchBasedInputDiscoverer;
 import es.usc.citius.composit.core.composition.Verifier;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.composition.search.ForwardServiceDiscoverer;
@@ -49,7 +49,7 @@ public class ForwardServiceDiscovererWSC {
         // Create the KB match graph
         WSCKBMatchGraph matchGraph = dataset.getMatchGraph();
         // Create a simple I/O Discovery using a KB Match Graph
-        MatchBasedDiscoveryIO<Concept, Boolean> discovery = new MatchBasedDiscoveryIO<Concept, Boolean>(matchGraph, provider);
+        MatchBasedInputDiscoverer<Concept> discovery = new MatchBasedInputDiscoverer<Concept>(matchGraph, provider);
         ServiceMatchNetwork<Concept, Boolean> network = new ForwardServiceDiscoverer<Concept, Boolean>(discovery, matchGraph).search(dataset.getRequest());
         log.debug("Metrics: {}", SimonManager.getSimons(SimonPattern.create("es.usc.citius.composit.core.*")));
         return network;
