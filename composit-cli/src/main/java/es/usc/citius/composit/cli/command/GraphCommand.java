@@ -65,13 +65,8 @@ public class GraphCommand implements CliCommand {
         return "graph";
     }
 
-    private Graph buildGraph() throws IOException {
-        // Open dataset
-        WSCTest.Dataset dataset = test.dataset();
-        ServiceProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
+    public static Multimap<Operation<Concept>, Operation<Concept>> buildOperationGraph(ServiceProvider<Concept> provider, SetMatchFunction<Concept, ?> matcher){
         Multimap<Operation<Concept>, Operation<Concept>> mmap = HashMultimap.create();
-        SetMatchFunction<Concept, Boolean> matcher = dataset.getMatchGraph();
-
         // Find match between all services
         for(Operation<Concept> source : provider.getOperations()){
             for(Operation<Concept> target : provider.getOperations()){
@@ -83,6 +78,15 @@ public class GraphCommand implements CliCommand {
                 }
             }
         }
+        return mmap;
+    }
+
+    private Graph buildGraph() throws IOException {
+        // Open dataset
+        WSCTest.Dataset dataset = test.dataset();
+        ServiceProvider<Concept> provider = new MemoryIndexServiceProvider<Concept>(dataset.getServiceProvider());
+        SetMatchFunction<Concept, Boolean> matcher = dataset.getMatchGraph();
+        Multimap<Operation<Concept>, Operation<Concept>> mmap = buildOperationGraph(provider, matcher);
         return BlueprintsUtils.mapToGraph(mmap.asMap());
     }
 }
