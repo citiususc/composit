@@ -111,7 +111,7 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
             newOutputs = nextOutputs;
 
             // Add the discovered ops
-            leveledOps.add(candidates);
+            if (!candidates.isEmpty()) leveledOps.add(candidates);
 
             log.debug("\t + Available inputs: {}, new outputs: {}", availableInputs.size(), newOutputs.size());
             // Stop condition. Stop if there are no more candidates and/or expected outputs are satisfied.
