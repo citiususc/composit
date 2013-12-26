@@ -23,10 +23,7 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
-import es.usc.citius.composit.cli.command.CliCommand;
-import es.usc.citius.composit.cli.command.CompositionCommand;
-import es.usc.citius.composit.cli.command.GraphCommand;
-import es.usc.citius.composit.cli.command.HelpCommand;
+import es.usc.citius.composit.cli.command.*;
 import org.fusesource.jansi.AnsiConsole;
 import org.javasimon.SimonManager;
 import org.slf4j.LoggerFactory;
@@ -81,9 +78,12 @@ public class CompositCli {
         CompositionCommand compose = new CompositionCommand();
         HelpCommand help = new HelpCommand();
         GraphCommand graph = new GraphCommand();
+        RandomQueryCommand rquery = new RandomQueryCommand();
+
         bindings.put(compose.getCommandName(), compose);
         bindings.put(help.getCommandName(), help);
         bindings.put(graph.getCommandName(), graph);
+        bindings.put(rquery.getCommandName(), rquery);
 
         // Add all available commands to JCommander
         for(CliCommand cmd : bindings.values()){
@@ -112,14 +112,16 @@ public class CompositCli {
 
         countdown(countdown);
         // Process command
+        String command = "";
         try {
-            String command = cli.getParsedCommand();
+            command = cli.getParsedCommand();
             if (command != null && !command.isEmpty()){
                 println("Invoking " + command + " command...");
                 bindings.get(cli.getParsedCommand()).invoke(this);
             }
         } catch (Exception e) {
-            errorln(e.getMessage());
+            errorln("Command " + command + " error: " + e.getMessage());
+            e.printStackTrace();
             System.exit(-1);
         }
     }
