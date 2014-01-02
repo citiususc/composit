@@ -30,12 +30,16 @@ import es.usc.citius.composit.core.composition.optimization.FunctionalDominanceO
 import es.usc.citius.composit.core.composition.search.ComposIT;
 import es.usc.citius.composit.core.composition.search.CompositionProblem;
 import es.usc.citius.composit.core.composition.search.ForwardServiceDiscoverer;
+import es.usc.citius.composit.core.composition.search.State;
 import es.usc.citius.composit.core.knowledge.Concept;
+import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Operations;
 import es.usc.citius.composit.core.model.impl.SignatureIO;
 import es.usc.citius.composit.wsc08.data.WSCTest;
+import es.usc.citius.lab.hipster.algorithm.Algorithms;
+import es.usc.citius.lab.hipster.node.HeuristicNode;
 
 import java.util.*;
 
@@ -45,13 +49,13 @@ public class RandomQueryCommand implements CliCommand {
     @Parameter(names = {"-d", "--dataset"}, description = "Select a WSC'08 dataset.", required = true)
     private WSCTest test;
 
-    @Parameter(names = {"-l", "--min-levels"}, description = "Minimum number of levels in the match graph")
     private int minLevels = 5;
 
-    /*
-    @Parameter(names = {"-s", "--min-ops"}, description = "Minimum number of operations. Set to 0 to any number")
-    private int minOps = 0;
-    */
+    @Parameter(names = {"-min", "--min-ops"}, description = "Minimum number of operations in the match graph")
+    private int minOps = 10;
+
+    @Parameter(names = {"-max", "--max-ops"}, description = "Maximum number of operations in the match graph")
+    private int maxOps = 100;
 
     private CompositCli cli;
 
@@ -59,7 +63,135 @@ public class RandomQueryCommand implements CliCommand {
     public void invoke(CompositCli contextCli) throws Exception {
         this.cli = contextCli;
         WSCTest.Dataset dataset = test.dataset();
-        backwardSearch(dataset);
+        iterativeForwardSearch(dataset);
+    }
+
+    private void iterativeForwardSearch(WSCTest.Dataset dataset) throws Exception {
+        // Select a random input
+        Random r = new Random();
+        Set<Concept> inputs = new HashSet<Concept>();
+        InputDiscoverer<Concept> discoverer = dataset.getDefaultCompositionProblem().getInputDiscoverer();
+        MatchGraph<Concept, Boolean> matcher = dataset.getDefaultCompositionProblem().getMatchGraph();
+        // Starting point
+        String startingOp = randomElement(dataset.getServiceProvider().listOperations(), r);
+        inputs.addAll(dataset.getServiceProvider().getOperation(startingOp).getSignature().getInputs());
+        // Random max ops
+        int diff = (maxOps-minOps) > 0 ? maxOps - minOps : 1;
+        int max = r.nextInt(diff)+minOps;
+        cli.println("Max operations selected: " + max);
+        ServiceMatchNetwork<Concept, Boolean> result;
+        do {
+            ForwardServiceDiscoverer<Concept, Boolean> fs =
+                    new ForwardServiceDiscoverer<Concept, Boolean>(discoverer, matcher);
+            result = fs.search(new SignatureIO<Concept>(inputs, Collections.<Concept>emptySet()));
+            // Select a random op and provide its inputs:
+            Operation<Concept> op = randomElement(fs.getUnmatchedInputMap().keySet(), r);
+            inputs.addAll(fs.getUnmatchedInputMap().get(op));
+        } while (result.listOperations().size() < max);
+
+        // TODO: Select a random number of outputs from the last layer
+        // Select outputs (one from each service in the last level)
+        Set<Concept> outputs = new HashSet<Concept>();
+        for(Operation<Concept> op : result.getLeveledList().get(result.numberOfLevels()-2)){
+            outputs.add(randomElement(op.getSignature().getOutputs(), r));
+        }
+        cli.println("Request inputs: " + inputs.size() + ", outputs: " + outputs.size());
+        ComposIT<Concept, Boolean> composit = new ComposIT<Concept, Boolean>(dataset.getDefaultCompositionProblem());
+        composit.addOptimization(new BackwardMinimizationOptimizer<Concept, Boolean>());
+        composit.addOptimization(new FunctionalDominanceOptimizer<Concept, Boolean>());
+        Algorithms.Search<State<Concept>,HeuristicNode<State<Concept>,Double>>.Result composition
+                = composit.search(new SignatureIO<Concept>(inputs, outputs));
+        List<State<Concept>> solution = composition.getOptimalPath();
+        // Clean request
+        inputs = cleanInputs(solution, matcher);
+        List<State<Concept>> solution2 = composit.search(new SignatureIO<Concept>(inputs, outputs)).getOptimalPath();
+        int solutionSize = composition.getGoalNode().getCost().intValue();
+        int solutionLenght = solution.size()-2;
+        //if (solution.equals(solution2)){
+            cli.println("Random query found.");
+            cli.println(" - Inputs: " + inputs);
+            cli.println(" - Outputs: " + outputs);
+            cli.println(" - Optimal solution size/lenght: " + solutionLenght + "/" + solutionSize);
+        /*} else {
+            throw new Exception("Query minimization failed");
+        }*/
+    }
+
+
+    private Set<Concept> cleanInputs(List<State<Concept>> solution, SetMatchFunction<Concept, Boolean> matcher){
+        Set<Concept> unresolvedInputs = new HashSet<Concept>();
+        for(int level = 0; level < solution.size()-1; level++){
+            Set<Operation<Concept>> ops = solution.get(level).getStateOperations();
+            Set<Concept> levelOutputs = Operations.outputs(ops);
+            Set<Concept> resolved = matcher.partialMatch(levelOutputs, unresolvedInputs).getTargetElements();
+            unresolvedInputs.removeAll(resolved);
+            unresolvedInputs.addAll(Operations.inputs(ops));
+        }
+        return unresolvedInputs;
+    }
+
+    private void greedySearch(WSCTest.Dataset dataset){
+        Random r = new Random();
+        int totalOutputs = r.nextInt(3)+1;
+        MatchGraph<Concept, Boolean> matcher = dataset.getDefaultCompositionProblem().getMatchGraph();
+        Set<Concept> initialOutputs = new HashSet<Concept>();
+        for(int i=0; i < totalOutputs; i++){
+            initialOutputs.add(randomElement(dataset.getMatchGraph().getElements(), r));
+        }
+        // Greedy selection of operations, covering the maximum possible inputs
+        Set<Concept> selectedOutputs = new HashSet<Concept>(initialOutputs);
+        selectedOutputs.clear();
+        selectedOutputs.add(dataset.getKb().getConcept("con896546722"));
+        Set<Concept> unresolvedInputs = new HashSet<Concept>();
+        Set<Operation<Concept>> selected = new HashSet<Operation<Concept>>();
+        do {
+            Set<Operation<Concept>> levelOps = new HashSet<Operation<Concept>>();
+            do {
+                // Sort candidates by match size
+                Set<Operation<Concept>> candidates = new HashSet<Operation<Concept>>();
+                for(Concept output : selectedOutputs){
+                    Set<Concept> sources = matcher.getSourceElementsThatMatch(output).keySet();
+                    if (sources.isEmpty()){
+                        unresolvedInputs.add(output);
+                        continue;
+                    }
+
+                    for(Concept source : sources){
+                        HashSet<Operation<Concept>> ops = Sets.newHashSet(dataset.getServiceProvider().getOperationsWithOutput(source));
+                        candidates.addAll(ops);
+                    }
+                }
+                candidates.removeAll(selected);
+                if (candidates.isEmpty()) break;
+
+                TreeMap<Integer, Set<Operation<Concept>>> sortedMap = new TreeMap<Integer, Set<Operation<Concept>>>();
+                for(Operation<Concept> candidate : candidates){
+                    int matches = matcher.partialMatch(candidate.getSignature().getOutputs(), selectedOutputs).getTargetElements().size();
+                    Set<Operation<Concept>> ops = sortedMap.get(matches);
+                    if (ops == null){
+                        ops = new HashSet<Operation<Concept>>();
+                        sortedMap.put(matches, ops);
+                    }
+                    ops.add(candidate);
+                }
+                // Select the one with less inputs, remove matched outputs and repeat
+                Operation<Concept> min = null;
+                int minInputs = Integer.MAX_VALUE;
+                for(Operation<Concept> candidate : sortedMap.lastEntry().getValue()){
+                    if (candidate.getSignature().getInputs().size() < minInputs){
+                        minInputs = candidate.getSignature().getInputs().size();
+                        min = candidate;
+                    }
+                }
+                levelOps.add(min);
+                selected.add(min);
+                // Remove matched outputs
+                selectedOutputs.removeAll(matcher.partialMatch(min.getSignature().getOutputs(), selectedOutputs).getTargetElements());
+            } while (!selectedOutputs.isEmpty());
+            cli.println("Level ops: " + levelOps.size());
+            selectedOutputs = Operations.outputs(levelOps);
+        } while(!selectedOutputs.isEmpty());
+        cli.println("Unresolved inputs: " + unresolvedInputs.size());
     }
 
     private void backwardSearch(WSCTest.Dataset dataset){
@@ -83,6 +215,7 @@ public class RandomQueryCommand implements CliCommand {
         do {
             Set<Operation<Concept>> levelOps = new HashSet<Operation<Concept>>();
             for(Concept output : selectedOutputs){
+                // TODO: Wrong method! findOperationsProducingSome output
                 Set<Operation<Concept>> ops = discoverer.findOperationsConsuming(output);
                 ops.removeAll(selected);
                 if (ops.isEmpty()){
