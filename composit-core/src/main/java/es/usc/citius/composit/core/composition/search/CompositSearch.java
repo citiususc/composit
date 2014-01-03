@@ -148,7 +148,7 @@ public final class CompositSearch {
                 Set<Set<Operation<E>>> result = combine(groups);
                 log.debug("\t- {} optimal successor states found that isExecutable the unsolved inputs: {}", result.size(), result);
                 // Generate new states.
-                //result = nodeEquivalence(result, network);
+                result = nodeEquivalence(result, network);
                 //log.debug("\t- {} non-equivalent unique successor after node equivalence: {}", result.size(), result);
                 Set<State<E>> neighbors = new HashSet<State<E>>();
                 for(Set<Operation<E>> combination : result){
