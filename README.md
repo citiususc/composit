@@ -35,6 +35,8 @@ you may make that includes Apache software. For more information about the terms
     limitations under the License.
     
 ### Citation
+
+This library implements an algorithm based on the research work described in http://dx.doi.org/10.4018/jwsr.2012040101.
 We encourage you to cite our journal paper if you use ComposIT or some parts of the library in your research:
 
 > Rodriguez-Mier, P., Mucientes, M., Vidal, J. C., & Lama, M. (2012). [An Optimal and Complete Algorithm for 
@@ -53,5 +55,8 @@ Research (IJWSR)*, 9(2), 1-20. doi:10.4018/jwsr.2012040101
   publisher={IGI Global}
 }
 ```
+#### Paper Abstract
+
+> The ability of web services to build and integrate loosely-coupled systems has attracted a great deal of attention from researchers in the field of the automatic web service composition. The combination of different web services to build complex systems can be carried out using different control structures to coordinate the execution flow and, therefore, finding the optimal combination of web services represents a non-trivial search effort. Furthermore, the time restrictions together with the growing number of available services complicate further the composition problem. In this paper the authors present an optimal and complete algorithm which finds all valid compositions from the point of view of the semantic input-output message structure matching. Given a request, a service dependency graph which represents a suboptimal solution is dynamically generated. Then, the solution is improved using a backward heuristic search based on the A* algorithm which finds all the possible solutions with different number of services and runpath. Moreover, in order to improve the scalability of our approach, a set of dynamic optimization techniques have been included. The proposal has been validated using eight different repositories from the Web Service Challenge 2008, obtaining all optimal solutions with minimal overhead.
 
 
