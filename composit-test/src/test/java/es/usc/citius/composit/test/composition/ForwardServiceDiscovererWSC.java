@@ -26,8 +26,6 @@ import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.provider.MemoryIndexServiceProvider;
 import es.usc.citius.composit.wsc08.data.WSCTest;
 import es.usc.citius.composit.wsc08.data.matcher.WSCKBMatchGraph;
-import org.javasimon.SimonManager;
-import org.javasimon.SimonPattern;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -51,7 +49,6 @@ public class ForwardServiceDiscovererWSC {
         // Create a simple I/O Discovery using a KB Match Graph
         MatchBasedInputDiscoverer<Concept> discovery = new MatchBasedInputDiscoverer<Concept>(matchGraph, provider);
         ServiceMatchNetwork<Concept, Boolean> network = new ForwardServiceDiscoverer<Concept, Boolean>(discovery, matchGraph).search(dataset.getRequest());
-        log.debug("Metrics: {}", SimonManager.getSimons(SimonPattern.create("es.usc.citius.composit.core.*")));
         return network;
     }
 

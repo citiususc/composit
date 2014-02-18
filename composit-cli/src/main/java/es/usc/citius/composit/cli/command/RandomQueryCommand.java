@@ -29,6 +29,7 @@ import es.usc.citius.composit.core.composition.search.ComposIT;
 import es.usc.citius.composit.core.composition.search.ForwardServiceDiscoverer;
 import es.usc.citius.composit.core.composition.search.State;
 import es.usc.citius.composit.core.knowledge.Concept;
+import es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase;
 import es.usc.citius.composit.core.matcher.SetMatchFunction;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 import es.usc.citius.composit.core.model.Operation;
@@ -61,6 +62,18 @@ public class RandomQueryCommand implements CliCommand {
         this.cli = contextCli;
         WSCTest.Dataset dataset = test.dataset();
         iterativeForwardSearch(dataset);
+    }
+
+    private void kbOptimizeRequest(Set<Concept> inputs, Set<Concept> outputs, HierarchicalKnowledgeBase kb){
+        for(Concept x : inputs){
+            Set<Concept> xs = kb.getSubclasses(x);
+            for(Concept y : inputs){
+                if (x.equals(y)) continue;
+                Set<Concept> ys = kb.getSubclasses(y);
+                // Check some element in common
+            }
+        }
+
     }
 
     private void iterativeForwardSearch(WSCTest.Dataset dataset) throws Exception {

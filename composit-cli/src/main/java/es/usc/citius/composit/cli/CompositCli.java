@@ -25,7 +25,6 @@ import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
 import es.usc.citius.composit.cli.command.*;
 import org.fusesource.jansi.AnsiConsole;
-import org.javasimon.SimonManager;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
@@ -137,11 +136,7 @@ public class CompositCli {
         }
 
         // Record metrics?
-        if (metrics){
-            SimonManager.enable();
-        } else {
-            SimonManager.disable();
-        }
+
     }
 
     public void countdown(int seconds){
