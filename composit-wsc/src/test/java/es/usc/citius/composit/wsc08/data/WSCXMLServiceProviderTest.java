@@ -24,6 +24,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -38,6 +40,21 @@ public class WSCXMLServiceProviderTest {
     @Before
     public void setUp() throws IOException {
         this.provider = WSCTest.TESTSET_2008_01.createXmlResourceProvider();
+    }
+
+    @Test
+    public void testInputOutput(){
+        Map<Integer, Integer> histogram = new HashMap<Integer, Integer>();
+        for(Operation<String> op : provider.getOperations()){
+            int size = op.getSignature().getInputs().size();
+            Integer count = histogram.get(size);
+            if (count == null){
+                histogram.put(size, 1);
+            } else {
+                histogram.put(size, count+1);
+            }
+        }
+        //System.out.println(histogram);
     }
 
     @Test
