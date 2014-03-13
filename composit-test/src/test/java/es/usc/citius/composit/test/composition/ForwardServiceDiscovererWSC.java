@@ -22,6 +22,7 @@ import es.usc.citius.composit.core.composition.MatchBasedInputDiscoverer;
 import es.usc.citius.composit.core.composition.Verifier;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.composition.search.ForwardServiceDiscoverer;
+import es.usc.citius.composit.core.composition.search.NaiveForwardServiceDiscoverer;
 import es.usc.citius.composit.core.knowledge.Concept;
 import es.usc.citius.composit.core.provider.MemoryIndexServiceProvider;
 import es.usc.citius.composit.wsc08.data.WSCTest;
@@ -48,7 +49,9 @@ public class ForwardServiceDiscovererWSC {
         WSCKBMatchGraph matchGraph = dataset.getMatchGraph();
         // Create a simple I/O Discovery using a KB Match Graph
         MatchBasedInputDiscoverer<Concept> discovery = new MatchBasedInputDiscoverer<Concept>(matchGraph, provider);
+        ServiceMatchNetwork<Concept, Boolean> networkNaive = new NaiveForwardServiceDiscoverer<Concept, Boolean>(discovery, matchGraph).search(dataset.getRequest());
         ServiceMatchNetwork<Concept, Boolean> network = new ForwardServiceDiscoverer<Concept, Boolean>(discovery, matchGraph).search(dataset.getRequest());
+
         return network;
     }
 
