@@ -23,8 +23,9 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
-import es.usc.citius.composit.cli.command.*;
+import es.usc.citius.composit.cli.command.CliCommand;
 import org.fusesource.jansi.AnsiConsole;
+import org.reflections.Reflections;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -41,6 +43,8 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class CompositCli {
 
     private static final String nl = System.getProperty("line.separator");
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(CompositCli.class);
+
 
     // Command binding
     private Map<String, CliCommand> bindings = new HashMap<String, CliCommand>();
@@ -71,22 +75,26 @@ public class CompositCli {
         // Configure cli with the available commands
         this.cli = new JCommander(this);
         cli.setProgramName("Composit");
+        // Automatic discover cli commands
+        discoverAndBindCommands();
+    }
 
-        // Add command bindings. This step can be automated or even improved
-        // with a plugin system using the ClassLoader or injection.
-        CompositionCommand compose = new CompositionCommand();
-        HelpCommand help = new HelpCommand();
-        GraphCommand graph = new GraphCommand();
-        RandomQueryCommand rquery = new RandomQueryCommand();
+    private void discoverAndBindCommands(){
+        Reflections reflections = new Reflections("es.usc.citius.composit.cli.command");
+        Set<Class<? extends CliCommand>> classes = reflections.getSubTypesOf(CliCommand.class);
 
-        bindings.put(compose.getCommandName(), compose);
-        bindings.put(help.getCommandName(), help);
-        bindings.put(graph.getCommandName(), graph);
-        bindings.put(rquery.getCommandName(), rquery);
-
-        // Add all available commands to JCommander
-        for(CliCommand cmd : bindings.values()){
-            cli.addCommand(cmd.getCommandName(), cmd);
+        for(Class<? extends CliCommand> commandClass : classes){
+            // Create a new instance
+            try {
+                // Bind command impl
+                CliCommand instance = commandClass.newInstance();
+                bindings.put(instance.getCommandName(), instance);
+                log.debug("Command {} installed.", instance.getCommandName());
+            } catch (InstantiationException e) {
+                log.warn("Exception during automatic command instantiation", e);
+            } catch (IllegalAccessException e) {
+                log.warn("Illegal access to command constructor", e);
+            }
         }
     }
 
