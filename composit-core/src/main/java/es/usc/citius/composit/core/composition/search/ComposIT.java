@@ -69,9 +69,12 @@ public final class ComposIT<E, T extends Comparable<T>> {
         // Build the initial match graph network (first pass)
         ServiceMatchNetwork<E, T> network = discoverer.search(request);
         // Apply optimizations
+        Stopwatch optWatch = Stopwatch.createStarted();
         for(NetworkOptimizer<E,T> opt : optimizations){
             network = opt.optimize(network);
         }
+        optWatch.stop();
+        log.info("Graph optimizations done in {}", optWatch);
         log.info("Starting search over a network with {} levels and {} operations", network.numberOfLevels(), network.listOperations().size());
         // Run search over network
         Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result searchResult = CompositSearch.create(network).search();
