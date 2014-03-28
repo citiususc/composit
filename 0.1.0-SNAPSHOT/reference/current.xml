@@ -1,0 +1,6162 @@
+<api>
+<package name="es.usc.citius.composit.blueprints"
+>
+<class name="BlueprintsBasedMatchGraph"
+ extends="es.usc.citius.composit.core.matcher.graph.AbstractMatchGraph"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="BlueprintsBasedMatchGraph"
+ type="es.usc.citius.composit.blueprints.BlueprintsBasedMatchGraph"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="graph" type="com.tinkerpop.blueprints.Graph">
+</parameter>
+</constructor>
+<method name="getElements"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+</method>
+</class>
+<class name="BlueprintsUtils"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="BlueprintsUtils"
+ type="es.usc.citius.composit.blueprints.BlueprintsUtils"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="mapToGraph"
+ return="com.tinkerpop.blueprints.Graph"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="map" type="java.util.Map&lt;E, java.util.Collection&lt;E&gt;&gt;">
+</parameter>
+</method>
+</class>
+<interface name="NetworkToGraphFactory"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="createGraph"
+ return="com.tinkerpop.blueprints.Graph"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+</interface>
+<class name="TinkerGraphSMNFactory"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.blueprints.NetworkToGraphFactory">
+</implements>
+<constructor name="TinkerGraphSMNFactory"
+ type="es.usc.citius.composit.blueprints.TinkerGraphSMNFactory"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="create"
+ return="com.tinkerpop.blueprints.Graph"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+<method name="createGraph"
+ return="com.tinkerpop.blueprints.Graph"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+</class>
+<class name="TinkerGraphSNFactory"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.blueprints.NetworkToGraphFactory">
+</implements>
+<constructor name="TinkerGraphSNFactory"
+ type="es.usc.citius.composit.blueprints.TinkerGraphSNFactory"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="create"
+ return="com.tinkerpop.blueprints.Graph"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+<method name="createGraph"
+ return="com.tinkerpop.blueprints.Graph"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.cli"
+>
+<class name="CompositCli"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="CompositCli"
+ type="es.usc.citius.composit.cli.CompositCli"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="byteCount"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="bytes" type="long">
+</parameter>
+<parameter name="si" type="boolean">
+</parameter>
+</method>
+<method name="countdown"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="seconds" type="int">
+</parameter>
+</method>
+<method name="errorln"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="msg" type="java.lang.String">
+</parameter>
+</method>
+<method name="getCli"
+ return="com.beust.jcommander.JCommander"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getLicense"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getLogo"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="header"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="args" type="java.lang.String[]">
+</parameter>
+</method>
+<method name="isDebug"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="isMetrics"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="isShowHelp"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="isVersion"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="main"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="args" type="java.lang.String[]">
+</parameter>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+<method name="pause"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="ms" type="int">
+</parameter>
+</method>
+<method name="println"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="obj" type="java.lang.Object">
+</parameter>
+</method>
+<method name="println"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="msg" type="java.lang.String">
+</parameter>
+</method>
+<method name="separator"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="size" type="int">
+</parameter>
+</method>
+<method name="separator"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="systemInfo"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="CompositionConfig"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="CompositionConfig"
+ type="es.usc.citius.composit.cli.CompositionConfig"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getInputs"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOutputs"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getTest"
+ return="es.usc.citius.composit.wsc08.data.WSCTest"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getWscDatasetPath"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="isBackwardOptimization"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="isFunctionalDominance"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="validate"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.cli.command"
+>
+<interface name="CliCommand"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="getCommandName"
+ return="java.lang.String"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="invoke"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="contextCli" type="es.usc.citius.composit.cli.CompositCli">
+</parameter>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+</interface>
+<class name="CompositionCommand"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.cli.command.CliCommand">
+</implements>
+<constructor name="CompositionCommand"
+ type="es.usc.citius.composit.cli.command.CompositionCommand"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getBenchmarkCycles"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getCommandName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getMatchType"
+ return="es.usc.citius.composit.core.matcher.logic.LogicMatchType"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="invoke"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="contextCli" type="es.usc.citius.composit.cli.CompositCli">
+</parameter>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+<method name="isNodeEquivalence"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="GraphCommand"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.cli.command.CliCommand">
+</implements>
+<constructor name="GraphCommand"
+ type="es.usc.citius.composit.cli.command.GraphCommand"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="buildOperationGraph"
+ return="com.google.common.collect.Multimap&lt;es.usc.citius.composit.core.model.Operation&lt;es.usc.citius.composit.core.knowledge.Concept&gt;, es.usc.citius.composit.core.model.Operation&lt;es.usc.citius.composit.core.knowledge.Concept&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="provider" type="es.usc.citius.composit.core.provider.ServiceProvider&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+<parameter name="matcher" type="es.usc.citius.composit.core.matcher.SetMatchFunction&lt;es.usc.citius.composit.core.knowledge.Concept, ?&gt;">
+</parameter>
+</method>
+<method name="getCommandName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="invoke"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="contextCli" type="es.usc.citius.composit.cli.CompositCli">
+</parameter>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+</class>
+<class name="HelpCommand"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.cli.command.CliCommand">
+</implements>
+<constructor name="HelpCommand"
+ type="es.usc.citius.composit.cli.command.HelpCommand"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getCommandName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="invoke"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="contextCli" type="es.usc.citius.composit.cli.CompositCli">
+</parameter>
+</method>
+</class>
+<class name="RandomQueryCommand"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.cli.command.CliCommand">
+</implements>
+<constructor name="RandomQueryCommand"
+ type="es.usc.citius.composit.cli.command.RandomQueryCommand"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getCommandName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="invoke"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="contextCli" type="es.usc.citius.composit.cli.CompositCli">
+</parameter>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.core.composition"
+>
+<interface name="DiscoveryIO"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="findOperationsConsuming"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="E">
+</parameter>
+</method>
+<method name="findOperationsProducing"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="output" type="E">
+</parameter>
+</method>
+</interface>
+<class name="HashLeveledServices"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.composition.LeveledServices">
+</implements>
+<constructor name="HashLeveledServices"
+ type="es.usc.citius.composit.core.composition.HashLeveledServices"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operationLayers" type="java.util.List&lt;java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;&gt;">
+</parameter>
+</constructor>
+<method name="getLeveledList"
+ return="java.util.List&lt;java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperation"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operationID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getOperations"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperationsAfterLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getOperationsAtLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getOperationsBeforeLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getOperationsWithInput"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="E">
+</parameter>
+</method>
+<method name="getOperationsWithOutput"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="output" type="E">
+</parameter>
+</method>
+<method name="getService"
+ return="es.usc.citius.composit.core.model.Service&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="serviceID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getServices"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Service&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSink"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSource"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="levelOf"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operation" type="es.usc.citius.composit.core.model.Operation&lt;E&gt;">
+</parameter>
+</method>
+<method name="listOperations"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listServices"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="numberOfLevels"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<interface name="InputDiscoverer"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="findOperationsConsuming"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="E">
+</parameter>
+</method>
+<method name="findOperationsConsumingSome"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="inputs" type="java.util.Collection&lt;E&gt;">
+</parameter>
+</method>
+</interface>
+<interface name="LeveledServices"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.provider.ServiceProvider">
+</implements>
+<method name="getLeveledList"
+ return="java.util.List&lt;java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperationsAfterLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getOperationsAtLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getOperationsBeforeLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getSink"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSource"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="levelOf"
+ return="int"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operation" type="es.usc.citius.composit.core.model.Operation&lt;E&gt;">
+</parameter>
+</method>
+<method name="numberOfLevels"
+ return="int"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</interface>
+<class name="MatchBasedDiscoveryIO"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.composition.DiscoveryIO">
+</implements>
+<constructor name="MatchBasedDiscoveryIO"
+ type="es.usc.citius.composit.core.composition.MatchBasedDiscoveryIO"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="matchGraph" type="es.usc.citius.composit.core.matcher.graph.MatchGraph&lt;E, T&gt;">
+</parameter>
+<parameter name="provider" type="es.usc.citius.composit.core.provider.ServiceProvider&lt;E&gt;">
+</parameter>
+</constructor>
+<method name="findOperationsConsuming"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="E">
+</parameter>
+</method>
+<method name="findOperationsProducing"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="output" type="E">
+</parameter>
+</method>
+</class>
+<class name="MatchBasedInputDiscoverer"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.composition.InputDiscoverer">
+</implements>
+<constructor name="MatchBasedInputDiscoverer"
+ type="es.usc.citius.composit.core.composition.MatchBasedInputDiscoverer"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="matchGraph" type="es.usc.citius.composit.core.matcher.graph.MatchGraph&lt;E, ?&gt;">
+</parameter>
+<parameter name="provider" type="es.usc.citius.composit.core.provider.ServiceProvider&lt;E&gt;">
+</parameter>
+</constructor>
+<method name="findOperationsConsuming"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="E">
+</parameter>
+</method>
+<method name="findOperationsConsumingSome"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="inputs" type="java.util.Collection&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<class name="Verifier"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="isExecutable"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="composition" type="es.usc.citius.composit.core.composition.LeveledServices&lt;E&gt;">
+</parameter>
+<parameter name="matcher" type="es.usc.citius.composit.core.matcher.SetMatchFunction&lt;E, T&gt;">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.core.composition.network"
+>
+<class name="AbstractServiceMatchNetwork"
+ extends="java.lang.Object"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork">
+</implements>
+<constructor name="AbstractServiceMatchNetwork"
+ type="es.usc.citius.composit.core.composition.network.AbstractServiceMatchNetwork"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getSourceOperationsThatMatch"
+ return="java.util.Map&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;, java.util.Map&lt;E, T&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="getSourceOperationsThatMatch"
+ return="java.util.Map&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;, com.google.common.collect.Table&lt;E, E, T&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="es.usc.citius.composit.core.model.Operation&lt;E&gt;">
+</parameter>
+</method>
+<method name="getTargetOperationsMatchedBy"
+ return="java.util.Map&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;, java.util.Map&lt;E, T&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+</method>
+<method name="getTargetOperationsMatchedBy"
+ return="java.util.Map&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;, com.google.common.collect.Table&lt;E, E, T&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="es.usc.citius.composit.core.model.Operation&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<class name="DirectedAcyclicSMN"
+ extends="es.usc.citius.composit.core.composition.network.AbstractServiceMatchNetwork"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="DirectedAcyclicSMN"
+ type="es.usc.citius.composit.core.composition.network.DirectedAcyclicSMN"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="layers" type="es.usc.citius.composit.core.composition.LeveledServices&lt;E&gt;">
+</parameter>
+<parameter name="setMatcher" type="es.usc.citius.composit.core.matcher.SetMatchFunction&lt;E, T&gt;">
+</parameter>
+</constructor>
+<method name="fullMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+<method name="getElements"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getLeveledList"
+ return="java.util.List&lt;java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperation"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operationID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getOperations"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperationsAfterLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getOperationsAtLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getOperationsBeforeLevel"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="getOperationsWithInput"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="E">
+</parameter>
+</method>
+<method name="getOperationsWithOutput"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="output" type="E">
+</parameter>
+</method>
+<method name="getService"
+ return="es.usc.citius.composit.core.model.Service&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="serviceID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getServices"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Service&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSink"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSource"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+<parameter name="type" type="T">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="type" type="T">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+<method name="levelOf"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operation" type="es.usc.citius.composit.core.model.Operation&lt;E&gt;">
+</parameter>
+</method>
+<method name="listOperations"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listServices"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="match"
+ return="T"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="numberOfLevels"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="partialMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<interface name="ServiceMatchNetwork"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.composition.LeveledServices">
+</implements>
+<implements name="es.usc.citius.composit.core.matcher.graph.MatchGraph">
+</implements>
+<method name="getSourceOperationsThatMatch"
+ return="java.util.Map&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;, java.util.Map&lt;E, T&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="getTargetOperationsMatchedBy"
+ return="java.util.Map&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;, java.util.Map&lt;E, T&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+</method>
+</interface>
+</package>
+<package name="es.usc.citius.composit.core.composition.optimization"
+>
+<class name="BackwardMinimizationOptimizer"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.composition.optimization.NetworkOptimizer">
+</implements>
+<constructor name="BackwardMinimizationOptimizer"
+ type="es.usc.citius.composit.core.composition.optimization.BackwardMinimizationOptimizer"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="optimize"
+ return="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+</class>
+<class name="FunctionalDominanceOptimizer"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.composition.optimization.NetworkOptimizer">
+</implements>
+<constructor name="FunctionalDominanceOptimizer"
+ type="es.usc.citius.composit.core.composition.optimization.FunctionalDominanceOptimizer"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="functionalInputEquivalence"
+ return="java.util.Collection&lt;java.util.Collection&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="functionalOutputDominance"
+ return="java.util.Collection&lt;java.util.Collection&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operations" type="java.util.Collection&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;">
+</parameter>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+<parameter name="level" type="int">
+</parameter>
+</method>
+<method name="optimize"
+ return="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+</class>
+<interface name="NetworkOptimizer"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="optimize"
+ return="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+</interface>
+</package>
+<package name="es.usc.citius.composit.core.composition.search"
+>
+<class name="ComposIT"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="ComposIT"
+ type="es.usc.citius.composit.core.composition.search.ComposIT"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="compositionProblem" type="es.usc.citius.composit.core.composition.search.CompositionProblem&lt;E, T&gt;">
+</parameter>
+</constructor>
+<method name="addOptimization"
+ return="es.usc.citius.composit.core.composition.search.ComposIT"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="opt" type="es.usc.citius.composit.core.composition.optimization.NetworkOptimizer&lt;E, T&gt;">
+</parameter>
+</method>
+<method name="generateNetwork"
+ return="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="request" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
+</parameter>
+</method>
+<method name="search"
+ return="es.usc.citius.lab.hipster.algorithm.Algorithms.Search.Result"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="request" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<class name="CompositSearch"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="create"
+ return="es.usc.citius.lab.hipster.algorithm.Algorithms.Search&lt;es.usc.citius.composit.core.composition.search.State&lt;E&gt;, es.usc.citius.lab.hipster.node.HeuristicNode&lt;es.usc.citius.composit.core.composition.search.State&lt;E&gt;, java.lang.Double&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="network" type="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;">
+</parameter>
+</method>
+</class>
+<interface name="CompositionProblem"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="getInputDiscoverer"
+ return="es.usc.citius.composit.core.composition.InputDiscoverer&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getMatchGraph"
+ return="es.usc.citius.composit.core.matcher.graph.MatchGraph&lt;E, T&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</interface>
+<class name="ForwardServiceDiscoverer"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="ForwardServiceDiscoverer"
+ type="es.usc.citius.composit.core.composition.search.ForwardServiceDiscoverer"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="discovery" type="es.usc.citius.composit.core.composition.InputDiscoverer&lt;E&gt;">
+</parameter>
+<parameter name="matcher" type="es.usc.citius.composit.core.matcher.SetMatchFunction&lt;E, T&gt;">
+</parameter>
+</constructor>
+<method name="getUnmatchedInputMap"
+ return="java.util.Map&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;, java.util.Set&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="isRelaxedMatchCondition"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="search"
+ return="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="signature" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
+</parameter>
+</method>
+<method name="setRelaxedMatchCondition"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="relaxedMatchCondition" type="boolean">
+</parameter>
+</method>
+</class>
+<class name="NaiveForwardServiceDiscoverer"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="NaiveForwardServiceDiscoverer"
+ type="es.usc.citius.composit.core.composition.search.NaiveForwardServiceDiscoverer"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="discovery" type="es.usc.citius.composit.core.composition.InputDiscoverer&lt;E&gt;">
+</parameter>
+<parameter name="matcher" type="es.usc.citius.composit.core.matcher.SetMatchFunction&lt;E, T&gt;">
+</parameter>
+</constructor>
+<method name="search"
+ return="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="signature" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<class name="State"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="State"
+ type="es.usc.citius.composit.core.composition.search.State"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="stateOperations" type="java.util.Collection&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;">
+</parameter>
+<parameter name="level" type="int">
+</parameter>
+</constructor>
+<method name="countServices"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getLevel"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getStateOperations"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.core.knowledge"
+>
+<interface name="Concept"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.model.Resource">
+</implements>
+<method name="getDirectSubclasses"
+ return="java.util.Set&lt;? extends es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getInstances"
+ return="java.util.Set&lt;? extends es.usc.citius.composit.core.knowledge.Instance&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</interface>
+<interface name="HierarchicalKnowledgeBase"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="equivalent"
+ return="boolean"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="x" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="y" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getConcept"
+ return="es.usc.citius.composit.core.knowledge.Concept"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+</method>
+<method name="getConcepts"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getInstance"
+ return="es.usc.citius.composit.core.knowledge.Instance"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+</method>
+<method name="getInstances"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Instance&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="concept" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getInstances"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Instance&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSubclasses"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="concept" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getSuperclasses"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="concept" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="isSubclass"
+ return="boolean"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="x" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="y" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="isSuperclass"
+ return="boolean"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="x" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="y" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="resolveInstance"
+ return="es.usc.citius.composit.core.knowledge.Concept"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="instance" type="es.usc.citius.composit.core.knowledge.Instance">
+</parameter>
+</method>
+</interface>
+<interface name="Instance"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.model.Resource">
+</implements>
+</interface>
+</package>
+<package name="es.usc.citius.composit.core.matcher"
+>
+<class name="ExactSetMatchFunction"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.SetMatchFunction">
+</implements>
+<constructor name="ExactSetMatchFunction"
+ type="es.usc.citius.composit.core.matcher.ExactSetMatchFunction"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="fullMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+<method name="match"
+ return="java.lang.Boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="partialMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<class name="Match"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="Match"
+ type="es.usc.citius.composit.core.matcher.Match"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="matcher" type="E">
+</parameter>
+<parameter name="matched" type="E">
+</parameter>
+<parameter name="matchType" type="T">
+</parameter>
+</constructor>
+<method name="getMatchType"
+ return="T"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getMatched"
+ return="E"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getMatcher"
+ return="E"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<interface name="MatchFunction"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="match"
+ return="T"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="target" type="E">
+</parameter>
+</method>
+</interface>
+<class name="MatchTable"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="MatchTable"
+ type="es.usc.citius.composit.core.matcher.MatchTable"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<constructor name="MatchTable"
+ type="es.usc.citius.composit.core.matcher.MatchTable"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="matchTable" type="com.google.common.collect.Table&lt;E, E, T&gt;">
+</parameter>
+</constructor>
+<method name="addMatch"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="x" type="E">
+</parameter>
+<parameter name="y" type="E">
+</parameter>
+<parameter name="type" type="T">
+</parameter>
+</method>
+<method name="getMatchTable"
+ return="com.google.common.collect.Table&lt;E, E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSortedSourceElemsThatMatch"
+ return="java.util.SortedSet&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="targetElement" type="E">
+</parameter>
+</method>
+<method name="getSourceElements"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="targetElement" type="E">
+</parameter>
+</method>
+<method name="getTargetElements"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="sourceElement" type="E">
+</parameter>
+</method>
+</class>
+<interface name="SetMatchFunction"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.MatchFunction">
+</implements>
+<method name="fullMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+<method name="partialMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+</interface>
+<class name="SetMatchFunctionDecorator"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.SetMatchFunction">
+</implements>
+<constructor name="SetMatchFunctionDecorator"
+ type="es.usc.citius.composit.core.matcher.SetMatchFunctionDecorator"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="decoratedMatcher" type="es.usc.citius.composit.core.matcher.MatchFunction&lt;E, T&gt;">
+</parameter>
+</constructor>
+<method name="fullMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+<method name="match"
+ return="T"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="partialMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.core.matcher.graph"
+>
+<class name="AbstractMatchGraph"
+ extends="java.lang.Object"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.graph.MatchGraph">
+</implements>
+<constructor name="AbstractMatchGraph"
+ type="es.usc.citius.composit.core.matcher.graph.AbstractMatchGraph"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="filter"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+<parameter name="map" type="java.util.Map&lt;E, T&gt;">
+</parameter>
+<parameter name="type" type="T">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+<method name="fullMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+<parameter name="type" type="T">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="type" type="T">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+<method name="match"
+ return="T"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="partialMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<class name="HashMatchGraph"
+ extends="es.usc.citius.composit.core.matcher.graph.AbstractMatchGraph"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="HashMatchGraph"
+ type="es.usc.citius.composit.core.matcher.graph.HashMatchGraph"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="setMatcher" type="es.usc.citius.composit.core.matcher.SetMatchFunction&lt;E, T&gt;">
+</parameter>
+<parameter name="elements" type="java.util.Set&lt;E&gt;">
+</parameter>
+</constructor>
+<constructor name="HashMatchGraph"
+ type="es.usc.citius.composit.core.matcher.graph.HashMatchGraph"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="matchResult" type="es.usc.citius.composit.core.matcher.MatchTable&lt;E, T&gt;">
+</parameter>
+</constructor>
+<method name="getElements"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+</method>
+</class>
+<interface name="MatchGraph"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.SetMatchFunction">
+</implements>
+<method name="getElements"
+ return="java.util.Set&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="E">
+</parameter>
+<parameter name="type" type="T">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;E, T&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="type" type="T">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+</interface>
+<class name="MatchGraph.TypeSelector"
+ extends="java.lang.Enum"
+ abstract="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="valueOf"
+ return="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="name" type="java.lang.String">
+</parameter>
+</method>
+<method name="values"
+ return="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector[]"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.core.matcher.logic"
+>
+<class name="ExactSetMatchFunction"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.SetMatchFunction">
+</implements>
+<constructor name="ExactSetMatchFunction"
+ type="es.usc.citius.composit.core.matcher.logic.ExactSetMatchFunction"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="fullMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, es.usc.citius.composit.core.matcher.logic.LogicMatchType&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+<method name="match"
+ return="es.usc.citius.composit.core.matcher.logic.LogicMatchType"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="E">
+</parameter>
+<parameter name="target" type="E">
+</parameter>
+</method>
+<method name="partialMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;E, es.usc.citius.composit.core.matcher.logic.LogicMatchType&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;E&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<class name="LogicMatchType"
+ extends="java.lang.Enum"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="valueOf"
+ return="es.usc.citius.composit.core.matcher.logic.LogicMatchType"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="name" type="java.lang.String">
+</parameter>
+</method>
+<method name="values"
+ return="es.usc.citius.composit.core.matcher.logic.LogicMatchType[]"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="LogicMatcher"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.MatchFunction">
+</implements>
+<constructor name="LogicMatcher"
+ type="es.usc.citius.composit.core.matcher.logic.LogicMatcher"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="kb" type="es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase">
+</parameter>
+</constructor>
+<method name="match"
+ return="es.usc.citius.composit.core.matcher.logic.LogicMatchType"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="target" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.core.model"
+>
+<interface name="Operation"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.model.Resource">
+</implements>
+<method name="getServiceOwner"
+ return="es.usc.citius.composit.core.model.Service&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSignature"
+ return="es.usc.citius.composit.core.model.Signature&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</interface>
+<class name="Operations"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="extract"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="services" type="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Service&gt;">
+</parameter>
+</method>
+<method name="inputs"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operations" type="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;">
+</parameter>
+</method>
+<method name="outputs"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operations" type="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;">
+</parameter>
+</method>
+<method name="owners"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Service&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operations" type="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;">
+</parameter>
+</method>
+<method name="signatureOperation"
+ return="java.util.Map&lt;es.usc.citius.composit.core.model.Signature&lt;E&gt;, es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operations" type="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;">
+</parameter>
+</method>
+<method name="signatures"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Signature&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operations" type="java.util.Collection&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;">
+</parameter>
+</method>
+</class>
+<interface name="Resource"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="getID"
+ return="java.lang.String"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getURI"
+ return="java.net.URI"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</interface>
+<interface name="Service"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.model.Resource">
+</implements>
+<method name="getOperations"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</interface>
+<interface name="Signature"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="getInputs"
+ return="java.util.Set&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOutputs"
+ return="java.util.Set&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</interface>
+</package>
+<package name="es.usc.citius.composit.core.model.impl"
+>
+<class name="DummyOperation"
+ extends="es.usc.citius.composit.core.model.impl.ResourceOperation"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="DummyOperation"
+ type="es.usc.citius.composit.core.model.impl.DummyOperation"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+<parameter name="io" type="java.util.Set&lt;E&gt;">
+</parameter>
+</constructor>
+<constructor name="DummyOperation"
+ type="es.usc.citius.composit.core.model.impl.DummyOperation"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+<parameter name="signature" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
+</parameter>
+</constructor>
+</class>
+<class name="ResourceComponent"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.model.Resource">
+</implements>
+<constructor name="ResourceComponent"
+ type="es.usc.citius.composit.core.model.impl.ResourceComponent"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+</constructor>
+<constructor name="ResourceComponent"
+ type="es.usc.citius.composit.core.model.impl.ResourceComponent"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+<parameter name="uri" type="java.net.URI">
+</parameter>
+</constructor>
+<method name="getID"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getURI"
+ return="java.net.URI"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="ResourceOperation"
+ extends="es.usc.citius.composit.core.model.impl.ResourceComponent"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.model.Operation">
+</implements>
+<constructor name="ResourceOperation"
+ type="es.usc.citius.composit.core.model.impl.ResourceOperation"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+<parameter name="owner" type="es.usc.citius.composit.core.model.Service&lt;E&gt;">
+</parameter>
+<parameter name="signature" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
+</parameter>
+</constructor>
+<constructor name="ResourceOperation"
+ type="es.usc.citius.composit.core.model.impl.ResourceOperation"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+<parameter name="signature" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
+</parameter>
+</constructor>
+<method name="getServiceOwner"
+ return="es.usc.citius.composit.core.model.Service&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSignature"
+ return="es.usc.citius.composit.core.model.Signature&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setOwner"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="owner" type="es.usc.citius.composit.core.model.Service&lt;E&gt;">
+</parameter>
+</method>
+</class>
+<class name="ResourceService"
+ extends="es.usc.citius.composit.core.model.impl.ResourceComponent"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.model.Service">
+</implements>
+<constructor name="ResourceService"
+ type="es.usc.citius.composit.core.model.impl.ResourceService"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+<parameter name="operations" type="java.util.Set&lt;es.usc.citius.composit.core.model.impl.ResourceOperation&lt;E&gt;&gt;">
+</parameter>
+</constructor>
+<constructor name="ResourceService"
+ type="es.usc.citius.composit.core.model.impl.ResourceService"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+</constructor>
+<method name="addOperation"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="op" type="es.usc.citius.composit.core.model.impl.ResourceOperation&lt;E&gt;">
+</parameter>
+</method>
+<method name="getOperations"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="SignatureIO"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.model.Signature">
+</implements>
+<constructor name="SignatureIO"
+ type="es.usc.citius.composit.core.model.impl.SignatureIO"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="inputs" type="java.util.Collection&lt;E&gt;">
+</parameter>
+<parameter name="outputs" type="java.util.Collection&lt;E&gt;">
+</parameter>
+</constructor>
+<constructor name="SignatureIO"
+ type="es.usc.citius.composit.core.model.impl.SignatureIO"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="empty"
+ return="es.usc.citius.composit.core.model.impl.SignatureIO&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getInputs"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOutputs"
+ return="java.util.Set&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="Sink"
+ extends="es.usc.citius.composit.core.model.impl.DummyOperation"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="Sink"
+ type="es.usc.citius.composit.core.model.impl.Sink"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="inputs" type="java.util.Set&lt;E&gt;">
+</parameter>
+</constructor>
+</class>
+<class name="Source"
+ extends="es.usc.citius.composit.core.model.impl.DummyOperation"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="Source"
+ type="es.usc.citius.composit.core.model.impl.Source"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="outputs" type="java.util.Set&lt;E&gt;">
+</parameter>
+</constructor>
+</class>
+</package>
+<package name="es.usc.citius.composit.core.provider"
+>
+<class name="MemoryIndexServiceProvider"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.provider.ServiceProvider">
+</implements>
+<constructor name="MemoryIndexServiceProvider"
+ type="es.usc.citius.composit.core.provider.MemoryIndexServiceProvider"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="delegatedProvider" type="es.usc.citius.composit.core.provider.ServiceProvider&lt;E&gt;">
+</parameter>
+</constructor>
+<method name="getOperation"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operationID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getOperations"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperationsWithInput"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="E">
+</parameter>
+</method>
+<method name="getOperationsWithOutput"
+ return="java.util.Set&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="output" type="E">
+</parameter>
+</method>
+<method name="getService"
+ return="es.usc.citius.composit.core.model.Service&lt;E&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="serviceID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getServices"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Service&lt;E&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listOperations"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listServices"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<interface name="ServiceProvider"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="getOperation"
+ return="es.usc.citius.composit.core.model.Operation&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operationID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getOperations"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperationsWithInput"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="E">
+</parameter>
+</method>
+<method name="getOperationsWithOutput"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="output" type="E">
+</parameter>
+</method>
+<method name="getService"
+ return="es.usc.citius.composit.core.model.Service&lt;E&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="serviceID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getServices"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Service&lt;E&gt;&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listOperations"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listServices"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</interface>
+</package>
+<package name="es.usc.citius.composit.core.util"
+>
+<class name="FileUtils"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="loadObject"
+ return="T"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="file" type="java.io.File">
+</parameter>
+<parameter name="use_compression" type="boolean">
+</parameter>
+<exception name="ClassNotFoundException" type="java.lang.ClassNotFoundException">
+</exception>
+<exception name="FileNotFoundException" type="java.io.FileNotFoundException">
+</exception>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+</method>
+<method name="moveToZipEntry"
+ return="java.util.zip.ZipInputStream"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="stream" type="java.util.zip.ZipInputStream">
+</parameter>
+<parameter name="entry" type="java.lang.String">
+</parameter>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+</method>
+<method name="openZip"
+ return="java.io.InputStream"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="zipFile" type="java.io.File">
+</parameter>
+<exception name="FileNotFoundException" type="java.io.FileNotFoundException">
+</exception>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+</method>
+<method name="openZipEntry"
+ return="java.io.InputStream"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="zipFile" type="java.io.File">
+</parameter>
+<parameter name="entryName" type="java.lang.String">
+</parameter>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+<exception name="ZipException" type="java.util.zip.ZipException">
+</exception>
+</method>
+<method name="saveObject"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="object" type="T">
+</parameter>
+<parameter name="file" type="java.io.File">
+</parameter>
+<parameter name="use_compression" type="boolean">
+</parameter>
+<exception name="FileNotFoundException" type="java.io.FileNotFoundException">
+</exception>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.wsc08.data"
+>
+<class name="WSCLazyServiceProvider"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.provider.ServiceProvider">
+</implements>
+<constructor name="WSCLazyServiceProvider"
+ type="es.usc.citius.composit.wsc08.data.WSCLazyServiceProvider"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="delegatedProvider" type="es.usc.citius.composit.core.provider.ServiceProvider&lt;java.lang.String&gt;">
+</parameter>
+<parameter name="kb" type="es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase">
+</parameter>
+</constructor>
+<method name="getOperation"
+ return="es.usc.citius.composit.core.model.Operation&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operationID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getOperations"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;es.usc.citius.composit.core.knowledge.Concept&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperationsWithInput"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;es.usc.citius.composit.core.knowledge.Concept&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getOperationsWithOutput"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;es.usc.citius.composit.core.knowledge.Concept&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="output" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getService"
+ return="es.usc.citius.composit.core.model.Service&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="serviceID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getServices"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Service&lt;es.usc.citius.composit.core.knowledge.Concept&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listOperations"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listServices"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="WSCTest"
+ extends="java.lang.Enum"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="createKnowledgeBase"
+ return="es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+</method>
+<method name="createSemanticServiceProvider"
+ return="es.usc.citius.composit.wsc08.data.WSCLazyServiceProvider"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+</method>
+<method name="createXmlResourceProvider"
+ return="es.usc.citius.composit.wsc08.data.WSCXMLServiceProvider"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+<exception name="ZipException" type="java.util.zip.ZipException">
+</exception>
+</method>
+<method name="dataset"
+ return="es.usc.citius.composit.wsc08.data.WSCTest.Dataset"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+</method>
+<method name="getConcepts"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getExpected"
+ return="int[]"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getRequest"
+ return="es.usc.citius.composit.core.model.impl.SignatureIO&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getResourceName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getServices"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getZipPath"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="openServicesStream"
+ return="java.util.zip.ZipInputStream"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+<exception name="ZipException" type="java.util.zip.ZipException">
+</exception>
+</method>
+<method name="openTaxonomyStream"
+ return="java.util.zip.ZipInputStream"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="IOException" type="java.io.IOException">
+</exception>
+<exception name="ZipException" type="java.util.zip.ZipException">
+</exception>
+</method>
+<method name="valueOf"
+ return="es.usc.citius.composit.wsc08.data.WSCTest"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="name" type="java.lang.String">
+</parameter>
+</method>
+<method name="values"
+ return="es.usc.citius.composit.wsc08.data.WSCTest[]"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="WSCTest.Dataset"
+ extends="java.lang.Object"
+ abstract="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="WSCTest.Dataset"
+ type="es.usc.citius.composit.wsc08.data.WSCTest.Dataset"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="request" type="es.usc.citius.composit.core.model.impl.SignatureIO&lt;java.lang.String&gt;">
+</parameter>
+<parameter name="serviceProvider" type="es.usc.citius.composit.wsc08.data.WSCLazyServiceProvider">
+</parameter>
+<parameter name="kb" type="es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase">
+</parameter>
+<parameter name="defaultMatcher" type="es.usc.citius.composit.core.matcher.SetMatchFunction&lt;es.usc.citius.composit.core.knowledge.Concept, es.usc.citius.composit.core.matcher.logic.LogicMatchType&gt;">
+</parameter>
+</constructor>
+<method name="getDefaultCompositionProblem"
+ return="es.usc.citius.composit.core.composition.search.CompositionProblem&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getDefaultMatcher"
+ return="es.usc.citius.composit.core.matcher.SetMatchFunction&lt;es.usc.citius.composit.core.knowledge.Concept, es.usc.citius.composit.core.matcher.logic.LogicMatchType&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getKb"
+ return="es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getMatchGraph"
+ return="es.usc.citius.composit.wsc08.data.matcher.WSCKBMatchGraph"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getRequest"
+ return="es.usc.citius.composit.core.model.impl.SignatureIO&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getServiceProvider"
+ return="es.usc.citius.composit.wsc08.data.WSCLazyServiceProvider"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="WSCXMLServiceProvider"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.provider.ServiceProvider">
+</implements>
+<constructor name="WSCXMLServiceProvider"
+ type="es.usc.citius.composit.wsc08.data.WSCXMLServiceProvider"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="serviceStream" type="java.io.InputStream">
+</parameter>
+</constructor>
+<constructor name="WSCXMLServiceProvider"
+ type="es.usc.citius.composit.wsc08.data.WSCXMLServiceProvider"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="xmlServices" type="java.io.File">
+</parameter>
+</constructor>
+<method name="getOperation"
+ return="es.usc.citius.composit.core.model.Operation&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="operationID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getOperations"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;java.lang.String&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOperationsWithInput"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;java.lang.String&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="inputInstance" type="java.lang.String">
+</parameter>
+</method>
+<method name="getOperationsWithOutput"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Operation&lt;java.lang.String&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="outputInstance" type="java.lang.String">
+</parameter>
+</method>
+<method name="getService"
+ return="es.usc.citius.composit.core.model.Service&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="serviceID" type="java.lang.String">
+</parameter>
+</method>
+<method name="getServices"
+ return="java.lang.Iterable&lt;es.usc.citius.composit.core.model.Service&lt;java.lang.String&gt;&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listOperations"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="listServices"
+ return="java.util.Set&lt;java.lang.String&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<field name="operationSuffix"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;Operation&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+</class>
+</package>
+<package name="es.usc.citius.composit.wsc08.data.knowledge"
+>
+<class name="WSCXMLKnowledgeBase"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase">
+</implements>
+<constructor name="WSCXMLKnowledgeBase"
+ type="es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="xmlTaxonomyStream" type="java.io.InputStream">
+</parameter>
+</constructor>
+<constructor name="WSCXMLKnowledgeBase"
+ type="es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="xmlTaxonomy" type="java.lang.String">
+</parameter>
+</constructor>
+<constructor name="WSCXMLKnowledgeBase"
+ type="es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="xmlTaxonomyFile" type="java.io.File">
+</parameter>
+</constructor>
+<constructor name="WSCXMLKnowledgeBase"
+ type="es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="equivalent"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="x" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="y" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getConcept"
+ return="es.usc.citius.composit.core.knowledge.Concept"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+</method>
+<method name="getConcepts"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getInstance"
+ return="es.usc.citius.composit.core.knowledge.Instance"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="id" type="java.lang.String">
+</parameter>
+</method>
+<method name="getInstances"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Instance&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="concept" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getInstances"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Instance&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSubclasses"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="concept" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getSuperclasses"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="concept" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="isSubclass"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="x" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="y" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="isSuperclass"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="x" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="y" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="resolveInstance"
+ return="es.usc.citius.composit.core.knowledge.Concept"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="instance" type="es.usc.citius.composit.core.knowledge.Instance">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.wsc08.data.matcher"
+>
+<class name="WSCKBMatchGraph"
+ extends="es.usc.citius.composit.core.matcher.graph.AbstractMatchGraph"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="WSCKBMatchGraph"
+ type="es.usc.citius.composit.wsc08.data.matcher.WSCKBMatchGraph"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="kb" type="es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase">
+</parameter>
+</constructor>
+<method name="fullMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+</method>
+<method name="getElements"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="match"
+ return="java.lang.Boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="target" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="partialMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+</method>
+</class>
+<class name="WSCMatchGraph"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.graph.MatchGraph">
+</implements>
+<constructor name="WSCMatchGraph"
+ type="es.usc.citius.composit.wsc08.data.matcher.WSCMatchGraph"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="kb" type="es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase">
+</parameter>
+</constructor>
+<method name="fullMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+</method>
+<method name="getElements"
+ return="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getSourceElementsThatMatch"
+ return="java.util.Map&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="target" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="type" type="java.lang.Boolean">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="getTargetElementsMatchedBy"
+ return="java.util.Map&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="type" type="java.lang.Boolean">
+</parameter>
+<parameter name="selector" type="es.usc.citius.composit.core.matcher.graph.MatchGraph.TypeSelector">
+</parameter>
+</method>
+<method name="match"
+ return="java.lang.Boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="target" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+<method name="partialMatch"
+ return="es.usc.citius.composit.core.matcher.MatchTable&lt;es.usc.citius.composit.core.knowledge.Concept, java.lang.Boolean&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+<parameter name="target" type="java.util.Set&lt;es.usc.citius.composit.core.knowledge.Concept&gt;">
+</parameter>
+</method>
+</class>
+<class name="WSCMatcher"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.matcher.MatchFunction">
+</implements>
+<constructor name="WSCMatcher"
+ type="es.usc.citius.composit.wsc08.data.matcher.WSCMatcher"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="kb" type="es.usc.citius.composit.core.knowledge.HierarchicalKnowledgeBase">
+</parameter>
+</constructor>
+<method name="match"
+ return="java.lang.Boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="source" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+<parameter name="target" type="es.usc.citius.composit.core.knowledge.Concept">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.wsc08.data.model.xml"
+>
+<class name="XMLInstance"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.knowledge.Instance">
+</implements>
+<constructor name="XMLInstance"
+ type="es.usc.citius.composit.wsc08.data.model.xml.XMLInstance"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getID"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getURI"
+ return="java.net.URI"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setName"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="name" type="java.lang.String">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.wsc08.data.model.xml.problem"
+>
+<class name="XMLAbstraction"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLAbstraction"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLAbstraction"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getInput"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLInputs"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOutput"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLOutputs"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setInput"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="input" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLInputs">
+</parameter>
+</method>
+<method name="setOutput"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="output" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLOutputs">
+</parameter>
+</method>
+</class>
+<class name="XMLInputs"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLInputs"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLInputs"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getInputs"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setInputs"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="inputs" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLOutputs"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLOutputs"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLOutputs"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getOutputs"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setOutputs"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="outputs" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLParallel"
+ extends="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceNode"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLParallel"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLParallel"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+</class>
+<class name="XMLProblemStructure"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLProblemStructure"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLProblemStructure"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getSolutions"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLSolutions"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getTask"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLTask"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setSolutions"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="solutions" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLSolutions">
+</parameter>
+</method>
+<method name="setTask"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="task" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLTask">
+</parameter>
+</method>
+</class>
+<class name="XMLProvided"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLProvided"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLProvided"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getInputs"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setInputs"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="inputs" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLRealizations"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLRealizations"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLRealizations"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getServices"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.problem.XMLService&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setServices"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="services" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.problem.XMLService&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLSequence"
+ extends="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceNode"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLSequence"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLSequence"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+</class>
+<class name="XMLService"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLService"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLService"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setName"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="name" type="java.lang.String">
+</parameter>
+</method>
+</class>
+<class name="XMLServiceDesc"
+ extends="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceNode"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLServiceDesc"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceDesc"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getAbstraction"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLAbstraction"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getRealizations"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLRealizations"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setAbstraction"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="abstraction" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLAbstraction">
+</parameter>
+</method>
+<method name="setRealizations"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="realizations" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLRealizations">
+</parameter>
+</method>
+</class>
+<class name="XMLServiceNode"
+ extends="java.lang.Object"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLServiceNode"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceNode"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getNodes"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceNode&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setNodes"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="nodes" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceNode&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLSolution"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLSolution"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLSolution"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getRootnode"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceNode"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setRootnode"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="rootnode" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLServiceNode">
+</parameter>
+</method>
+</class>
+<class name="XMLSolutions"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLSolutions"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLSolutions"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getSolutions"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.problem.XMLSolution&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setSolutions"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="solutions" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.problem.XMLSolution&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLTask"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLTask"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLTask"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getProvided"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLProvided"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getWanted"
+ return="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLWanted"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setProvided"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="provided" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLProvided">
+</parameter>
+</method>
+<method name="setWanted"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="wanted" type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLWanted">
+</parameter>
+</method>
+</class>
+<class name="XMLWanted"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLWanted"
+ type="es.usc.citius.composit.wsc08.data.model.xml.problem.XMLWanted"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getOutputs"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setOutputs"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="outputs" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.wsc08.data.model.xml.services"
+>
+<class name="XMLInputs"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLInputs"
+ type="es.usc.citius.composit.wsc08.data.model.xml.services.XMLInputs"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getInstances"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setInstances"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="instances" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLOutputs"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLOutputs"
+ type="es.usc.citius.composit.wsc08.data.model.xml.services.XMLOutputs"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getInstances"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setInstances"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="instances" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLService"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLService"
+ type="es.usc.citius.composit.wsc08.data.model.xml.services.XMLService"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getInputs"
+ return="es.usc.citius.composit.wsc08.data.model.xml.services.XMLInputs"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getOutputs"
+ return="es.usc.citius.composit.wsc08.data.model.xml.services.XMLOutputs"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setInputs"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="inputs" type="es.usc.citius.composit.wsc08.data.model.xml.services.XMLInputs">
+</parameter>
+</method>
+<method name="setName"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="name" type="java.lang.String">
+</parameter>
+</method>
+<method name="setOutputs"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="outputs" type="es.usc.citius.composit.wsc08.data.model.xml.services.XMLOutputs">
+</parameter>
+</method>
+</class>
+<class name="XMLServices"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLServices"
+ type="es.usc.citius.composit.wsc08.data.model.xml.services.XMLServices"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getServices"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.services.XMLService&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setServices"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="services" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.services.XMLService&gt;">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.wsc08.data.model.xml.taxonomy"
+>
+<class name="XMLConcept"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="es.usc.citius.composit.core.knowledge.Concept">
+</implements>
+<constructor name="XMLConcept"
+ type="es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getConcepts"
+ return="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getDirectSubclasses"
+ return="java.util.Set&lt;es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getID"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getInstances"
+ return="java.util.Set&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getURI"
+ return="java.net.URI"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setConcepts"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="concepts" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept&gt;">
+</parameter>
+</method>
+<method name="setInstances"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="instances" type="java.util.ArrayList&lt;es.usc.citius.composit.wsc08.data.model.xml.XMLInstance&gt;">
+</parameter>
+</method>
+</class>
+<class name="XMLTaxonomy"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="XMLTaxonomy"
+ type="es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLTaxonomy"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getConcept"
+ return="es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="searchConceptForInstance"
+ return="es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="_instance" type="java.lang.String">
+</parameter>
+</method>
+<method name="setConcept"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="concept" type="es.usc.citius.composit.wsc08.data.model.xml.taxonomy.XMLConcept">
+</parameter>
+</method>
+</class>
+</package>
+<package name="es.usc.citius.composit.wsc08.data.util"
+>
+<class name="OWLTransformer"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="OWLTransformer"
+ type="es.usc.citius.composit.wsc08.data.util.OWLTransformer"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="convertKbToOwl"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="kb" type="es.usc.citius.composit.wsc08.data.knowledge.WSCXMLKnowledgeBase">
+</parameter>
+<parameter name="baseUri" type="java.lang.String">
+</parameter>
+</method>
+</class>
+</package>
+</api>
