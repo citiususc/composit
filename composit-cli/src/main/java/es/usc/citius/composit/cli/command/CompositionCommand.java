@@ -111,15 +111,4 @@ public class CompositionCommand implements CliCommand {
         return "compose";
     }
 
-    public boolean isNodeEquivalence() {
-        return nodeEquivalence;
-    }
-
-    public int getBenchmarkCycles() {
-        return benchmarkCycles;
-    }
-
-    public LogicMatchType getMatchType() {
-        return matchType;
-    }
 }

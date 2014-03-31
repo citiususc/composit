@@ -24,7 +24,7 @@ import es.usc.citius.composit.core.matcher.graph.MatchGraph;
 /**
  * Defines the components of a composition search problem. A problem is defined by two components:
  * <ol>
- *     <li>a {@link MatchGraph} that represents the matching between inputs / outputs.</li>
+ *     <li>a {@link MatchGraph} that represents the matching graph model between inputs / outputs.</li>
  *     <li>a {@link DiscoveryIO} to discover candidate services using the input/output information.</li>
  * </ol>
  *
