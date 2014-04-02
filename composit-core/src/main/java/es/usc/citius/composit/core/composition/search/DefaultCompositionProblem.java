@@ -33,11 +33,11 @@ public class DefaultCompositionProblem<E,T extends Comparable<T>> implements Com
 
     @Override
     public MatchGraph<E, T> getMatchGraph() {
-        return null;
+        return graph;
     }
 
     @Override
     public InputDiscoverer<E> getInputDiscoverer() {
-        return null;
+        return inputDiscoverer;
     }
 }
