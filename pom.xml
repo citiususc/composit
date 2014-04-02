@@ -41,6 +41,7 @@
         <module>composit-resources</module>
         <module>composit-datasets</module>
         <module>composit-blueprints</module>
+        <module>composit-engine</module>
     </modules>
 
     <properties>
