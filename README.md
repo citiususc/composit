@@ -2,7 +2,7 @@
 
 Automatic Web Service Composition Algorithms & Tools for Java.
 
-[![Build Status](https://drone.io/github.com/pablormier/composit/status.png)](https://drone.io/github.com/pablormier/composit/latest)
+[![Build Status](https://travis-ci.org/citiususc/composit.svg?branch=master)](https://travis-ci.org/citiususc/composit)
 
 ## Description
 
