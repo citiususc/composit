@@ -1,21 +1,17 @@
 language: java
-
 jdk:
-  - oraclejdk7
-  - openjdk6
-
+- oraclejdk7
+- openjdk6
 env:
   global:
-  - secure: "HdbakEISUvs1xhgcLN1i/jE2ad0m6M/mSEKFrXzt8Xl6Bk0pjU2kXLZuXeGU+1cfgcxrO/GrC9DdG6lHsJgNWCPQklp02NAalmBG8UvSRsnmuZBh4zq7Mlbyj1zdSYMQHv7PeebESZzbrqDzJVSUXvC6azFPyXR1iNfoSjIEaMw="
-  
+  - secure: HdbakEISUvs1xhgcLN1i/jE2ad0m6M/mSEKFrXzt8Xl6Bk0pjU2kXLZuXeGU+1cfgcxrO/GrC9DdG6lHsJgNWCPQklp02NAalmBG8UvSRsnmuZBh4zq7Mlbyj1zdSYMQHv7PeebESZzbrqDzJVSUXvC6azFPyXR1iNfoSjIEaMw=
+  - secure: M6yVY6HWNX+3UvhDQKNfgDS/DQ7uRClPHYOJnN7+9B8F9D4GW3EO0qv13zOIoCfeF5/MenAh91jWcPQH+pHUiguPrwj77p0gJ3TUzdrWNGqWfTNDOYO0l6rzqIC4QgUPx/ElOqG5jPuJ5AFngYxUqvu1P8sB9uc6iHlxyi9lCwk=
+  - secure: TlBYcTwvrZAutC+V6qU+4xc5zI9oLNrP4Zy32luhwnjDSI/fpH4q39sW8Ihmy+auy1/gM9KGyApiMrtF4Nb1HMkwfrTYxL52la3Qbvnrg15nAiyYfOltD0ZdFDwIHhE/AEuXd/zfEfr3/tHnZa83GQR70rKZN96KONNXcBDwrxY=
 branches:
   only:
-    - master
-    - /^release-.*$/
-
+  - master
+  - "/^release-.*$/"
 after_success:
-  - mvn javadoc:aggregate
-  - chmod +x .config/publish-javadoc.sh
-  - .config/publish-javadoc.sh
-  #- chmod +x .config/deploy-artifacts.sh
-  #- .config/deploy-artifacts.sh
+- mvn javadoc:aggregate
+- chmod +x .config/publish-javadoc.sh
+- ".config/publish-javadoc.sh"
