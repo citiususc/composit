@@ -14,17 +14,19 @@ if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" ==
   echo "Deploying [$FOLDER] ComposIT JavaDoc to GitHub gh-pages"
   echo "Current directory: `pwd`"
 
-  # Copy the build folder with the javadoc to the corresponding folder
-  cp -R target/apidocs/ $HOME/javadoc/$FOLDER/
-  
-  cd $HOME
-  git clone --quiet --branch=gh-pages https://github.com/citiususc/composit.git gh-pages > /dev/null
-
   # Config git user and credentials
   git config --global user.email "travis@travis-ci.org"
   git config --global user.name "travis-ci"
   git config credential.helper "store --file=.git/credentials"
   echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
+
+  # Copy the build folder with the javadoc to the corresponding folder
+  mkdir $HOME/javadoc/$FOLDER/
+  cp -R target/apidocs/ $HOME/javadoc/$FOLDER/
+  
+  cd $HOME
+  git clone --quiet --branch=gh-pages https://github.com/citiususc/composit.git gh-pages > /dev/null
+
 
   # Update the content of gh-pages
   cd gh-pages
