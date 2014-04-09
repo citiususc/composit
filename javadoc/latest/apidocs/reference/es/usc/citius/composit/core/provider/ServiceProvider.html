@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <meta name="description" content="Javadoc API documentation for composit-parent." />
+
+<link rel="shortcut icon" type="image/x-icon" href="../../../../../../favicon.ico" />
+<title>
+
+  ServiceProvider
+
+
+| composit-parent
+
+</title>
+<link href="../../../../../../../assets/doclava-developer-docs.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../../../assets/customizations.css" rel="stylesheet" type="text/css" />
+<script src="../../../../../../../assets/search_autocomplete.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/doclava-developer-docs.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/prettify.js" type="text/javascript"></script>
+<script type="text/javascript">
+  setToRoot("../../../../../../", "../../../../../../../assets/");
+</script>
+<script src="../../../../../../../assets/doclava-developer-reference.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/navtree_data.js" type="text/javascript"></script>
+<script src="../../../../../../../assets/customizations.js" type="text/javascript"></script>
+<!-- Include MathJax lib to translate latex equations -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<noscript>
+  <style type="text/css">
+    html,body{overflow:auto;}
+    #body-content{position:relative; top:0;}
+    #doc-content{overflow:visible;border-left:3px solid #666;}
+    #side-nav{padding:0;}
+    #side-nav .toggle-list ul {display:block;}
+    #resize-packages-nav{border-bottom:3px solid #666;}
+  </style>
+</noscript>
+</head>
+
+<body class="">
+
+<div id="header">
+    <div id="headerLeft">
+      <a href="http://citius.usc.es" tabindex="-1"><img src="../../../../../../../assets/images/header-logo.png" alt="" border="0"></a>
+    </div>
+    <div id="headerRight">
+      
+  <div id="search" >
+      <div id="searchForm">
+          <form accept-charset="utf-8" class="gsc-search-box" 
+                onsubmit="return submit_search()">
+            <table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody>
+                <tr>
+                  <td class="gsc-input">
+                    <input id="search_autocomplete" class="gsc-input" type="text" size="33" autocomplete="off"
+                      title="search developer docs" name="q"
+                      value="search developer docs"
+                      onFocus="search_focus_changed(this, true)"
+                      onBlur="search_focus_changed(this, false)"
+                      onkeydown="return search_changed(event, true, '../../../../../../')"
+                      onkeyup="return search_changed(event, false, '../../../../../../')" />
+                  <div id="search_filtered_div" class="no-display">
+                      <table id="search_filtered" cellspacing=0>
+                      </table>
+                  </div>
+                  </td>
+                  <td class="gsc-search-button">
+                    <input type="submit" value="Search" title="search" id="search-button" class="gsc-search-button" />
+                  </td>
+                  <td class="gsc-clear-button">
+                    <div title="clear results" class="gsc-clear-button">&nbsp;</div>
+                  </td>
+                </tr></tbody>
+              </table>
+          </form>
+      </div><!-- searchForm -->
+  </div><!-- search -->
+      
+    </div>
+</div><!-- header -->
+
+
+  <div class="g-section g-tpl-240" id="body-content">
+    <div class="g-unit g-first side-nav-resizable" id="side-nav">
+      <div id="swapper">
+        <div id="nav-panels">
+          <div id="resize-packages-nav">
+            <div id="packages-nav">
+              <div id="index-links"><nobr>
+                <a href="../../../../../../packages.html"  >Package Index</a> | 
+                <a href="../../../../../../classes.html" >Class Index</a></nobr>
+              </div>
+              <ul>
+                
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/blueprints/package-summary.html">es.usc.citius.composit.blueprints</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/cli/package-summary.html">es.usc.citius.composit.cli</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/cli/command/package-summary.html">es.usc.citius.composit.cli.command</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/composition/package-summary.html">es.usc.citius.composit.core.composition</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/composition/network/package-summary.html">es.usc.citius.composit.core.composition.network</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/composition/optimization/package-summary.html">es.usc.citius.composit.core.composition.optimization</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/composition/search/package-summary.html">es.usc.citius.composit.core.composition.search</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/knowledge/package-summary.html">es.usc.citius.composit.core.knowledge</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/matcher/package-summary.html">es.usc.citius.composit.core.matcher</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/matcher/graph/package-summary.html">es.usc.citius.composit.core.matcher.graph</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/matcher/logic/package-summary.html">es.usc.citius.composit.core.matcher.logic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/model/package-summary.html">es.usc.citius.composit.core.model</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/model/impl/package-summary.html">es.usc.citius.composit.core.model.impl</a></li>
+    <li class="selected api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/provider/package-summary.html">es.usc.citius.composit.core.provider</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/core/util/package-summary.html">es.usc.citius.composit.core.util</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/wsc08/data/package-summary.html">es.usc.citius.composit.wsc08.data</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/wsc08/data/knowledge/package-summary.html">es.usc.citius.composit.wsc08.data.knowledge</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/wsc08/data/matcher/package-summary.html">es.usc.citius.composit.wsc08.data.matcher</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/wsc08/data/model/xml/package-summary.html">es.usc.citius.composit.wsc08.data.model.xml</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/wsc08/data/model/xml/problem/package-summary.html">es.usc.citius.composit.wsc08.data.model.xml.problem</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/wsc08/data/model/xml/services/package-summary.html">es.usc.citius.composit.wsc08.data.model.xml.services</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/wsc08/data/model/xml/taxonomy/package-summary.html">es.usc.citius.composit.wsc08.data.model.xml.taxonomy</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../es/usc/citius/composit/wsc08/data/util/package-summary.html">es.usc.citius.composit.wsc08.data.util</a></li>
+              </ul><br/>
+            </div> <!-- end packages -->
+          </div> <!-- end resize-packages -->
+          <div id="classes-nav">
+            <ul>
+              
+    <li><h2>Interfaces</h2>
+      <ul>
+          <li class="selected api apilevel-"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html">ServiceProvider</a>&lt;E&gt;</li>
+      </ul>
+    </li>
+              
+    <li><h2>Classes</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../../es/usc/citius/composit/core/provider/MemoryIndexServiceProvider.html">MemoryIndexServiceProvider</a>&lt;E&gt;</li>
+      </ul>
+    </li>
+              
+              
+              
+              
+            </ul><br/>
+          </div><!-- end classes -->
+        </div><!-- end nav-panels -->
+        <div id="nav-tree" style="display:none">
+          <div id="index-links"><nobr>
+            <a href="../../../../../../packages.html"  >Package Index</a> | 
+            <a href="../../../../../../classes.html" >Class Index</a></nobr>
+          </div>
+        </div><!-- end nav-tree -->
+      </div><!-- end swapper -->
+    </div> <!-- end side-nav -->
+    <script>
+      if (!isMobile) {
+        $("<a href='#' id='nav-swap' onclick='swapNav();return false;' style='font-size:10px;line-height:9px;margin-left:1em;text-decoration:none;'><span id='tree-link'>Use Tree Navigation</span><span id='panel-link' style='display:none'>Use Panel Navigation</span></a>").appendTo("#side-nav");
+        chooseDefaultNav();
+        if ($("#nav-tree").is(':visible')) {
+          init_default_navtree("../../../../../../");
+        } else {
+          addLoadEvent(function() {
+            scrollIntoView("packages-nav");
+            scrollIntoView("classes-nav");
+          });
+        }
+        $("#swapper").css({borderBottom:"2px solid #aaa"});
+      } else {
+        swapNav(); // tree view should be used on mobile
+      }
+    </script>
+
+
+
+<div class="g-unit" id="doc-content">
+
+<div id="api-info-block">
+
+
+
+
+<div class="sum-details-links">
+
+
+Summary:
+
+
+
+
+
+
+
+
+
+
+
+  <a href="#pubmethods">Methods</a>
+  
+
+
+
+&#124; <a href="#" onclick="return toggleAllClassInherited()" id="toggleAllClassInherited">[Expand All]</a>
+
+</div><!-- end sum-details-links -->
+<div class="api-level">
+  
+
+
+  
+  
+
+</div>
+</div><!-- end api-info-block -->
+
+
+<!-- ======== START OF CLASS DATA ======== -->
+
+<div id="jd-header">
+    public
+     
+     
+    
+    interface
+<h1>ServiceProvider</h1>
+
+
+
+  
+  
+  
+
+
+</div><!-- end header -->
+
+<div id="naMessage"></div>
+
+<div id="jd-content" class="api apilevel-">
+<table class="jd-inheritance-table">
+
+
+    <tr>
+         	
+        <td colspan="1" class="jd-inheritance-class-cell">es.usc.citius.composit.core.provider.ServiceProvider&lt;E&gt;</td>
+    </tr>
+    
+
+</table>
+
+
+
+
+
+
+<table class="jd-sumtable jd-sumtable-subclasses"><tr><td colspan="12" style="border:none;margin:0;padding:0;">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="subclasses-indirect" class="jd-expando-trigger closed"
+          ><img id="subclasses-indirect-trigger"
+          src="../../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>Known Indirect Subclasses
+
+  <div id="subclasses-indirect">
+      <div id="subclasses-indirect-list"
+              class="jd-inheritedlinks"
+              
+              >
+          
+            
+              <a href="../../../../../../es/usc/citius/composit/core/composition/network/AbstractServiceMatchNetwork.html">AbstractServiceMatchNetwork</a>&lt;E,&nbsp;T&nbsp;extends&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Comparable.html">Comparable</a>&lt;T&gt;&gt;,
+            
+              <a href="../../../../../../es/usc/citius/composit/core/composition/network/DirectedAcyclicSMN.html">DirectedAcyclicSMN</a>&lt;E,&nbsp;T&nbsp;extends&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Comparable.html">Comparable</a>&lt;T&gt;&gt;,
+            
+              <a href="../../../../../../es/usc/citius/composit/core/composition/HashLeveledServices.html">HashLeveledServices</a>&lt;E&gt;,
+            
+              <a href="../../../../../../es/usc/citius/composit/core/composition/LeveledServices.html">LeveledServices</a>&lt;E&gt;,
+            
+              <a href="../../../../../../es/usc/citius/composit/core/provider/MemoryIndexServiceProvider.html">MemoryIndexServiceProvider</a>&lt;E&gt;,
+            
+              <a href="../../../../../../es/usc/citius/composit/core/composition/network/ServiceMatchNetwork.html">ServiceMatchNetwork</a>&lt;E,&nbsp;T&nbsp;extends&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Comparable.html">Comparable</a>&lt;T&gt;&gt;,
+            
+              <a href="../../../../../../es/usc/citius/composit/wsc08/data/WSCLazyServiceProvider.html">WSCLazyServiceProvider</a>,
+            
+              <a href="../../../../../../es/usc/citius/composit/wsc08/data/WSCXMLServiceProvider.html">WSCXMLServiceProvider</a>
+            
+          
+      </div>
+      <div id="subclasses-indirect-summary"
+              style="display: none;"
+              >
+  <table class="jd-sumtable-expando">
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../es/usc/citius/composit/core/composition/network/AbstractServiceMatchNetwork.html">AbstractServiceMatchNetwork</a>&lt;E,&nbsp;T&nbsp;extends&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Comparable.html">Comparable</a>&lt;T&gt;&gt;</td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../es/usc/citius/composit/core/composition/network/DirectedAcyclicSMN.html">DirectedAcyclicSMN</a>&lt;E,&nbsp;T&nbsp;extends&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Comparable.html">Comparable</a>&lt;T&gt;&gt;</td>
+              <td class="jd-descrcol" width="100%">Directed acyclic implementation of a <code><a href="../../../../../../es/usc/citius/composit/core/composition/network/ServiceMatchNetwork.html">ServiceMatchNetwork</a></code>.&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../es/usc/citius/composit/core/composition/HashLeveledServices.html">HashLeveledServices</a>&lt;E&gt;</td>
+              <td class="jd-descrcol" width="100%">Default implementation of the <code><a href="../../../../../../es/usc/citius/composit/core/composition/LeveledServices.html">LeveledServices</a></code> using hash maps.&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../es/usc/citius/composit/core/composition/LeveledServices.html">LeveledServices</a>&lt;E&gt;</td>
+              <td class="jd-descrcol" width="100%">Represents a leveled service operation graph without edges (without input/output matching).&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../es/usc/citius/composit/core/provider/MemoryIndexServiceProvider.html">MemoryIndexServiceProvider</a>&lt;E&gt;</td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../es/usc/citius/composit/core/composition/network/ServiceMatchNetwork.html">ServiceMatchNetwork</a>&lt;E,&nbsp;T&nbsp;extends&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Comparable.html">Comparable</a>&lt;T&gt;&gt;</td>
+              <td class="jd-descrcol" width="100%"><p>A Service Match Network (SMN) represents a directed composition match graph model.&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../es/usc/citius/composit/wsc08/data/WSCLazyServiceProvider.html">WSCLazyServiceProvider</a></td>
+              <td class="jd-descrcol" width="100%">&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../../../es/usc/citius/composit/wsc08/data/WSCXMLServiceProvider.html">WSCXMLServiceProvider</a></td>
+              <td class="jd-descrcol" width="100%">This class provides access and translates the data format of the Web Service Challenge 2008
+ into the ComposIT model.&nbsp;</td>
+          </tr>
+  </table>
+      </div>
+  </div>
+</td></tr></table>
+
+
+<div class="jd-descr">
+
+
+
+
+
+
+</div><!-- jd-descr -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="jd-descr">
+
+
+<h2>Summary</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="pubmethods" class="jd-sumtable"><tr><th colspan="12">Public Methods</th></tr>
+
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="../../../../../../es/usc/citius/composit/core/model/Operation.html">Operation</a>&lt;E&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#getOperation(java.lang.String)">getOperation</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> operationID)</nobr>
+        
+        <div class="jd-descrdiv">Locates and imports an operation from the current service provider.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a>&lt;<a href="../../../../../../es/usc/citius/composit/core/model/Operation.html">Operation</a>&lt;E&gt;&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#getOperations()">getOperations</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns an iterator over the available operations.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a>&lt;<a href="../../../../../../es/usc/citius/composit/core/model/Operation.html">Operation</a>&lt;E&gt;&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#getOperationsWithInput(E)">getOperationsWithInput</a></span>(E input)</nobr>
+        
+        <div class="jd-descrdiv">Returns an iterable with all operations that have the
+ selected input.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a>&lt;<a href="../../../../../../es/usc/citius/composit/core/model/Operation.html">Operation</a>&lt;E&gt;&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#getOperationsWithOutput(E)">getOperationsWithOutput</a></span>(E output)</nobr>
+        
+        <div class="jd-descrdiv">Returns an iterable with all operations that have the
+ selected output.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="../../../../../../es/usc/citius/composit/core/model/Service.html">Service</a>&lt;E&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#getService(java.lang.String)">getService</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> serviceID)</nobr>
+        
+        <div class="jd-descrdiv">Locates and imports a service from the current service
+ provider.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a>&lt;<a href="../../../../../../es/usc/citius/composit/core/model/Service.html">Service</a>&lt;E&gt;&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#getServices()">getServices</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns an iterator over the available services.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Set.html">Set</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#listOperations()">listOperations</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">List the available operation id's.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Set.html">Set</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#listServices()">listServices</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">List the available service id's.</div>
+  
+  </td></tr>
+
+
+
+</table>
+
+
+
+
+
+
+
+</div><!-- jd-descr (summary) -->
+
+<!-- Details -->
+
+
+
+
+
+
+
+
+<!-- XML Attributes -->
+
+
+<!-- Enum Values -->
+
+
+<!-- Constants -->
+
+
+<!-- Fields -->
+
+
+<!-- Public ctors -->
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- Protected ctors -->
+
+
+
+<!-- ========= METHOD DETAIL ======== -->
+<!-- Public methdos -->
+
+<h2>Public Methods</h2>
+
+
+
+<A NAME="getOperation(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        <a href="../../../../../../es/usc/citius/composit/core/model/Operation.html">Operation</a>&lt;E&gt;
+      </span>
+      <span class="sympad">getOperation</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> operationID)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Locates and imports an operation from the current service provider.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>operationID</td>
+          <td>unique ID of the operation used to locate the resource.</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Imported service model.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getOperations()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a>&lt;<a href="../../../../../../es/usc/citius/composit/core/model/Operation.html">Operation</a>&lt;E&gt;&gt;
+      </span>
+      <span class="sympad">getOperations</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns an iterator over the available operations.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li><code><a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a></code> with the translated operations.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getOperationsWithInput(E)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a>&lt;<a href="../../../../../../es/usc/citius/composit/core/model/Operation.html">Operation</a>&lt;E&gt;&gt;
+      </span>
+      <span class="sympad">getOperationsWithInput</span>
+      <span class="normal">(E input)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns an iterable with all operations that have the
+ selected input.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>input</td>
+          <td>Input to be found.</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Iterable with operations
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getOperationsWithOutput(E)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a>&lt;<a href="../../../../../../es/usc/citius/composit/core/model/Operation.html">Operation</a>&lt;E&gt;&gt;
+      </span>
+      <span class="sympad">getOperationsWithOutput</span>
+      <span class="normal">(E output)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns an iterable with all operations that have the
+ selected output.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>output</td>
+          <td>Output to be found.</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Iterable with operations
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getService(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        <a href="../../../../../../es/usc/citius/composit/core/model/Service.html">Service</a>&lt;E&gt;
+      </span>
+      <span class="sympad">getService</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> serviceID)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Locates and imports a service from the current service
+ provider.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>serviceID</td>
+          <td>unique ID of the service used to locate the resource.</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Imported service model.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getServices()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a>&lt;<a href="../../../../../../es/usc/citius/composit/core/model/Service.html">Service</a>&lt;E&gt;&gt;
+      </span>
+      <span class="sympad">getServices</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns an iterator over the available services.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li><code><a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Iterable.html">Iterable</a></code> with the translated services.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="listOperations()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Set.html">Set</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>&gt;
+      </span>
+      <span class="sympad">listOperations</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>List the available operation id's.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Set of operation ids. To retrieve
+ the operation model use <code><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#getOperation(java.lang.String)">getOperation(String)</a></code>.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="listServices()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Set.html">Set</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>&gt;
+      </span>
+      <span class="sympad">listServices</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>List the available service id's.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Set of service ids. To retrieve the service model
+ use <code><a href="../../../../../../es/usc/citius/composit/core/provider/ServiceProvider.html#getService(java.lang.String)">getService(String)</a></code>.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- ========= METHOD DETAIL ======== -->
+
+
+
+<!-- ========= END OF CLASS DATA ========= -->
+<A NAME="navbar_top"></A>
+
+<div id="footer">
+<!--Generated by <a href="http://code.google.com/p/doclava/">Doclava</a>-->
+Copyrigth &copy Centro de Investigación en Tecnoloxías da Información (<a href="http://citius.usc.es">CITIUS</a>).
+</div> <!-- end footer -->
+
+</div> <!-- jd-content -->
+
+</div><!-- end doc-content -->
+
+</div> <!-- end body-content --> 
+
+<script type="text/javascript">
+init(); /* initialize doclava-developer-docs.js */
+</script>
+
+</body>
+</html>
