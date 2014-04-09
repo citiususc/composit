@@ -7,8 +7,9 @@ jdk:
 branches:
   only:
     - master
-    - development
+    - /^release-.*$/
 
 after_success:
-  #- .config/publish-javadoc.sh
+  - chmod +x .config/publish-javadoc.sh
+  - .config/publish-javadoc.sh
   #- .config/publish-artifacts.sh
