@@ -21,7 +21,7 @@ if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" ==
   git config --global user.name "travis-ci"
   
   cd $HOME
-  git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/citiususc/composit gh-pages > /dev/null
+  git clone --quiet --branch=gh-pages https://${GITHUB_TOKEN}@github.com/citiususc/composit gh-pages > /dev/null
   cd gh-pages
   rm -rf ./javadoc/$FOLDER/
   cp -R $HOME/javadoc/$FOLDER ./javadoc/$FOLDER

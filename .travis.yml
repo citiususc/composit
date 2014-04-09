@@ -3,11 +3,18 @@ language: java
 jdk:
   - oraclejdk7
   - openjdk6
+
+env:
+  global:
+  - secure: VSAKLNPppbCxBVfVpke8VCtKeKy5Km4I9VeUu512celRjcK3qosMwHjPbT9jWTYNYLRx3hHfN7i8X2z5NN7bdPIbdBhB/njuggkk9GBc/B+4DcgYPvO9cPdi9rYYE4VbxkmiRhMIBkNX8TT8qk+9u9fhYYdku7NIuHvEjlJXz5g=
   
 branches:
   only:
     - master
     - /^release-.*$/
+
+before_install:
+  - mvn javadoc:aggregate
 
 after_success:
   - chmod +x .config/publish-javadoc.sh
