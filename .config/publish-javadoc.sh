@@ -23,7 +23,7 @@ if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" ==
 
   # Update the content of gh-pages
   cd gh-pages
-  
+
   # Config git user and credentials
   git config --global user.email "travis@travis-ci.org"
   git config --global user.name "travis-ci"
@@ -31,7 +31,7 @@ if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" ==
   echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
 
   rm -rf javadoc/$FOLDER/
-  cp -R $HOME/javadoc/$FOLDER javadoc/$FOLDER
+  cp -R $HOME/javadoc/ javadoc/$FOLDER
   git add .
   git commit -a -m "auto-commit $TRAVIS_BRANCH ComposIT JavaDoc (build $TRAVIS_BUILD_NUMBER)"
   git push -q origin gh-pages > /dev/null
