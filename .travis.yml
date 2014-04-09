@@ -6,17 +6,15 @@ jdk:
 
 env:
   global:
-  - secure: VSAKLNPppbCxBVfVpke8VCtKeKy5Km4I9VeUu512celRjcK3qosMwHjPbT9jWTYNYLRx3hHfN7i8X2z5NN7bdPIbdBhB/njuggkk9GBc/B+4DcgYPvO9cPdi9rYYE4VbxkmiRhMIBkNX8TT8qk+9u9fhYYdku7NIuHvEjlJXz5g=
+  - secure: "HdbakEISUvs1xhgcLN1i/jE2ad0m6M/mSEKFrXzt8Xl6Bk0pjU2kXLZuXeGU+1cfgcxrO/GrC9DdG6lHsJgNWCPQklp02NAalmBG8UvSRsnmuZBh4zq7Mlbyj1zdSYMQHv7PeebESZzbrqDzJVSUXvC6azFPyXR1iNfoSjIEaMw="
   
 branches:
   only:
     - master
     - /^release-.*$/
 
-after_install:
-  - mvn javadoc:aggregate
-
 after_success:
+  - mvn javadoc:aggregate
   - chmod +x .config/publish-javadoc.sh
   - .config/publish-javadoc.sh
   #- .config/publish-artifacts.sh
