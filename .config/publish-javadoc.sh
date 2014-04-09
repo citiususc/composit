@@ -5,13 +5,18 @@ echo "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG - TRAVIS_JDK_VERSION=$TRAVIS_JDK_VERSIO
 
 if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" == "oraclejdk7" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
-  FOLDER=$TRAVIS_BRANCH
+  VERSION=$TRAVIS_BRANCH
   
-  if [ "$FOLDER" = "master" ]; then
-    FOLDER="latest"
+  if [ "$VERSION" = "master" ]; then
+    VERSION="latest"
+  else
+    wget https://raw.githubusercontent.com/citiususc/composit/$TRAVIS_BRANCH/pom.xml
+    # Take the version from the main pom.xml
+    VERSION=`grep -m 1 "<version>" pom.xml | cut -d ">" -f 2 | cut -d "<" -f 1`
+    rm pom.xml
   fi
   
-  echo "Deploying [$FOLDER] ComposIT JavaDoc to GitHub gh-pages"
+  echo "Deploying [$VERSION] ComposIT JavaDoc to GitHub gh-pages"
   echo "Current directory: `pwd`"
 
   # Copy the build folder with the javadoc to the corresponding folder
@@ -30,8 +35,8 @@ if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" ==
   git config credential.helper "store --file=.git/credentials"
   echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
 
-  rm -rf javadoc/$FOLDER/
-  cp -R $HOME/javadoc/ javadoc/$FOLDER
+  rm -rf javadoc/$VERSION/
+  cp -R $HOME/javadoc/ javadoc/$VERSION
   git add .
   git commit -a -m "auto-commit $TRAVIS_BRANCH ComposIT JavaDoc (build $TRAVIS_BUILD_NUMBER)"
   git push -q origin gh-pages > /dev/null
