@@ -13,7 +13,7 @@ branches:
     - master
     - /^release-.*$/
 
-before_install:
+after_install:
   - mvn javadoc:aggregate
 
 after_success:
