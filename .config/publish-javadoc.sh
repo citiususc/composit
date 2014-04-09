@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo -e "Preparing JavaDoc auto-deploy...\n"
+echo -e "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG - TRAVIS_JDK_VERSION=$TRAVIS_JDK_VERSION - TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST\n"
+
 if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" == "oraclejdk7" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
   FOLDER=$TRAVIS_BRANCH
