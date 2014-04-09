@@ -11,6 +11,12 @@ en Tecnoloxías da Información (CITIUS)](http://citius.usc.es), University of S
 This library is the main ComposIT Java API used by the engine, which includes different state-of-the-art search algorithms
 and optimization techniques to improve the composition of Semantic Web Services.
 
+## Documentation
+
+TODO;
+
+ComposIT JavaDoc: [0.1.0-SNAPSHOT](http://citiususc.github.io/composit/javadoc/0.1.0-SNAPSHOT)
+
 
 ## License & Citation
 
