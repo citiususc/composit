@@ -17,4 +17,5 @@ after_success:
   - mvn javadoc:aggregate
   - chmod +x .config/publish-javadoc.sh
   - .config/publish-javadoc.sh
-  #- .config/publish-artifacts.sh
+  #- chmod +x .config/deploy-artifacts.sh
+  #- .config/deploy-artifacts.sh

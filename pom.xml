@@ -118,6 +118,15 @@
     </repositories>
     -->
 
+    <!-- Deployment to the internal nexus server -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>citius-nexus-snapshots</id>
+            <name>Internal Snapshots</name>
+            <url>http://tec.citius.usc.es/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <pluginManagement>
             <plugins>
