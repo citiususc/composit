@@ -21,17 +21,16 @@ if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" ==
   echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
 
   # Copy the build folder with the javadoc to the corresponding folder
-  mkdir $HOME/javadoc/$FOLDER/
-  cp -R target/apidocs/ $HOME/javadoc/$FOLDER/
+  mkdir $HOME/javadoc
+  cp -R target/apidocs/ $HOME/javadoc/
   
   cd $HOME
   git clone --quiet --branch=gh-pages https://github.com/citiususc/composit.git gh-pages > /dev/null
 
-
   # Update the content of gh-pages
   cd gh-pages
-  rm -rf ./javadoc/$FOLDER/
-  cp -R $HOME/javadoc/$FOLDER ./javadoc/$FOLDER
+  rm -rf javadoc/$FOLDER/
+  cp -R $HOME/javadoc/$FOLDER javadoc/$FOLDER
   git add .
   git commit -a -m "auto-commit $TRAVIS_BRANCH ComposIT JavaDoc (build $TRAVIS_BUILD_NUMBER)"
   git push -q origin gh-pages > /dev/null
