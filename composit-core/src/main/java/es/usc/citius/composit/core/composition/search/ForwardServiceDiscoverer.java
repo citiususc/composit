@@ -102,7 +102,8 @@ public class ForwardServiceDiscoverer<E, T extends Comparable<T>> {
                     }
                 }
             }
-            log.info("\t + [{}] operations selected for this level in {}: {}", candidates.size(), levelTimer.toString(), candidates);
+            log.info("\t + [{}] operations selected for this level in {}", candidates.size(), levelTimer.toString());
+            log.debug("\t\t Candidates: {}", candidates);
 
             // Collect the new outputs of the new candidates
             Set<E> nextOutputs = Operations.outputs(candidates);
