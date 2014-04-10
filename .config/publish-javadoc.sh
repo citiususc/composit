@@ -36,6 +36,7 @@ if [ "$TRAVIS_REPO_SLUG" == "citiususc/composit" ] && [ "$TRAVIS_JDK_VERSION" ==
   echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
 
   rm -rf javadoc/$VERSION/
+  mkdir javadoc/$VERSION
   cp -R $HOME/javadoc/ javadoc/$VERSION
   git add .
   git commit -a -m "auto-commit $TRAVIS_BRANCH ComposIT JavaDoc (build $TRAVIS_BUILD_NUMBER)"
