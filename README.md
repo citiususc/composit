@@ -2,7 +2,7 @@
 
 Automatic Web Service Composition Algorithms & Tools for Java.
 
-[![Build Status](https://travis-ci.org/citiususc/composit.svg?branch=master)](https://travis-ci.org/citiususc/composit)
+[![Build Status](https://travis-ci.org/citiususc/composit.svg?branch=master)](http://goo.gl/rZxkXt)
 
 ## Description
 
