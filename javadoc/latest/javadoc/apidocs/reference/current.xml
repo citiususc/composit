@@ -1897,6 +1897,19 @@
 <parameter name="request" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
 </parameter>
 </method>
+<method name="searchComposition"
+ return="es.usc.citius.composit.core.composition.network.ServiceMatchNetwork&lt;E, T&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="request" type="es.usc.citius.composit.core.model.Signature&lt;E&gt;">
+</parameter>
+</method>
 </class>
 <class name="CompositSearch"
  extends="java.lang.Object"
