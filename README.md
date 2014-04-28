@@ -2,12 +2,12 @@
 
 Automatic Web Service Composition Algorithms & Tools for Java.
 
-[![Build Status](https://travis-ci.org/citiususc/composit.svg?branch=master)](https://travis-ci.org/citiususc/composit)
+[![Build Status](https://travis-ci.org/citiususc/composit.svg?branch=master)](http://goo.gl/rZxkXt)
 
 ## Description
 
 ComposIT is an automatic semantic web service composition engine developed within the [Centro de Investigación
-en Tecnoloxías da Información (CITIUS)](http://citius.usc.es), University of Santiago de Compostela. 
+en Tecnoloxías da Información (CITIUS)](http://goo.gl/DBtaht), University of Santiago de Compostela. 
 This library is the main ComposIT Java API used by the engine, which includes different state-of-the-art search algorithms
 and optimization techniques to improve the composition of Semantic Web Services.
 
@@ -15,7 +15,7 @@ and optimization techniques to improve the composition of Semantic Web Services.
 
 TODO;
 
-ComposIT JavaDoc: [0.1.0-SNAPSHOT](http://citiususc.github.io/composit/javadoc/0.1.0-SNAPSHOT)
+ComposIT JavaDoc: [0.1.0-SNAPSHOT](http://goo.gl/XGev1i)
 
 
 ## License & Citation
@@ -46,7 +46,7 @@ This library implements an algorithm based on the research work described in htt
 We encourage you to cite our journal paper if you use ComposIT or some parts of the library in your research:
 
 > Rodriguez-Mier, P., Mucientes, M., Vidal, J. C., & Lama, M. (2012). [An Optimal and Complete Algorithm for 
-Automatic Web Service Composition](http://dx.doi.org/10.4018/jwsr.2012040101). *International Journal of Web Services 
+Automatic Web Service Composition](http://goo.gl/rH59tu). *International Journal of Web Services 
 Research (IJWSR)*, 9(2), 1-20. doi:10.4018/jwsr.2012040101
 
 ```
