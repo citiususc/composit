@@ -17,11 +17,16 @@
 
 package es.usc.citius.composit.core.composition.search;
 
+import com.google.common.base.Function;
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.Lists;
+import es.usc.citius.composit.core.composition.HashLeveledServices;
 import es.usc.citius.composit.core.composition.InputDiscoverer;
+import es.usc.citius.composit.core.composition.network.DirectedAcyclicSMN;
 import es.usc.citius.composit.core.composition.network.ServiceMatchNetwork;
 import es.usc.citius.composit.core.composition.optimization.NetworkOptimizer;
 import es.usc.citius.composit.core.matcher.graph.MatchGraph;
+import es.usc.citius.composit.core.model.Operation;
 import es.usc.citius.composit.core.model.Signature;
 import es.usc.citius.lab.hipster.algorithm.Algorithms;
 import es.usc.citius.lab.hipster.node.HeuristicNode;
@@ -30,6 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Pablo Rodríguez Mier <<a href="mailto:pablo.rodriguez.mier@usc.es">pablo.rodriguez.mier@usc.es</a>>
@@ -61,6 +67,30 @@ public final class ComposIT<E, T extends Comparable<T>> {
         return discoverer.search(request);
     }
 
+    public ServiceMatchNetwork<E, T> searchComposition(Signature<E> request){
+        // Build the initial match graph network (first pass)
+        ServiceMatchNetwork<E, T> network = discoverer.search(request);
+        // Apply optimizations
+        for(NetworkOptimizer<E,T> opt : optimizations){
+            network = opt.optimize(network);
+        }
+        Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result searchResult = CompositSearch.create(network).search();
+        // Take the service operations from the optimal state path. We reverse the list because
+        // the search was done backwards.
+        List<State<E>> states = Lists.reverse(searchResult.getOptimalPath());
+        List<Set<Operation<E>>> optimalServiceOps = Lists.transform(states, new Function<State<E>, Set<Operation<E>>>() {
+            @Override
+            public Set<Operation<E>> apply(State<E> state) {
+                return state.getStateOperations();
+            }
+        });
+        // Generate a new ServiceMatchNetwork composition with the optimal services.
+        // To build the composition, we use the information of the previous network to build the match relations
+        // between services among the optimal services.
+        ServiceMatchNetwork<E, T> composition = new DirectedAcyclicSMN<E, T>(new HashLeveledServices<E>(optimalServiceOps), network);
+        return composition;
+    }
+
     public Algorithms.Search<State<E>,HeuristicNode<State<E>,Double>>.Result search(Signature<E> request){
         // Create the 3-pass service match network.
         log.info("Initializing composition search problem...");
@@ -84,6 +114,14 @@ public final class ComposIT<E, T extends Comparable<T>> {
         log.info("   Composition runpath : {}", searchResult.getOptimalPath().size()-2);
         log.info("   Composition services: {}", searchResult.getGoalNode().getScore());
         log.info("Total composition time : {}", compositionWatch.stop().toString());
+
+        List<State<E>> states = searchResult.getOptimalPath();
+        List<Set<Operation<E>>> ops = Lists.transform(states, new Function<State<E>, Set<Operation<E>>>() {
+            @Override
+            public Set<Operation<E>> apply(State<E> state) {
+                return state.getStateOperations();
+            }
+        });
         return searchResult;
     }
 }
