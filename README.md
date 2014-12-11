@@ -61,3 +61,7 @@ Research (IJWSR)*, 9(2), 1-20. doi:10.4018/jwsr.2012040101
   publisher={IGI Global}
 }
 ```
+
+### Acknowledgements
+
+* [Ángel Piñeiro](https://github.com/angelpinheiro) for the design of the logo.
