@@ -13,9 +13,16 @@ and optimization techniques to improve the composition of Semantic Web Services.
 
 ## Documentation
 
-TODO;
-
 ComposIT JavaDoc: [0.1.0-SNAPSHOT](http://goo.gl/XGev1i)
+
+## FAQ
+
+- (Q1) _I've tried to compile the project with maven in windows but the "maven-exec-plugin" throws the following error_: `Failed to execute goal org.codehaus.mojo:exec-maven-plugin:1.2.1:exec (install-hipster) on project composit-parent: Command execution failed. Cannot run program "mvn"`:
+- (A1) The simplest way to fix the problem is by manually installing the missing dependency (`lib/hipster-core-0.0.1-SNAPSHOT`) with maven:
+
+    `mvn install:install-file -Dfile=path-to-composit/lib/hipster-core-0.0.1-SNAPSHOT.jar -DgroupId=es.usc.citius.lab -DartifactId=hipster-core -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar`
+
+
 
 
 ## License & Citation
